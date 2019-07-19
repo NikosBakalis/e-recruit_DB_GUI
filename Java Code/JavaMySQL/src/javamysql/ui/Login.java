@@ -6,6 +6,8 @@
 package javamysql.ui;
 
 import javamysql.helper.Controller;
+import javamysql.model.Candidate;
+import javamysql.model.Recruiter;
 import javamysql.model.User;
 
 /**
@@ -118,11 +120,26 @@ public class Login extends javax.swing.JFrame {
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         User user = this.controller.login(this.username.getText(), this.password.getText());
-        if(user != null) {
+        Recruiter recruiter = this.controller.recruiterLogin(this.username.getText());
+        Candidate candidate = this.controller.candidateLogin(this.username.getText());
+        
+        if((user != null) && (user.getUserName().equals(candidate.getUserName()))) {
             System.out.println("You have Loged-In successfully!");
+            System.out.println("You are a Candidate!");
+        }
+
+        else if((user != null) && (user.getUserName().equals(recruiter.getUserName()))) {
+            System.out.println("You have Loged-In successfully!");
+            System.out.println("You are a Recruiter!");
+        }
+        
+        else if(user != null) {
+            System.out.println("You have Loged-In successfully!");
+            System.out.println("You are the Admin!!!");
         } else {
             System.err.println("Authentication Denied!");
         }
+
     }//GEN-LAST:event_loginActionPerformed
 
     private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed

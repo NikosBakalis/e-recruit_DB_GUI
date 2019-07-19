@@ -18,7 +18,11 @@ public class Main {
      */
     public static void main(String[] args) {
         Login login = new Login();
+        // Login recruiterLogin = new Login();
+        // Login candidateLogin = new Login();
         login.setVisible(true);
+        // recruiterLogin.setVisible(true);
+        // candidateLogin.setVisible(true);
     }
     
 }

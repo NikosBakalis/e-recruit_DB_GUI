@@ -6,6 +6,8 @@
 package javamysql.helper;
 
 import javamysql.database.ICRUDImpl;
+import javamysql.model.Candidate;
+import javamysql.model.Recruiter;
 import javamysql.model.User;
 
 /**
@@ -33,4 +35,12 @@ public class Controller {
         return this.iCRUDImpl.getUser(username, password);
     }
     
+    public Recruiter recruiterLogin(String username) {
+        return this.iCRUDImpl.getRecruiter(username);
+    }
+    
+    public Candidate candidateLogin(String username) {
+        return this.iCRUDImpl.getCandidate(username);
+    }
+
 }

@@ -5,6 +5,8 @@
  */
 package javamysql.database;
 
+import javamysql.model.Candidate;
+import javamysql.model.Recruiter;
 import javamysql.model.User;
 
 /**
@@ -14,5 +16,7 @@ import javamysql.model.User;
 public interface ICRUD {
     
     User getUser(String userName, String password);
+    Recruiter getRecruiter(String userName);
+    Candidate getCandidate(String userName);
     
 }

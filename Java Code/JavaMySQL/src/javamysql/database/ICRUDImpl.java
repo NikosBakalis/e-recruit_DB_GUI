@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javamysql.model.Candidate;
+import javamysql.model.Recruiter;
 import javamysql.model.User;
 
 /**
@@ -20,42 +22,26 @@ public class ICRUDImpl implements ICRUD {
 
     private Connection connection;
 
-    /*
-    @Override
-    public boolean insert(User user) {
-        try {
-            String query = "INSERT INTO `user` VALUES ('" + user.getUserName() + "','" + user.getPassword() + "','" + user.getName() + "','" + user.getSurname() + "','" + user.getReg_date() + "','" + user.getEmail() + "')";
-            Statement statement = this.connection.createStatement();
-            statement.executeUpdate(query);
-            statement.close();
-            return true;
-        } catch (SQLException e) {
-            return false;
-        }
-    }
-    */
-
     @Override
     public User getUser(String userName, String password) {
         try {
-            String query = "SELECT * FROM user where username = '" + userName + "' AND password = '" + password + "'";
+            String query = "SELECT * FROM user WHERE user.username = '" + userName + "' AND password = '" + password + "'";
             
-            PreparedStatement preparedStatement = this.connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            
-            User user = null;
-            
-            if(resultSet.next()) {
-                user = new User();
-                user.setUserName(resultSet.getString("username"));
-                user.setPassword(resultSet.getString("password"));
-                user.setName(resultSet.getString("name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setReg_date(resultSet.getTimestamp("reg_date"));
-                user.setEmail(resultSet.getString("email"));
+            ResultSet resultSet;
+            User user;
+            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                user = null;
+                if(resultSet.next()) {
+                    user = new User();
+                    user.setUserName(resultSet.getString("username"));
+                    user.setPassword(resultSet.getString("password"));
+                    user.setName(resultSet.getString("name"));
+                    user.setSurname(resultSet.getString("surname"));
+                    user.setReg_date(resultSet.getTimestamp("reg_date"));
+                    user.setEmail(resultSet.getString("email"));
+                }
             }
-            // System.out.println("TEST");
-            preparedStatement.close();
             resultSet.close();
             return user;
         } catch (SQLException e) {
@@ -63,6 +49,57 @@ public class ICRUDImpl implements ICRUD {
         }
     }
     
+    
+    @Override
+    public Recruiter getRecruiter(String userName) {
+        try {
+            String query = "SELECT * FROM recruiter WHERE recruiter.username = '" + userName + "'";
+            
+            ResultSet resultSet;
+            Recruiter recruiter;
+            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                recruiter = null;
+                if(resultSet.next()) {
+                    recruiter = new Recruiter();
+                    recruiter.setUserName(resultSet.getString("username"));
+                    recruiter.setExp_years(resultSet.getInt("exp_years"));
+                    recruiter.setFirm(resultSet.getString("firm"));
+                }
+            }
+            resultSet.close();
+            return recruiter;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    
+    @Override
+    public Candidate getCandidate(String userName) {
+        try {
+            String query = "SELECT * FROM candidate WHERE candidate.username = '" + userName + "'";
+            
+            ResultSet resultSet;
+            Candidate candidate;
+            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                candidate = null;
+                if(resultSet.next()) {
+                    candidate = new Candidate();
+                    candidate.setUserName(resultSet.getString("username"));
+                    candidate.setBio(resultSet.getString("bio"));
+                    candidate.setSistatikes(resultSet.getString("sistatikes"));
+                    candidate.setCertificates(resultSet.getString("certificates"));
+                }
+            }
+            resultSet.close();
+            return candidate;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     public void openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -71,5 +108,13 @@ public class ICRUDImpl implements ICRUD {
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Error: " + e.getMessage());
         }
+    }
+
+    public Recruiter getRecruiter(String username, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Candidate getCandidate(String username, String password) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
