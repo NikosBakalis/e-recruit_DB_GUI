@@ -123,12 +123,12 @@ public class Login extends javax.swing.JFrame {
         Recruiter recruiter = this.controller.recruiterLogin(this.username.getText());
         Candidate candidate = this.controller.candidateLogin(this.username.getText());
         
-        if((user != null) && (user.getUserName().equals(candidate.getUserName()))) {
+        if(candidate != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Candidate!");
         }
 
-        else if((user != null) && (user.getUserName().equals(recruiter.getUserName()))) {
+        else if(recruiter != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Recruiter!");
         }
