@@ -11,8 +11,8 @@ package javamysql.model;
  */
 public class Candidate {
     
-    private String username, bio, sistatikes, certificates;
-
+    private static String username, bio, sistatikes, certificates;
+    
     /**
      * @return the username
      */
@@ -69,9 +69,9 @@ public class Candidate {
         this.certificates = certificates;
     }
     
-    //@Override
-    //public String toString() {
-    //    return this.username + ", " + this.bio + ", " + this.sistatikes + ", " + this.certificates;
-    //}
+    @Override
+    public String toString() {
+        return this.username + ", " + this.bio + ", " + this.sistatikes + ", " + this.certificates;
+    }
     
 }

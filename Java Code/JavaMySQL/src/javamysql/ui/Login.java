@@ -51,26 +51,26 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Username");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(300, 130, 80, 16);
+        jLabel1.setBounds(300, 170, 80, 16);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Password");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(300, 170, 80, 16);
+        jLabel2.setBounds(300, 210, 80, 16);
         getContentPane().add(username);
-        username.setBounds(390, 130, 170, 20);
+        username.setBounds(390, 170, 170, 20);
         getContentPane().add(password);
-        password.setBounds(390, 170, 170, 20);
+        password.setBounds(390, 210, 170, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Log-In Form");
         jLabel3.setToolTipText("");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(340, 20, 170, 59);
+        jLabel3.setBounds(340, 30, 170, 59);
 
         clear.setText("Clear");
         clear.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +79,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(clear);
-        clear.setBounds(390, 220, 70, 23);
+        clear.setBounds(390, 250, 70, 23);
 
         login.setText("Log-In");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(login);
-        login.setBounds(490, 220, 70, 23);
+        login.setBounds(490, 250, 70, 23);
 
         jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nikolas\\Documents\\NetBeansProjects\\JavaMySQL\\images\\1.jpg")); // NOI18N
         jLabel5.setText("jLabel5");

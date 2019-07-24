@@ -11,8 +11,8 @@ package javamysql.model;
  */
 public class Recruiter {
     
-    private String username, firm;
-    private int exp_years;
+    private static String username, firm;
+    private static int exp_years;
 
     /**
      * @return the username

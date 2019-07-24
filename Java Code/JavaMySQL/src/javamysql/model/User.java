@@ -13,8 +13,8 @@ import java.sql.Timestamp;
  */
 public class User {
     
-    private String username, password, name, surname, email;
-    private Timestamp reg_date;
+    private static String username, password, name, surname, email;
+    private static Timestamp reg_date;
 
     /**
      * @return the username
