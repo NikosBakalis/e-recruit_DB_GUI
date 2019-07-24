@@ -11,20 +11,20 @@ package javamysql.model;
  */
 public class Candidate {
     
-    private String userName, bio, sistatikes, certificates;
+    private String username, bio, sistatikes, certificates;
 
     /**
-     * @return the userName
+     * @return the username
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param userName the userName to set
+     * @param username the username to set
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -69,9 +69,9 @@ public class Candidate {
         this.certificates = certificates;
     }
     
-    @Override
-    public String toString() {
-        return this.userName + ", " + this.bio + ", " + this.sistatikes + ", " + this.certificates;
-    }
+    //@Override
+    //public String toString() {
+    //    return this.username + ", " + this.bio + ", " + this.sistatikes + ", " + this.certificates;
+    //}
     
 }

@@ -13,21 +13,21 @@ import java.sql.Timestamp;
  */
 public class User {
     
-    private String userName, password, name, surname, email;
+    private String username, password, name, surname, email;
     private Timestamp reg_date;
 
     /**
      * @return the username
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param userName the username to set
+     * @param username the username to set
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -100,8 +100,8 @@ public class User {
         this.email = email;
     }
     
-    @Override
-    public String toString() {
-        return this.userName + ", " + this.name + ", " + this.surname + ", " + this.reg_date + ", " + this.email;
-    }
+    //@Override
+    //public String toString() {
+    //    return this.username + ", " + this.name + ", " + this.surname + ", " + this.reg_date + ", " + this.email;
+    //}
 }

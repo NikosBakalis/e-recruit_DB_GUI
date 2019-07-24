@@ -23,9 +23,9 @@ public class ICRUDImpl implements ICRUD {
     private Connection connection;
 
     @Override
-    public User getUser(String userName, String password) {
+    public User getUser(String username, String password) {
         try {
-            String query = "SELECT * FROM user WHERE user.username = '" + userName + "' AND password = '" + password + "'";
+            String query = "SELECT * FROM user WHERE user.username = '" + username + "' AND password = '" + password + "'";
             
             ResultSet resultSet;
             User user;
@@ -34,7 +34,7 @@ public class ICRUDImpl implements ICRUD {
                 user = null;
                 if(resultSet.next()) {
                     user = new User();
-                    user.setUserName(resultSet.getString("username"));
+                    user.setUsername(resultSet.getString("username"));
                     user.setPassword(resultSet.getString("password"));
                     user.setName(resultSet.getString("name"));
                     user.setSurname(resultSet.getString("surname"));
@@ -51,9 +51,9 @@ public class ICRUDImpl implements ICRUD {
     
     
     @Override
-    public Recruiter getRecruiter(String userName) {
+    public Recruiter getRecruiter(String username) {
         try {
-            String query = "SELECT * FROM recruiter WHERE recruiter.username = '" + userName + "'";
+            String query = "SELECT * FROM recruiter WHERE recruiter.username = '" + username + "'";
             
             ResultSet resultSet;
             Recruiter recruiter;
@@ -62,7 +62,7 @@ public class ICRUDImpl implements ICRUD {
                 recruiter = null;
                 if(resultSet.next()) {
                     recruiter = new Recruiter();
-                    recruiter.setUserName(resultSet.getString("username"));
+                    recruiter.setUsername(resultSet.getString("username"));
                     recruiter.setExp_years(resultSet.getInt("exp_years"));
                     recruiter.setFirm(resultSet.getString("firm"));
                 }
@@ -76,9 +76,9 @@ public class ICRUDImpl implements ICRUD {
     
     
     @Override
-    public Candidate getCandidate(String userName) {
+    public Candidate getCandidate(String username) {
         try {
-            String query = "SELECT * FROM candidate WHERE candidate.username = '" + userName + "'";
+            String query = "SELECT * FROM candidate WHERE candidate.username = '" + username + "'";
             
             ResultSet resultSet;
             Candidate candidate;
@@ -87,7 +87,7 @@ public class ICRUDImpl implements ICRUD {
                 candidate = null;
                 if(resultSet.next()) {
                     candidate = new Candidate();
-                    candidate.setUserName(resultSet.getString("username"));
+                    candidate.setUsername(resultSet.getString("username"));
                     candidate.setBio(resultSet.getString("bio"));
                     candidate.setSistatikes(resultSet.getString("sistatikes"));
                     candidate.setCertificates(resultSet.getString("certificates"));
@@ -99,7 +99,25 @@ public class ICRUDImpl implements ICRUD {
             return null;
         }
     }
-
+    
+/*    @Override
+    public CandidateUI setCandidatesUIUsername(String username) {
+        CandidateUI candidateUI = new CandidateUI();
+        try {
+            String query = "SELECT username FROM candidate WHERE candidate.username = '" + username + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query); 
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                candidateUI.getjLabel1().setText(resultSet.getString(username));
+//                candidateUI.getjTable1().setModel(DbUtils.resultSetToTableModel(resultSet));
+            }
+//            resultSet.close();
+            return candidateUI;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+*/
     public void openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");

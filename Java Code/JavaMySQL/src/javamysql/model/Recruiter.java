@@ -11,21 +11,21 @@ package javamysql.model;
  */
 public class Recruiter {
     
-    private String userName, firm;
+    private String username, firm;
     private int exp_years;
 
     /**
-     * @return the userName
+     * @return the username
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param userName the userName to set
+     * @param username the username to set
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -56,9 +56,9 @@ public class Recruiter {
         this.exp_years = exp_years;
     }
     
-    @Override
-    public String toString() {
-        return this.userName + ", " + this.firm + ", " + this.exp_years;
-    }
+    //@Override
+    //public String toString() {
+    //    return this.username + ", " + this.firm + ", " + this.exp_years;
+    //}
     
 }

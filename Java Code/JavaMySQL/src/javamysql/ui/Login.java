@@ -43,19 +43,34 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         clear = new javax.swing.JButton();
         login = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Log-In Form");
+        setPreferredSize(new java.awt.Dimension(835, 409));
         setResizable(false);
+        getContentPane().setLayout(null);
 
-        jLabel1.setText("UserName");
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jLabel1.setText("Username");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(300, 130, 80, 16);
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel2.setText("Password");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(300, 170, 80, 16);
+        getContentPane().add(username);
+        username.setBounds(390, 130, 170, 20);
+        getContentPane().add(password);
+        password.setBounds(390, 170, 170, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Log-In Form");
         jLabel3.setToolTipText("");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(340, 20, 170, 59);
 
         clear.setText("Clear");
         clear.addActionListener(new java.awt.event.ActionListener() {
@@ -63,6 +78,8 @@ public class Login extends javax.swing.JFrame {
                 clearActionPerformed(evt);
             }
         });
+        getContentPane().add(clear);
+        clear.setBounds(390, 220, 70, 23);
 
         login.setText("Log-In");
         login.addActionListener(new java.awt.event.ActionListener() {
@@ -70,50 +87,13 @@ public class Login extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
+        getContentPane().add(login);
+        login.setBounds(490, 220, 70, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(113, 113, 113)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(clear, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
-                                .addGap(36, 36, 36)
-                                .addComponent(login))
-                            .addComponent(password)
-                            .addComponent(username)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clear)
-                    .addComponent(login))
-                .addGap(24, 24, 24))
-        );
+        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nikolas\\Documents\\NetBeansProjects\\JavaMySQL\\images\\1.jpg")); // NOI18N
+        jLabel5.setText("jLabel5");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(0, 0, 830, 390);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -123,12 +103,15 @@ public class Login extends javax.swing.JFrame {
         Recruiter recruiter = this.controller.recruiterLogin(this.username.getText());
         Candidate candidate = this.controller.candidateLogin(this.username.getText());
         
-        if(candidate != null) {
+        if(candidate != null && user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Candidate!");
+            CandidateUI candidateUI = new CandidateUI();
+            candidateUI.setVisible(true);
+            this.dispose();
         }
 
-        else if(recruiter != null) {
+        else if(recruiter != null && user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Recruiter!");
         }
@@ -152,6 +135,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton login;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
