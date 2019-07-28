@@ -6,6 +6,7 @@
 package javamysql.ui;
 
 //import javamysql.helper.Controller;
+import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
 import javamysql.model.User;
 
@@ -17,8 +18,13 @@ import javamysql.model.User;
  */
 public class CandidateUI extends javax.swing.JFrame {
     
+    int counter = 0;
+    
+    ICRUDImpl iCRUDImpl = new ICRUDImpl();
     Candidate candidate = new Candidate();
     User user = new User();
+    
+    private static String newPassword, newName, newSurname, newEmail, newBio;
     
 
     /**
@@ -46,8 +52,8 @@ public class CandidateUI extends javax.swing.JFrame {
         Email = new javax.swing.JLabel();
         changePassword = new javax.swing.JPasswordField();
         Bio = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        EditAndSave = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
         changeUsername = new javax.swing.JTextField();
         changeSurname = new javax.swing.JTextField();
         changeName = new javax.swing.JTextField();
@@ -78,12 +84,17 @@ public class CandidateUI extends javax.swing.JFrame {
         Bio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Bio.setText("Bio");
 
-        jButton1.setText("Edit");
-
-        jButton2.setText("Log-out");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        EditAndSave.setText("Edit");
+        EditAndSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                EditAndSaveActionPerformed(evt);
+            }
+        });
+
+        Logout.setText("Log-out");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
             }
         });
 
@@ -107,17 +118,18 @@ public class CandidateUI extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(262, 262, 262)
-                        .addComponent(jButton1)
-                        .addGap(184, 184, 184)
-                        .addComponent(jButton2)))
-                .addContainerGap(249, Short.MAX_VALUE))
+                        .addComponent(EditAndSave, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(169, 169, 169)
+                        .addComponent(Logout)))
+                .addGap(249, 249, 249))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,8 +185,8 @@ public class CandidateUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(EditAndSave)
+                    .addComponent(Logout))
                 .addGap(20, 20, 20))
         );
 
@@ -199,11 +211,41 @@ public class CandidateUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_LogoutActionPerformed
+
+    private void EditAndSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditAndSaveActionPerformed
+        counter++;
+        if(counter%2 == 1){
+            changePassword.setEditable(true);
+            changeName.setEditable(true);
+            changeSurname.setEditable(true);
+            changeEmail.setEditable(true);
+            changeBio.setEditable(true);
+            EditAndSave.setText("Save");
+            // Logout.setVisible(false);
+        } else {
+            changePassword.setEditable(false);
+            changeName.setEditable(false);
+            changeSurname.setEditable(false);
+            changeEmail.setEditable(false);
+            changeBio.setEditable(false);
+            EditAndSave.setText("Edit");
+            // String newUsername = changeUsername.getText();
+            newPassword = changePassword.getText();
+            newName = changeName.getText();
+            newSurname = changeSurname.getText();
+            newEmail = changeEmail.getText();
+            newBio = changeBio.getText();
+            // System.out.println(getNewName());
+            // Logout.setVisible(true);
+            // TODO Disable Logout
+            iCRUDImpl.getCandidateUI(changeUsername.getText());
+        }
+    }//GEN-LAST:event_EditAndSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,7 +284,9 @@ public class CandidateUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Bio;
+    private javax.swing.JButton EditAndSave;
     private javax.swing.JLabel Email;
+    private javax.swing.JButton Logout;
     private javax.swing.JLabel Name;
     private javax.swing.JLabel Password;
     private javax.swing.JLabel Surname;
@@ -254,10 +298,78 @@ public class CandidateUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField changePassword;
     private javax.swing.JTextField changeSurname;
     private javax.swing.JTextField changeUsername;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the newPassword
+     */
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    /**
+     * @param newPassword the newPassword to set
+     */
+    public void setNewPassword(String newPassword) {
+        CandidateUI.newPassword = newPassword;
+    }
+
+    /**
+     * @return the newName
+     */
+    public String getNewName() {
+        return newName;
+    }
+
+    /**
+     * @param newName the newName to set
+     */
+    public void setNewName(String newName) {
+        CandidateUI.newName = newName;
+    }
+
+    /**
+     * @return the newSurname
+     */
+    public String getNewSurname() {
+        return newSurname;
+    }
+
+    /**
+     * @param newSurname the newSurname to set
+     */
+    public void setNewSurname(String newSurname) {
+        this.newSurname = newSurname;
+    }
+
+    /**
+     * @return the newEmail
+     */
+    public String getNewEmail() {
+        return newEmail;
+    }
+
+    /**
+     * @param newEmail the newEmail to set
+     */
+    public void setNewEmail(String newEmail) {
+        this.newEmail = newEmail;
+    }
+
+    /**
+     * @return the newBio
+     */
+    public String getNewBio() {
+        return newBio;
+    }
+
+    /**
+     * @param newBio the newBio to set
+     */
+    public void setNewBio(String newBio) {
+        this.newBio = newBio;
+    }
 
 }

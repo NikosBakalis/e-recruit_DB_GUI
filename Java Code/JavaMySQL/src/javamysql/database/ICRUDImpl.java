@@ -10,9 +10,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javamysql.model.Candidate;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javamysql.ui.CandidateUI;
 
 /**
  *
@@ -21,7 +23,7 @@ import javamysql.model.User;
 public class ICRUDImpl implements ICRUD {
 
     private Connection connection;
-
+    
     @Override
     public User getUser(String username, String password) {
         try {
@@ -100,24 +102,29 @@ public class ICRUDImpl implements ICRUD {
         }
     }
     
-/*    @Override
-    public CandidateUI setCandidatesUIUsername(String username) {
-        CandidateUI candidateUI = new CandidateUI();
-        try {
-            String query = "SELECT username FROM candidate WHERE candidate.username = '" + username + "'";
-            PreparedStatement preparedStatement = connection.prepareStatement(query); 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                candidateUI.getjLabel1().setText(resultSet.getString(username));
-//                candidateUI.getjTable1().setModel(DbUtils.resultSetToTableModel(resultSet));
-            }
-//            resultSet.close();
+    @Override
+    public CandidateUI getCandidateUI(String username) {
+        try{
+            CandidateUI candidateUI = new CandidateUI();
+            System.out.println(candidateUI.getNewName());
+            System.out.println(username);
+            Statement statement = connection.createStatement();
+            String query = "UPDATE user SET password = '" + candidateUI.getNewPassword() + "', name = '" + candidateUI.getNewName() + "', surname = '" + candidateUI.getNewSurname() + "', email = '" + candidateUI.getNewEmail() + "' WHERE username = '" + username + "';UPDATE candidate SET bio = '" + candidateUI.getNewBio() + "'";
+            // String query = "UPDATE user SET name = 'Cleomenis13' WHERE username = 'cleogeo'";
+            statement.executeUpdate(query);
+        
+            ResultSet resultSet = statement.executeQuery(query);
+            /*if(resultSet.next()){
+                String name = resultSet.getString("name");
+                System.out.println("Successfully Update!");
+            }*/
+            resultSet.close();
             return candidateUI;
         } catch (SQLException e) {
             return null;
         }
     }
-*/
+
     public void openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -135,4 +142,5 @@ public class ICRUDImpl implements ICRUD {
     public Candidate getCandidate(String username, String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

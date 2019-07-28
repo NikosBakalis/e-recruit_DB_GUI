@@ -19,6 +19,6 @@ public interface ICRUD {
     User getUser(String username, String password);
     Recruiter getRecruiter(String username);
     Candidate getCandidate(String username);
-//    CandidateUI setCandidatesUIUserName(String userName);
+    CandidateUI getCandidateUI(String username);
     
 }

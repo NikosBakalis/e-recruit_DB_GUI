@@ -9,7 +9,6 @@ import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
-import javamysql.ui.CandidateUI;
 
 /**
  *
@@ -43,9 +42,5 @@ public class Controller {
     public Candidate candidateLogin(String username) {
         return this.iCRUDImpl.getCandidate(username);
     }
-    
-/*    public CandidateUI candidateUI(String username) {
-        return this.iCRUDImpl.setCandidatesUIUsername(username);
-    }*/
 
 }
