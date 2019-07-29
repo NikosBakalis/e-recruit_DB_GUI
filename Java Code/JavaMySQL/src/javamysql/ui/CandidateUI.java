@@ -341,7 +341,7 @@ public class CandidateUI extends javax.swing.JFrame {
      * @param newSurname the newSurname to set
      */
     public void setNewSurname(String newSurname) {
-        this.newSurname = newSurname;
+        CandidateUI.newSurname = newSurname;
     }
 
     /**
@@ -355,7 +355,7 @@ public class CandidateUI extends javax.swing.JFrame {
      * @param newEmail the newEmail to set
      */
     public void setNewEmail(String newEmail) {
-        this.newEmail = newEmail;
+        CandidateUI.newEmail = newEmail;
     }
 
     /**
@@ -369,7 +369,7 @@ public class CandidateUI extends javax.swing.JFrame {
      * @param newBio the newBio to set
      */
     public void setNewBio(String newBio) {
-        this.newBio = newBio;
+        CandidateUI.newBio = newBio;
     }
 
 }
