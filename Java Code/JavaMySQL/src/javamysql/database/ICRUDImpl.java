@@ -105,6 +105,7 @@ public class ICRUDImpl implements ICRUD {
     @Override
     public CandidateUI getCandidateUI(String username) {
         try{
+            openConnection();
             CandidateUI candidateUI = new CandidateUI();
             Statement statement = connection.createStatement();
             String query = "UPDATE user SET password = '" + candidateUI.getNewPassword() + "', name = '" + candidateUI.getNewName() + "', surname = '" + candidateUI.getNewSurname() + "', email = '" + candidateUI.getNewEmail() + "' WHERE username = '" + username + "';UPDATE candidate SET bio = '" + candidateUI.getNewBio() + "'";
