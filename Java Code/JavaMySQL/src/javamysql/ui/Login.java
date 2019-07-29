@@ -16,7 +16,7 @@ import javamysql.model.User;
  */
 public class Login extends javax.swing.JFrame {
     
-    private final Controller controller;    
+    private final Controller controller;
 
     /**
      * Creates new form Login

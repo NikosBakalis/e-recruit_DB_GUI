@@ -5,7 +5,7 @@
  */
 package javamysql.ui;
 
-//import javamysql.helper.Controller;
+import javamysql.helper.Controller;
 import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
 import javamysql.model.User;
@@ -18,6 +18,7 @@ import javamysql.model.User;
  */
 public class CandidateUI extends javax.swing.JFrame {
     
+    private final Controller controller;
     int counter = 0;
     
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
@@ -32,6 +33,7 @@ public class CandidateUI extends javax.swing.JFrame {
      */
     public CandidateUI() {
         initComponents();
+        this.controller = Controller.getController();
     }
 
     /**

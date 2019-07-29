@@ -9,6 +9,7 @@ import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javamysql.ui.CandidateUI;
 
 /**
  *

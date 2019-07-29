@@ -104,16 +104,15 @@ public class ICRUDImpl implements ICRUD {
     
     @Override
     public CandidateUI getCandidateUI(String username) {
+        openConnection();
         try{
-            openConnection();
             CandidateUI candidateUI = new CandidateUI();
             Statement statement = connection.createStatement();
-            String query = "UPDATE user SET password = '" + candidateUI.getNewPassword() + "', name = '" + candidateUI.getNewName() + "', surname = '" + candidateUI.getNewSurname() + "', email = '" + candidateUI.getNewEmail() + "' WHERE username = '" + username + "';UPDATE candidate SET bio = '" + candidateUI.getNewBio() + "'";
-            // String query = "UPDATE user SET name = 'Cleomenis13' WHERE username = 'cleogeo'";
-            statement.executeUpdate(query);
-        
-            ResultSet resultSet = statement.executeQuery(query);
-            resultSet.close();
+            String query1 = "UPDATE user SET password = '" + candidateUI.getNewPassword() + "', name = '" + candidateUI.getNewName() + "', surname = '" + candidateUI.getNewSurname() + "', email = '" + candidateUI.getNewEmail() + "' WHERE username = '" + username + "'";
+            String query2 = "UPDATE candidate SET bio = '" + candidateUI.getNewBio() + "' WHERE username = '" + username + "'";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
+            statement.executeBatch();
             return candidateUI;
         } catch (SQLException e) {
             return null;
