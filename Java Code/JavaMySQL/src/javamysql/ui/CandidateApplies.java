@@ -17,7 +17,9 @@ public class CandidateApplies extends javax.swing.JFrame {
     
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
     Candidate candidate = new Candidate();
-    JobMoreInfo jobMoreInfo = new JobMoreInfo();
+    Job job = new Job();
+    
+    private static String selectedApply;
 
     /**
      * Creates new form CandidateApplies
@@ -48,7 +50,9 @@ public class CandidateApplies extends javax.swing.JFrame {
         OpenForApply1 = new javax.swing.JLabel();
         Apply = new javax.swing.JButton();
         DeleteApply = new javax.swing.JButton();
+        moreInfoOpen = new javax.swing.JButton();
         moreInfo = new javax.swing.JButton();
+        moreInfoCompleted = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,8 +101,20 @@ public class CandidateApplies extends javax.swing.JFrame {
         OpenForApply1.setText("Completed");
 
         Apply.setText("Apply");
+        Apply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApplyActionPerformed(evt);
+            }
+        });
 
         DeleteApply.setText("Delete Apply");
+
+        moreInfoOpen.setText("More Info");
+        moreInfoOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moreInfoOpenActionPerformed(evt);
+            }
+        });
 
         moreInfo.setText("More Info");
         moreInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -106,6 +122,8 @@ public class CandidateApplies extends javax.swing.JFrame {
                 moreInfoActionPerformed(evt);
             }
         });
+
+        moreInfoCompleted.setText("More Info");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,21 +134,23 @@ public class CandidateApplies extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(OpenForApply, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(moreInfo)
+                        .addComponent(moreInfoOpen)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Apply))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(DeleteApply)
-                        .addGap(46, 46, 46)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(moreInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(DeleteApply)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(216, 216, 216)
+                        .addComponent(moreInfoCompleted)
+                        .addGap(143, 143, 143)
                         .addComponent(Back))
                     .addComponent(OpenForApply1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,7 +166,9 @@ public class CandidateApplies extends javax.swing.JFrame {
                             .addComponent(Back)
                             .addComponent(Apply)
                             .addComponent(DeleteApply)
-                            .addComponent(moreInfo)))
+                            .addComponent(moreInfoOpen)
+                            .addComponent(moreInfo)
+                            .addComponent(moreInfoCompleted)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -204,9 +226,21 @@ public class CandidateApplies extends javax.swing.JFrame {
         jList2.setModel(iCRUDImpl.getDLM());
     }//GEN-LAST:event_jList2AncestorAdded
 
-    private void moreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreInfoActionPerformed
+    private void moreInfoOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreInfoOpenActionPerformed
+        JobMoreInfo jobMoreInfo = new JobMoreInfo();
         jobMoreInfo.setVisible(true);
-        // Job job = new Job();
+        setSelectedApply(jList1.getSelectedValue());
+    }//GEN-LAST:event_moreInfoOpenActionPerformed
+
+    private void ApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyActionPerformed
+        iCRUDImpl.getApplies(candidate.getUsername(), job.getId());
+        System.out.println("DONE!");
+    }//GEN-LAST:event_ApplyActionPerformed
+
+    private void moreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreInfoActionPerformed
+        JobMoreInfo jobMoreInfo = new JobMoreInfo();
+        jobMoreInfo.setVisible(true);
+        setSelectedApply(jList2.getSelectedValue());
     }//GEN-LAST:event_moreInfoActionPerformed
 
     /**
@@ -259,5 +293,21 @@ public class CandidateApplies extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton moreInfo;
+    private javax.swing.JButton moreInfoCompleted;
+    private javax.swing.JButton moreInfoOpen;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the selectedApply
+     */
+    public String getSelectedApply() {
+        return selectedApply;
+    }
+
+    /**
+     * @param selectedApply the selectedApply to set
+     */
+    public void setSelectedApply(String selectedApply) {
+        this.selectedApply = selectedApply;
+    }
 }

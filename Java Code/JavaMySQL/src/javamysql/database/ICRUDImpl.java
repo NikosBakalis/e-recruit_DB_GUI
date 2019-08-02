@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javamysql.model.Applies;
 import javamysql.model.Candidate;
 import javamysql.model.Job;
 import javamysql.model.Recruiter;
@@ -168,8 +169,6 @@ public class ICRUDImpl implements ICRUD {
         openConnection();
         try {
             String query = "SELECT * FROM job WHERE job.position = '" + position + "'";
-            System.out.println(position);
-            // String query = "SELECT * FROM job WHERE position = 'data analyst'";
             
             ResultSet resultSet;
             Job job;
@@ -178,16 +177,33 @@ public class ICRUDImpl implements ICRUD {
                 job = null;
                 if(resultSet.next()) {
                     job = new Job();
+                    job.setId(resultSet.getInt("id"));
+                    job.setStartDate(resultSet.getDate("start_date"));
                     job.setSalary(resultSet.getInt("salary"));
                     job.setPosition(resultSet.getString("position"));
                     job.setCountry(resultSet.getString("edra"));
                     job.setRecruiter(resultSet.getString("recruiter"));
-                    job.setAnnounceDate(resultSet.getString("announce_date"));
-                    job.setSubmissionDate(resultSet.getString("submission_date"));
+                    job.setAnnounceDate(resultSet.getTimestamp("announce_date"));
+                    job.setSubmissionDate(resultSet.getDate("submission_date"));
                 }
             }
             resultSet.close();
             return job;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Applies getApplies(String username, int job_ID){
+        openConnection();
+        try{
+            Applies applies = new Applies();
+            Statement statement = connection.createStatement();
+            String query = "INSERT INTO applies VALUES ('" + username + "', " + job_ID + ")";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return applies;
         } catch (SQLException e) {
             return null;
         }

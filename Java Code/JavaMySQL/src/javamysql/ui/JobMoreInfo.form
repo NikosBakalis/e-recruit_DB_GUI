@@ -46,29 +46,66 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="Salary" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="TextSalary" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="AnnounceDate" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="TextAnnounceDate" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="SubmissionDate" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="TextSubmissionDate" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="StartDate" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="TextStartDate" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="Recruiter" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="TextRecruiter" min="-2" pref="120" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
-                          <Component id="Position" min="-2" pref="161" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="Seat" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="TextSeat" min="-2" pref="120" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="CompanyName" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="TextCompanyName" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                  <Component id="JobID" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="TextJobID" min="-2" pref="120" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="CompanyName" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextField1" min="-2" pref="120" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <Component id="Position" min="-2" pref="433" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="218" max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="Salary" min="-2" pref="100" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Component id="jTextField2" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -80,15 +117,49 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="CompanyName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="TextCompanyName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="JobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="TextJobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="Salary" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="Seat" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="TextSeat" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="172" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="Recruiter" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="TextRecruiter" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="TextSalary" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="Salary" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="TextAnnounceDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="AnnounceDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="SubmissionDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="TextSubmissionDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="TextStartDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="StartDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="112" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,14 +181,14 @@
             <Property name="text" type="java.lang.String" value="Company Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="Salary">
+        <Component class="javax.swing.JLabel" name="Seat">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Country"/>
+            <Property name="text" type="java.lang.String" value="Seat"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="TextCompanyName">
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JTextField" name="TextSeat">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="job.getCountry()" type="code"/>
@@ -125,6 +196,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// System.out.println(job.getCountry());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextSeat.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="jButton1">
@@ -134,6 +206,97 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Recruiter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Recruiter"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TextRecruiter">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="job.getRecruiter()" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// System.out.println(job.getCountry());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextRecruiter.setEditable(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="Salary">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Salary"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TextSalary">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="intToStringSalary" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextSalary.setEditable(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="AnnounceDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Announce Date"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TextAnnounceDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="timestampToStringAnnounceDate" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextAnnounceDate.setEditable(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="SubmissionDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Submission Date"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TextSubmissionDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="dateToStringSubmissionDate" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextSubmissionDate.setEditable(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="StartDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Start Date"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TextStartDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;TO-DO&quot;" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextStartDate.setEditable(false);"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="JobID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Job ID"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="TextJobID">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="intToStringID" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextJobID.setEditable(false);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

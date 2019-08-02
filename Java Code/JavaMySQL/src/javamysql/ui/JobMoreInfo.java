@@ -5,9 +5,10 @@
  */
 package javamysql.ui;
 
-import javamysql.helper.Controller;
+// import javamysql.helper.Controller;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javamysql.database.ICRUDImpl;
-import javamysql.model.Candidate;
 import javamysql.model.Job;
 
 /**
@@ -16,17 +17,23 @@ import javamysql.model.Job;
  */
 public class JobMoreInfo extends javax.swing.JFrame {
     
-    private final Controller controller;
-    
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
     Job job = new Job();
+    CandidateApplies candidateApplies = new CandidateApplies();
+    
+    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    DateFormat dateFormatDate = new SimpleDateFormat("yyyy/MM/dd");
+    
+    String intToStringSalary = null;
+    String timestampToStringAnnounceDate;
+    String dateToStringSubmissionDate;
+    String intToStringID = null;
 
     /**
      * Creates new form JobMoreInfo
      */
     public JobMoreInfo() {
         initComponents();
-        this.controller = Controller.getController();
     }
 
     /**
@@ -41,10 +48,22 @@ public class JobMoreInfo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Position = new javax.swing.JLabel();
         CompanyName = new javax.swing.JLabel();
-        Salary = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        Seat = new javax.swing.JLabel();
+        TextCompanyName = new javax.swing.JTextField();
+        TextSeat = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        Recruiter = new javax.swing.JLabel();
+        TextRecruiter = new javax.swing.JTextField();
+        Salary = new javax.swing.JLabel();
+        TextSalary = new javax.swing.JTextField();
+        AnnounceDate = new javax.swing.JLabel();
+        TextAnnounceDate = new javax.swing.JTextField();
+        SubmissionDate = new javax.swing.JLabel();
+        TextSubmissionDate = new javax.swing.JTextField();
+        StartDate = new javax.swing.JLabel();
+        TextStartDate = new javax.swing.JTextField();
+        JobID = new javax.swing.JLabel();
+        TextJobID = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,9 +73,10 @@ public class JobMoreInfo extends javax.swing.JFrame {
 
         CompanyName.setText("Company Name");
 
-        Salary.setText("Country");
+        Seat.setText("Seat");
 
-        jTextField2.setText(job.getCountry());
+        TextSeat.setEditable(false);
+        TextSeat.setText(job.getCountry());
         // System.out.println(job.getCountry());
 
         jButton1.setText("jButton1");
@@ -66,29 +86,88 @@ public class JobMoreInfo extends javax.swing.JFrame {
             }
         });
 
+        Recruiter.setText("Recruiter");
+
+        TextRecruiter.setEditable(false);
+        TextRecruiter.setText(job.getRecruiter());
+        // System.out.println(job.getCountry());
+
+        Salary.setText("Salary");
+
+        TextSalary.setEditable(false);
+        TextSalary.setText(intToStringSalary);
+
+        AnnounceDate.setText("Announce Date");
+
+        TextAnnounceDate.setEditable(false);
+        TextAnnounceDate.setText(timestampToStringAnnounceDate);
+
+        SubmissionDate.setText("Submission Date");
+
+        TextSubmissionDate.setEditable(false);
+        TextSubmissionDate.setText(dateToStringSubmissionDate);
+
+        StartDate.setText("Start Date");
+
+        TextStartDate.setEditable(false);
+        TextStartDate.setText("TO-DO");
+
+        JobID.setText("Job ID");
+
+        TextJobID.setEditable(false);
+        TextJobID.setText(intToStringID);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Salary, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(218, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Salary, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(AnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TextAnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(SubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TextSubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TextStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Recruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TextRecruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(113, 113, 113))
+                .addGap(90, 90, 90))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(TextSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(TextCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(52, 52, 52)
+                                .addComponent(JobID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(TextJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,13 +177,39 @@ public class JobMoreInfo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TextCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Salary, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(172, Short.MAX_VALUE))
+                    .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Recruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextRecruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Salary, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextAnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TextSubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TextStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -129,10 +234,19 @@ public class JobMoreInfo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // job = this.controller.jobLogin("data analyst");
-        iCRUDImpl.getJob("data analyst");
-        System.out.println(job.getRecruiter());
-        jTextField2.setText(job.getCountry());
+        // CandidateApplies candidateApplies = new CandidateApplies();
+        iCRUDImpl.getJob(candidateApplies.getSelectedApply());
+        Position.setText(job.getPosition());
+        TextSeat.setText(job.getCountry());
+        TextRecruiter.setText(job.getRecruiter());
+        intToStringSalary = Integer.toString(job.getSalary());
+        TextSalary.setText(intToStringSalary);
+        timestampToStringAnnounceDate = dateFormatTimestamp.format(job.getAnnounceDate());
+        TextAnnounceDate.setText(timestampToStringAnnounceDate);
+        dateToStringSubmissionDate = dateFormatDate.format(job.getSubmissionDate());
+        TextSubmissionDate.setText(dateToStringSubmissionDate);
+        intToStringID = Integer.toString(job.getId());
+        TextJobID.setText(intToStringID);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -171,12 +285,24 @@ public class JobMoreInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AnnounceDate;
     private javax.swing.JLabel CompanyName;
+    private javax.swing.JLabel JobID;
     private javax.swing.JLabel Position;
+    private javax.swing.JLabel Recruiter;
     private javax.swing.JLabel Salary;
+    private javax.swing.JLabel Seat;
+    private javax.swing.JLabel StartDate;
+    private javax.swing.JLabel SubmissionDate;
+    private javax.swing.JTextField TextAnnounceDate;
+    private javax.swing.JTextField TextCompanyName;
+    private javax.swing.JTextField TextJobID;
+    private javax.swing.JTextField TextRecruiter;
+    private javax.swing.JTextField TextSalary;
+    private javax.swing.JTextField TextSeat;
+    private javax.swing.JTextField TextStartDate;
+    private javax.swing.JTextField TextSubmissionDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

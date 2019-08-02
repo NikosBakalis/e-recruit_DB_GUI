@@ -5,14 +5,19 @@
  */
 package javamysql.model;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 /**
  *
  * @author Nikolas
  */
 public class Job {
     
-    private static String position, country, recruiter, announceDate, submissionDate;
-    private static int salary;
+    private static String position, country, recruiter;
+    private static int id, salary;
+    private static Timestamp announceDate;
+    private static Date startDate, submissionDate;
 
     /**
      * @return the position
@@ -59,28 +64,28 @@ public class Job {
     /**
      * @return the announceDate
      */
-    public String getAnnounceDate() {
+    public Timestamp getAnnounceDate() {
         return announceDate;
     }
-
+    
     /**
      * @param announceDate the announceDate to set
      */
-    public void setAnnounceDate(String announceDate) {
+    public void setAnnounceDate(Timestamp announceDate) {
         Job.announceDate = announceDate;
     }
 
     /**
      * @return the submissionDate
      */
-    public String getSubmissionDate() {
+    public Date getSubmissionDate() {
         return submissionDate;
     }
 
     /**
      * @param submissionDate the submissionDate to set
      */
-    public void setSubmissionDate(String submissionDate) {
+    public void setSubmissionDate(Date submissionDate) {
         Job.submissionDate = submissionDate;
     }
 
@@ -96,6 +101,34 @@ public class Job {
      */
     public void setSalary(int salary) {
         Job.salary = salary;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        Job.id = id;
+    }
+
+    /**
+     * @return the startDate
+     */
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    /**
+     * @param startDate the startDate to set
+     */
+    public void setStartDate(Date startDate) {
+        Job.startDate = startDate;
     }
     
 }

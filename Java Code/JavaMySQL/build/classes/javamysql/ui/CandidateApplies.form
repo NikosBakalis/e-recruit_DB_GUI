@@ -51,25 +51,27 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="OpenForApply" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="moreInfo" min="-2" max="-2" attributes="0"/>
+                          <Component id="moreInfoOpen" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="Apply" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" alignment="0" min="-2" pref="185" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                      <Component id="jLabel1" pref="190" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" pref="190" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="moreInfo" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="DeleteApply" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="72" max="32767" attributes="0"/>
+                  <EmptySpace pref="66" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
+                          <Component id="moreInfoCompleted" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                           <Component id="Back" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="OpenForApply1" min="-2" pref="171" max="-2" attributes="0"/>
@@ -89,7 +91,9 @@
                               <Component id="Back" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="Apply" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="DeleteApply" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="moreInfoOpen" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="moreInfo" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="moreInfoCompleted" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -227,11 +231,22 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Apply"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ApplyActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="DeleteApply">
           <Properties>
             <Property name="text" type="java.lang.String" value="Delete Apply"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="moreInfoOpen">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="More Info"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moreInfoOpenActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="moreInfo">
           <Properties>
@@ -240,6 +255,11 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moreInfoActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="moreInfoCompleted">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="More Info"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
