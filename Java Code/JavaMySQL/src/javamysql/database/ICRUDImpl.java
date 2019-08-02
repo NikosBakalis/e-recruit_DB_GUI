@@ -12,9 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javamysql.model.Candidate;
+import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -23,6 +26,7 @@ import javamysql.ui.CandidateUI;
 public class ICRUDImpl implements ICRUD {
 
     private Connection connection;
+    private DefaultListModel DLM;
     
     @Override
     public User getUser(String username, String password) {
@@ -118,6 +122,76 @@ public class ICRUDImpl implements ICRUD {
             return null;
         }
     }
+    
+    @Override
+    public CandidateApplies getCandidateOpenApplies(String username) {
+        openConnection();
+        setDLM(new DefaultListModel());
+        try{
+            CandidateApplies candidateApplies = new CandidateApplies();
+            Statement statement = connection.createStatement();
+            String query = "SELECT DISTINCT position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname != '" + username + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                String position = resultSet.getString("position");
+                getDLM().addElement(position);
+            }
+            System.out.println(getDLM());
+            return candidateApplies;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateApplies getCandidateApplies(String username) {
+        openConnection();
+        setDLM(new DefaultListModel());
+        try{
+            CandidateApplies candidateApplies = new CandidateApplies();
+            Statement statement = connection.createStatement();
+            String query = "SELECT DISTINCT position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname = '" + username + "'";
+            ResultSet resultSet = statement.executeQuery(query);
+            while(resultSet.next()) {
+                String position = resultSet.getString("position");
+                getDLM().addElement(position);
+            }
+            System.out.println(getDLM());
+            return candidateApplies;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Job getJob(String position) {
+        openConnection();
+        try {
+            String query = "SELECT * FROM job WHERE job.position = '" + position + "'";
+            System.out.println(position);
+            // String query = "SELECT * FROM job WHERE position = 'data analyst'";
+            
+            ResultSet resultSet;
+            Job job;
+            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                job = null;
+                if(resultSet.next()) {
+                    job = new Job();
+                    job.setSalary(resultSet.getInt("salary"));
+                    job.setPosition(resultSet.getString("position"));
+                    job.setCountry(resultSet.getString("edra"));
+                    job.setRecruiter(resultSet.getString("recruiter"));
+                    job.setAnnounceDate(resultSet.getString("announce_date"));
+                    job.setSubmissionDate(resultSet.getString("submission_date"));
+                }
+            }
+            resultSet.close();
+            return job;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     public void openConnection() {
         try {
@@ -129,12 +203,18 @@ public class ICRUDImpl implements ICRUD {
         }
     }
 
-    public Recruiter getRecruiter(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * @return the DLM
+     */
+    public DefaultListModel getDLM() {
+        return DLM;
     }
 
-    public Candidate getCandidate(String username, String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * @param DLM the DLM to set
+     */
+    public void setDLM(DefaultListModel DLM) {
+        this.DLM = DLM;
     }
 
 }

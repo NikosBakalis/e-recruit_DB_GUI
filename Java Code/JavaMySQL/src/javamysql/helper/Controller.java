@@ -7,9 +7,9 @@ package javamysql.helper;
 
 import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
+import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
-import javamysql.ui.CandidateUI;
 
 /**
  *
@@ -32,7 +32,7 @@ public class Controller {
         return controller;
     }
 
-    public User login(String username, String password) {
+    public User userLogin(String username, String password) {
         return this.iCRUDImpl.getUser(username, password);
     }
     
@@ -42,6 +42,10 @@ public class Controller {
     
     public Candidate candidateLogin(String username) {
         return this.iCRUDImpl.getCandidate(username);
+    }
+    
+    public Job jobLogin(String position){
+        return this.iCRUDImpl.getJob(position);
     }
 
 }

@@ -25,7 +25,7 @@ public class Recruiter {
      * @param username the username to set
      */
     public void setUsername(String username) {
-        this.username = username;
+        Recruiter.username = username;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Recruiter {
      * @param firm the firm to set
      */
     public void setFirm(String firm) {
-        this.firm = firm;
+        Recruiter.firm = firm;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Recruiter {
      * @param exp_years the exp_years to set
      */
     public void setExp_years(int exp_years) {
-        this.exp_years = exp_years;
+        Recruiter.exp_years = exp_years;
     }
     
     //@Override

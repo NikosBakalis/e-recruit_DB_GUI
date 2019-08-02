@@ -6,9 +6,12 @@
 package javamysql.database;
 
 import javamysql.model.Candidate;
+import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
+import javamysql.ui.JobMoreInfo;
 
 /**
  *
@@ -20,5 +23,8 @@ public interface ICRUD {
     Recruiter getRecruiter(String username);
     Candidate getCandidate(String username);
     CandidateUI getCandidateUI(String username);
+    CandidateApplies getCandidateOpenApplies(String username);
+    CandidateApplies getCandidateApplies(String username);
+    Job getJob(String position);
     
 }

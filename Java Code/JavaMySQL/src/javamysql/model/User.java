@@ -27,7 +27,7 @@ public class User {
      * @param username the username to set
      */
     public void setUsername(String username) {
-        this.username = username;
+        User.username = username;
     }
 
     /**
@@ -41,7 +41,7 @@ public class User {
      * @param password the password to set
      */
     public void setPassword(String password) {
-        this.password = password;
+        User.password = password;
     }
 
     /**
@@ -55,7 +55,7 @@ public class User {
      * @param name the name to set
      */
     public void setName(String name) {
-        this.name = name;
+        User.name = name;
     }
 
     /**
@@ -69,7 +69,7 @@ public class User {
      * @param surname the surname to set
      */
     public void setSurname(String surname) {
-        this.surname = surname;
+        User.surname = surname;
     }
 
     /**
@@ -83,7 +83,7 @@ public class User {
      * @param reg_date the reg_date to set
      */
     public void setReg_date(Timestamp reg_date) {
-        this.reg_date = reg_date;
+        User.reg_date = reg_date;
     }
 
     /**
@@ -97,7 +97,7 @@ public class User {
      * @param email the email to set
      */
     public void setEmail(String email) {
-        this.email = email;
+        User.email = email;
     }
     
     //@Override

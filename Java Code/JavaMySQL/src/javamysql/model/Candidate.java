@@ -24,7 +24,7 @@ public class Candidate {
      * @param username the username to set
      */
     public void setUsername(String username) {
-        this.username = username;
+        Candidate.username = username;
     }
 
     /**
@@ -38,7 +38,7 @@ public class Candidate {
      * @param bio the bio to set
      */
     public void setBio(String bio) {
-        this.bio = bio;
+        Candidate.bio = bio;
     }
 
     /**
@@ -52,7 +52,7 @@ public class Candidate {
      * @param sistatikes the sistatikes to set
      */
     public void setSistatikes(String sistatikes) {
-        this.sistatikes = sistatikes;
+        Candidate.sistatikes = sistatikes;
     }
 
     /**
@@ -66,12 +66,12 @@ public class Candidate {
      * @param certificates the certificates to set
      */
     public void setCertificates(String certificates) {
-        this.certificates = certificates;
+        Candidate.certificates = certificates;
     }
     
     @Override
     public String toString() {
-        return this.username + ", " + this.bio + ", " + this.sistatikes + ", " + this.certificates;
+        return Candidate.username + ", " + Candidate.bio + ", " + Candidate.sistatikes + ", " + Candidate.certificates;
     }
     
 }

@@ -23,7 +23,6 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocationRelativeTo(null);
         this.controller = Controller.getController();
     }
 
@@ -96,10 +95,11 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setBounds(0, 0, 830, 390);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        User user = this.controller.login(this.username.getText(), this.password.getText());
+        User user = this.controller.userLogin(this.username.getText(), this.password.getText());
         Recruiter recruiter = this.controller.recruiterLogin(this.username.getText());
         Candidate candidate = this.controller.candidateLogin(this.username.getText());
         

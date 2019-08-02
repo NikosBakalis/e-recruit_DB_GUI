@@ -5,7 +5,6 @@
  */
 package javamysql.ui;
 
-import javamysql.helper.Controller;
 import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
 import javamysql.model.User;
@@ -18,7 +17,6 @@ import javamysql.model.User;
  */
 public class CandidateUI extends javax.swing.JFrame {
     
-    private final Controller controller;
     int counter = 0;
     
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
@@ -33,7 +31,6 @@ public class CandidateUI extends javax.swing.JFrame {
      */
     public CandidateUI() {
         initComponents();
-        this.controller = Controller.getController();
     }
 
     /**
@@ -62,8 +59,9 @@ public class CandidateUI extends javax.swing.JFrame {
         changeEmail = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         changeBio = new javax.swing.JTextPane();
+        JobApplies = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         Title.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
@@ -116,22 +114,17 @@ public class CandidateUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(changeBio);
         changeBio.setText(candidate.getBio());
 
+        JobApplies.setText("Job Applies");
+        JobApplies.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JobAppliesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(EditAndSave, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(169, 169, 169)
-                        .addComponent(Logout)))
-                .addGap(249, 249, 249))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,27 +133,43 @@ public class CandidateUI extends javax.swing.JFrame {
                     .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Surname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(changePassword, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(changeUsername)
-                    .addComponent(changeSurname, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(changeName, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(changeEmail, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(175, 175, 175)
+                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
+                        .addComponent(Logout)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(changePassword, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(changeUsername)
+                            .addComponent(changeSurname, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(changeName, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(changeEmail, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(Bio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(111, 111, 111))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(EditAndSave, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(146, 146, 146)
+                        .addComponent(JobApplies)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Logout))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,10 +194,10 @@ public class CandidateUI extends javax.swing.JFrame {
                             .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EditAndSave)
-                    .addComponent(Logout))
+                    .addComponent(JobApplies)
+                    .addComponent(EditAndSave))
                 .addGap(20, 20, 20))
         );
 
@@ -228,7 +237,6 @@ public class CandidateUI extends javax.swing.JFrame {
             changeEmail.setEditable(true);
             changeBio.setEditable(true);
             EditAndSave.setText("Save");
-            // Logout.setVisible(false);
         } else {
             changePassword.setEditable(false);
             changeName.setEditable(false);
@@ -236,18 +244,20 @@ public class CandidateUI extends javax.swing.JFrame {
             changeEmail.setEditable(false);
             changeBio.setEditable(false);
             EditAndSave.setText("Edit");
-            // String newUsername = changeUsername.getText();
             newPassword = changePassword.getText();
             newName = changeName.getText();
             newSurname = changeSurname.getText();
             newEmail = changeEmail.getText();
             newBio = changeBio.getText();
-            // System.out.println(getNewName());
-            // Logout.setVisible(true);
-            // TODO Disable Logout
             iCRUDImpl.getCandidateUI(changeUsername.getText());
         }
     }//GEN-LAST:event_EditAndSaveActionPerformed
+
+    private void JobAppliesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JobAppliesActionPerformed
+        CandidateApplies candidateApplies = new CandidateApplies();
+        candidateApplies.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_JobAppliesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,6 +298,7 @@ public class CandidateUI extends javax.swing.JFrame {
     private javax.swing.JLabel Bio;
     private javax.swing.JButton EditAndSave;
     private javax.swing.JLabel Email;
+    private javax.swing.JButton JobApplies;
     private javax.swing.JButton Logout;
     private javax.swing.JLabel Name;
     private javax.swing.JLabel Password;
