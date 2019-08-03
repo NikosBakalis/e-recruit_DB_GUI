@@ -208,6 +208,21 @@ public class ICRUDImpl implements ICRUD {
             return null;
         }
     }
+    
+    @Override
+    public Applies delApplies(String username, int job_ID){
+        openConnection();
+        try{
+            Applies applies = new Applies();
+            Statement statement = connection.createStatement();
+            String query = "DELETE FROM applies WHERE cand_usrname = '" + username + "' AND job_id =  " + job_ID + "";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return applies;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     public void openConnection() {
         try {

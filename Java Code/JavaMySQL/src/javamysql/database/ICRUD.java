@@ -28,5 +28,6 @@ public interface ICRUD {
     CandidateApplies getCandidateApplies(String username);
     Job getJob(String position);
     Applies getApplies(String username, int job_ID);
+    Applies delApplies(String username, int job_ID);
     
 }

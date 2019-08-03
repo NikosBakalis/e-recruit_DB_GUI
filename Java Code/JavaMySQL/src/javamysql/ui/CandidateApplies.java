@@ -40,13 +40,13 @@ public class CandidateApplies extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        ListOpenForApply = new javax.swing.JList<>();
         OpenForApply = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        ListMyApplies = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        ListCompleted = new javax.swing.JList<>();
         OpenForApply1 = new javax.swing.JLabel();
         Apply = new javax.swing.JButton();
         DeleteApply = new javax.swing.JButton();
@@ -63,38 +63,38 @@ public class CandidateApplies extends javax.swing.JFrame {
             }
         });
 
-        jList1.addAncestorListener(new javax.swing.event.AncestorListener() {
+        ListOpenForApply.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jList1AncestorAdded(evt);
+                ListOpenForApplyAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(ListOpenForApply);
 
         OpenForApply.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         OpenForApply.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         OpenForApply.setText("Open For Apply");
 
-        jList2.addAncestorListener(new javax.swing.event.AncestorListener() {
+        ListMyApplies.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jList2AncestorAdded(evt);
+                ListMyAppliesAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(ListMyApplies);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("My Applies");
 
-        jList3.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
-        jScrollPane3.setViewportView(jList3);
+        ListCompleted.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jScrollPane3.setViewportView(ListCompleted);
 
         OpenForApply1.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         OpenForApply1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,6 +108,11 @@ public class CandidateApplies extends javax.swing.JFrame {
         });
 
         DeleteApply.setText("Delete Apply");
+        DeleteApply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteApplyActionPerformed(evt);
+            }
+        });
 
         moreInfoOpen.setText("More Info");
         moreInfoOpen.addActionListener(new java.awt.event.ActionListener() {
@@ -130,63 +135,69 @@ public class CandidateApplies extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(OpenForApply, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(moreInfoOpen)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(Apply))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(72, 72, 72)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(OpenForApply, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(moreInfo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                            .addComponent(DeleteApply))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(moreInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DeleteApply)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(OpenForApply1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(moreInfoCompleted)
-                        .addGap(143, 143, 143)
-                        .addComponent(Back))
-                    .addComponent(OpenForApply1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Back)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(OpenForApply, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Back)
-                            .addComponent(Apply)
-                            .addComponent(DeleteApply)
-                            .addComponent(moreInfoOpen)
-                            .addComponent(moreInfo)
-                            .addComponent(moreInfoCompleted)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(OpenForApply1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(OpenForApply1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(42, 42, 42)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(OpenForApply, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(221, 374, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Apply)
+                    .addComponent(DeleteApply)
+                    .addComponent(moreInfoOpen)
+                    .addComponent(moreInfo)
+                    .addComponent(moreInfoCompleted))
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Back)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,20 +227,20 @@ public class CandidateApplies extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
-    private void jList1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList1AncestorAdded
+    private void ListOpenForApplyAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ListOpenForApplyAncestorAdded
         iCRUDImpl.getCandidateOpenApplies(candidate.getUsername());
-        jList1.setModel(iCRUDImpl.getDLM());
-    }//GEN-LAST:event_jList1AncestorAdded
+        ListOpenForApply.setModel(iCRUDImpl.getDLM());
+    }//GEN-LAST:event_ListOpenForApplyAncestorAdded
 
-    private void jList2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jList2AncestorAdded
+    private void ListMyAppliesAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_ListMyAppliesAncestorAdded
         iCRUDImpl.getCandidateApplies(candidate.getUsername());
-        jList2.setModel(iCRUDImpl.getDLM());
-    }//GEN-LAST:event_jList2AncestorAdded
+        ListMyApplies.setModel(iCRUDImpl.getDLM());
+    }//GEN-LAST:event_ListMyAppliesAncestorAdded
 
     private void moreInfoOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreInfoOpenActionPerformed
         JobMoreInfo jobMoreInfo = new JobMoreInfo();
         jobMoreInfo.setVisible(true);
-        setSelectedApply(jList1.getSelectedValue());
+        setSelectedApply(ListOpenForApply.getSelectedValue());
     }//GEN-LAST:event_moreInfoOpenActionPerformed
 
     private void ApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApplyActionPerformed
@@ -240,8 +251,13 @@ public class CandidateApplies extends javax.swing.JFrame {
     private void moreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moreInfoActionPerformed
         JobMoreInfo jobMoreInfo = new JobMoreInfo();
         jobMoreInfo.setVisible(true);
-        setSelectedApply(jList2.getSelectedValue());
+        setSelectedApply(ListMyApplies.getSelectedValue());
     }//GEN-LAST:event_moreInfoActionPerformed
+
+    private void DeleteApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteApplyActionPerformed
+        iCRUDImpl.delApplies(candidate.getUsername(), job.getId());
+        System.out.println("DONE!");
+    }//GEN-LAST:event_DeleteApplyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,12 +298,12 @@ public class CandidateApplies extends javax.swing.JFrame {
     private javax.swing.JButton Apply;
     private javax.swing.JButton Back;
     private javax.swing.JButton DeleteApply;
+    private javax.swing.JList<String> ListCompleted;
+    private javax.swing.JList<String> ListMyApplies;
+    private javax.swing.JList<String> ListOpenForApply;
     private javax.swing.JLabel OpenForApply;
     private javax.swing.JLabel OpenForApply1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
