@@ -7,12 +7,12 @@ package javamysql.database;
 
 import javamysql.model.Applies;
 import javamysql.model.Candidate;
+import javamysql.model.Company;
 import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
-import javamysql.ui.JobMoreInfo;
 
 /**
  *
@@ -29,5 +29,5 @@ public interface ICRUD {
     Job getJob(String position);
     Applies getApplies(String username, int job_ID);
     Applies delApplies(String username, int job_ID);
-    
+    Company getCompany(int AFM);
 }

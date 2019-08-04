@@ -21,13 +21,14 @@ public class JobMoreInfo extends javax.swing.JFrame {
     Job job = new Job();
     CandidateApplies candidateApplies = new CandidateApplies();
     
-    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     DateFormat dateFormatDate = new SimpleDateFormat("yyyy/MM/dd");
     
     String intToStringSalary = null;
     String timestampToStringAnnounceDate;
     String dateToStringSubmissionDate;
     String intToStringID = null;
+    String dateToStringStartDate;
 
     /**
      * Creates new form JobMoreInfo
@@ -51,7 +52,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
         Seat = new javax.swing.JLabel();
         TextCompanyName = new javax.swing.JTextField();
         TextSeat = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        ButtonRefresh = new javax.swing.JButton();
         Recruiter = new javax.swing.JLabel();
         TextRecruiter = new javax.swing.JTextField();
         Salary = new javax.swing.JLabel();
@@ -79,10 +80,10 @@ public class JobMoreInfo extends javax.swing.JFrame {
         TextSeat.setText(job.getCountry());
         // System.out.println(job.getCountry());
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonRefresh.setText("Refresh");
+        ButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonRefreshActionPerformed(evt);
             }
         });
 
@@ -110,7 +111,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
         StartDate.setText("Start Date");
 
         TextStartDate.setEditable(false);
-        TextStartDate.setText("TO-DO");
+        TextStartDate.setText(dateToStringStartDate);
 
         JobID.setText("Job ID");
 
@@ -145,7 +146,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(TextRecruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(ButtonRefresh)
                 .addGap(90, 90, 90))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +192,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(119, 119, 119)
-                        .addComponent(jButton1))
+                        .addComponent(ButtonRefresh))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -233,7 +234,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRefreshActionPerformed
         // CandidateApplies candidateApplies = new CandidateApplies();
         iCRUDImpl.getJob(candidateApplies.getSelectedApply());
         Position.setText(job.getPosition());
@@ -247,7 +248,9 @@ public class JobMoreInfo extends javax.swing.JFrame {
         TextSubmissionDate.setText(dateToStringSubmissionDate);
         intToStringID = Integer.toString(job.getId());
         TextJobID.setText(intToStringID);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        dateToStringStartDate = dateFormatDate.format(job.getStartDate());
+        TextStartDate.setText(dateToStringStartDate);
+    }//GEN-LAST:event_ButtonRefreshActionPerformed
 
     /**
      * @param args the command line arguments
@@ -286,6 +289,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AnnounceDate;
+    private javax.swing.JButton ButtonRefresh;
     private javax.swing.JLabel CompanyName;
     private javax.swing.JLabel JobID;
     private javax.swing.JLabel Position;
@@ -302,7 +306,6 @@ public class JobMoreInfo extends javax.swing.JFrame {
     private javax.swing.JTextField TextSeat;
     private javax.swing.JTextField TextStartDate;
     private javax.swing.JTextField TextSubmissionDate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

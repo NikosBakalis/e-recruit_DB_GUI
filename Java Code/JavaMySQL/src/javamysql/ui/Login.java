@@ -114,6 +114,9 @@ public class Login extends javax.swing.JFrame {
         else if(recruiter != null && user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Recruiter!");
+            RecruiterUI recruiterUI = new RecruiterUI();
+            recruiterUI.setVisible(true);
+            this.dispose();
         }
         
         else if(user != null) {

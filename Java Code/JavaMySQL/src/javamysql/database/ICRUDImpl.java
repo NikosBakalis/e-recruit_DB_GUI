@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javamysql.model.Applies;
 import javamysql.model.Candidate;
+import javamysql.model.Company;
 import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
@@ -71,7 +72,7 @@ public class ICRUDImpl implements ICRUD {
                     recruiter = new Recruiter();
                     recruiter.setUsername(resultSet.getString("username"));
                     recruiter.setExp_years(resultSet.getInt("exp_years"));
-                    recruiter.setFirm(resultSet.getString("firm"));
+                    recruiter.setFirm(resultSet.getInt("firm"));
                 }
             }
             resultSet.close();
@@ -219,6 +220,36 @@ public class ICRUDImpl implements ICRUD {
             statement.addBatch(query);
             statement.executeBatch();
             return applies;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Company getCompany(int AFM) {
+        openConnection();
+        try {
+            String query = "SELECT * FROM etaireia WHERE AFM = '" + AFM + "'";
+            
+            ResultSet resultSet;
+            Company company;
+            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                company = null;
+                if(resultSet.next()) {
+                    company = new Company();
+                    company.setAFM(resultSet.getInt("AFM"));
+                    company.setDOY(resultSet.getString("DOY"));
+                    company.setName(resultSet.getString("name"));
+                    company.setTelephone(resultSet.getInt("tel"));
+                    company.setStreet(resultSet.getString("street"));
+                    company.setNumber(resultSet.getInt("num"));
+                    company.setCity(resultSet.getString("city"));
+                    company.setCountry(resultSet.getString("country"));
+                }
+            }
+            resultSet.close();
+            return company;
         } catch (SQLException e) {
             return null;
         }

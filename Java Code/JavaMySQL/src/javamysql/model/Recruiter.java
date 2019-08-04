@@ -11,8 +11,8 @@ package javamysql.model;
  */
 public class Recruiter {
     
-    private static String username, firm;
-    private static int exp_years;
+    private static String username;
+    private static int firm, exp_years;
 
     /**
      * @return the username
@@ -31,14 +31,14 @@ public class Recruiter {
     /**
      * @return the firm
      */
-    public String getFirm() {
+    public int getFirm() {
         return firm;
     }
 
     /**
      * @param firm the firm to set
      */
-    public void setFirm(String firm) {
+    public void setFirm(int firm) {
         Recruiter.firm = firm;
     }
 
