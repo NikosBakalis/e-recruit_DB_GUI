@@ -19,6 +19,7 @@ import javamysql.model.Recruiter;
 import javamysql.model.User;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
+import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
 
 /**
@@ -250,6 +251,23 @@ public class ICRUDImpl implements ICRUD {
             }
             resultSet.close();
             return company;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public RecruiterUI getRecruiterUI(String username) {
+        openConnection();
+        try{
+            RecruiterUI recruiterUI = new RecruiterUI();
+            Statement statement = connection.createStatement();
+            String query1 = "UPDATE user SET password = '" + recruiterUI.getNewPassword() + "', name = '" + recruiterUI.getNewName() + "', surname = '" + recruiterUI.getNewSurname() + "', email = '" + recruiterUI.getNewEmail() + "' WHERE username = '" + username + "'";
+            String query2 = "UPDATE recruiter SET exp_years = '" + recruiterUI.getNewExperienceYears()+ "' WHERE username = '" + username + "'";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
+            statement.executeBatch();
+            return recruiterUI;
         } catch (SQLException e) {
             return null;
         }

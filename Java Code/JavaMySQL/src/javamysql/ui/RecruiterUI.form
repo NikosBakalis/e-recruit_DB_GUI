@@ -48,80 +48,77 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="427" max="-2" attributes="0"/>
+                  <Component id="ButtonEditAndSave" min="-2" pref="68" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="Username" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="ChangeUsername" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel1" max="32767" attributes="0"/>
-                                      <Component id="ExperienceYears" pref="100" max="32767" attributes="0"/>
-                                  </Group>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="Username1" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="Username" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="Username3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="Email" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="ChangeEmail" min="-2" pref="100" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="Username1" min="-2" pref="100" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
-                                                  <Component id="WelcomeName" min="-2" pref="264" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="ChangePassword" max="32767" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="356" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="Username2" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="ChangeExperienceYears" pref="100" max="32767" attributes="0"/>
-                                      <Component id="ChangeCompany" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="192" max="-2" attributes="0"/>
+                                          <Component id="WelcomeName" min="-2" pref="264" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="changeUsername" min="-2" pref="100" max="-2" attributes="0"/>
+                                              <Component id="changePassword" min="-2" pref="100" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jLabel1" max="32767" attributes="0"/>
+                                              <Component id="ExperienceYears" pref="100" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="changeExperienceYears" pref="100" max="32767" attributes="0"/>
+                                              <Component id="changeCompany" max="32767" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="changeSurname" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="changeName" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="ButtonMyCompany" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="177" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="Username3" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="Email" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ChangeSurname" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="changeEmail" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="Username2" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ChangeName" min="-2" pref="100" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="ButtonMyCompany" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="427" max="-2" attributes="0"/>
-                  <Component id="ButtonEditAndSave" min="-2" pref="68" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -134,39 +131,38 @@
                       <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Username" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ChangeUsername" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ExperienceYears" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="ChangeExperienceYears" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                          <Component id="ExperienceYears" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="changeUsername" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="Username" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="changeExperienceYears" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Username1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ChangePassword" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ChangeCompany" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="changeCompany" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="changePassword" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="Username1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Username2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ChangeName" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="ButtonMyCompany" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="changeName" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="ButtonMyCompany" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="changeSurname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="Username3" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ChangeSurname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Email" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="ChangeEmail" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="changeEmail" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="41" max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
                   <Component id="ButtonEditAndSave" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -190,14 +186,14 @@
             <Property name="text" type="java.lang.String" value="Username"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ChangeUsername">
+        <Component class="javax.swing.JTextField" name="changeUsername">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="recruiter.getUsername()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangeUsername.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeUsername.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="Username1">
@@ -210,24 +206,24 @@
             <Property name="text" type="java.lang.String" value="Name"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ChangeName">
+        <Component class="javax.swing.JTextField" name="changeName">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="user.getName()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangeName.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeName.setEditable(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="ChangeSurname">
+        <Component class="javax.swing.JTextField" name="changeSurname">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="user.getSurname()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangeSurname.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeSurname.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="Username3">
@@ -240,24 +236,24 @@
             <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ChangeEmail">
+        <Component class="javax.swing.JTextField" name="changeEmail">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="user.getEmail()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangeEmail.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeEmail.setEditable(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="ChangePassword">
+        <Component class="javax.swing.JPasswordField" name="changePassword">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="user.getPassword()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangePassword.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changePassword.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="ExperienceYears">
@@ -265,14 +261,14 @@
             <Property name="text" type="java.lang.String" value="Experience Years"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ChangeExperienceYears">
+        <Component class="javax.swing.JTextField" name="changeExperienceYears">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="intToStringExperienceYears" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangeExperienceYears.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeExperienceYears.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
@@ -280,25 +276,31 @@
             <Property name="text" type="java.lang.String" value="Company"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ChangeCompany">
+        <Component class="javax.swing.JTextField" name="changeCompany">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="iCRUDImpl.getCompany(recruiter.getFirm()).getName()" type="code"/>
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ChangeCompany.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeCompany.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="ButtonMyCompany">
           <Properties>
             <Property name="text" type="java.lang.String" value="My Company"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonMyCompanyActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ButtonEditAndSave">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edit"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonEditAndSaveActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ButtonLogout">
           <Properties>

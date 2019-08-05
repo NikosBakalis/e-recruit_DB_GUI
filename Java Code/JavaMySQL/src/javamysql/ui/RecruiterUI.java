@@ -45,19 +45,19 @@ public class RecruiterUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         WelcomeName = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
-        ChangeUsername = new javax.swing.JTextField();
+        changeUsername = new javax.swing.JTextField();
         Username1 = new javax.swing.JLabel();
         Username2 = new javax.swing.JLabel();
-        ChangeName = new javax.swing.JTextField();
-        ChangeSurname = new javax.swing.JTextField();
+        changeName = new javax.swing.JTextField();
+        changeSurname = new javax.swing.JTextField();
         Username3 = new javax.swing.JLabel();
         Email = new javax.swing.JLabel();
-        ChangeEmail = new javax.swing.JTextField();
-        ChangePassword = new javax.swing.JPasswordField();
+        changeEmail = new javax.swing.JTextField();
+        changePassword = new javax.swing.JPasswordField();
         ExperienceYears = new javax.swing.JLabel();
-        ChangeExperienceYears = new javax.swing.JTextField();
+        changeExperienceYears = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        ChangeCompany = new javax.swing.JTextField();
+        changeCompany = new javax.swing.JTextField();
         ButtonMyCompany = new javax.swing.JButton();
         ButtonEditAndSave = new javax.swing.JButton();
         ButtonLogout = new javax.swing.JButton();
@@ -71,42 +71,52 @@ public class RecruiterUI extends javax.swing.JFrame {
 
         Username.setText("Username");
 
-        ChangeUsername.setEditable(false);
-        ChangeUsername.setText(recruiter.getUsername());
+        changeUsername.setEditable(false);
+        changeUsername.setText(recruiter.getUsername());
 
         Username1.setText("Password");
 
         Username2.setText("Name");
 
-        ChangeName.setEditable(false);
-        ChangeName.setText(user.getName());
+        changeName.setEditable(false);
+        changeName.setText(user.getName());
 
-        ChangeSurname.setEditable(false);
-        ChangeSurname.setText(user.getSurname());
+        changeSurname.setEditable(false);
+        changeSurname.setText(user.getSurname());
 
         Username3.setText("Surname");
 
         Email.setText("Email");
 
-        ChangeEmail.setEditable(false);
-        ChangeEmail.setText(user.getEmail());
+        changeEmail.setEditable(false);
+        changeEmail.setText(user.getEmail());
 
-        ChangePassword.setEditable(false);
-        ChangePassword.setText(user.getPassword());
+        changePassword.setEditable(false);
+        changePassword.setText(user.getPassword());
 
         ExperienceYears.setText("Experience Years");
 
-        ChangeExperienceYears.setEditable(false);
-        ChangeExperienceYears.setText(intToStringExperienceYears);
+        changeExperienceYears.setEditable(false);
+        changeExperienceYears.setText(intToStringExperienceYears);
 
         jLabel1.setText("Company");
 
-        ChangeCompany.setEditable(false);
-        ChangeCompany.setText(iCRUDImpl.getCompany(recruiter.getFirm()).getName());
+        changeCompany.setEditable(false);
+        changeCompany.setText(iCRUDImpl.getCompany(recruiter.getFirm()).getName());
 
         ButtonMyCompany.setText("My Company");
+        ButtonMyCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonMyCompanyActionPerformed(evt);
+            }
+        });
 
         ButtonEditAndSave.setText("Edit");
+        ButtonEditAndSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEditAndSaveActionPerformed(evt);
+            }
+        });
 
         ButtonLogout.setText("Log-out");
         ButtonLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -120,61 +130,58 @@ public class RecruiterUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(ChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ExperienceYears, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ChangeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(Username1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(210, 210, 210)
-                                                .addComponent(WelcomeName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(ChangePassword)
-                                                .addGap(356, 356, 356)))))
-                                .addGap(102, 102, 102)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ChangeExperienceYears, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                    .addComponent(ChangeCompany))
-                                .addGap(118, 118, 118))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(ButtonLogout)
-                                .addContainerGap())))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Username3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ChangeSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Username2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(ChangeName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonMyCompany)
-                        .addGap(175, 175, 175))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(427, 427, 427)
                 .addComponent(ButtonEditAndSave, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(Username1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Username3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Username2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(192, 192, 192)
+                                        .addComponent(WelcomeName, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(120, 120, 120))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(changeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(changePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(ExperienceYears, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(changeExperienceYears, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                            .addComponent(changeCompany))
+                                        .addGap(118, 118, 118))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(ButtonLogout)
+                                        .addContainerGap())))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(changeSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(changeName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonMyCompany)
+                                .addGap(177, 177, 177))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(changeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,33 +191,32 @@ public class RecruiterUI extends javax.swing.JFrame {
                     .addComponent(WelcomeName, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonLogout))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ExperienceYears, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeExperienceYears, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ExperienceYears, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(changeUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(changeExperienceYears, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Username1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(changeCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(changePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Username1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Username2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(ButtonMyCompany)))
+                    .addComponent(changeName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButtonMyCompany))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Username3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(changeSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Username3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                    .addComponent(changeEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(ButtonEditAndSave)
                 .addContainerGap())
         );
@@ -242,6 +248,40 @@ public class RecruiterUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ButtonLogoutActionPerformed
 
+    private void ButtonEditAndSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditAndSaveActionPerformed
+        counter++;
+        if(counter%2 == 1){
+            changePassword.setEditable(true);
+            changeName.setEditable(true);
+            changeSurname.setEditable(true);
+            changeEmail.setEditable(true);
+            changeExperienceYears.setEditable(true);
+            ButtonEditAndSave.setText("Save");
+        } else {
+            changePassword.setEditable(false);
+            changeName.setEditable(false);
+            changeSurname.setEditable(false);
+            changeEmail.setEditable(false);
+            changeExperienceYears.setEditable(false);
+            ButtonEditAndSave.setText("Edit");
+            newPassword = changePassword.getText();
+            newName = changeName.getText();
+            newSurname = changeSurname.getText();
+            newEmail = changeEmail.getText();
+            newExperienceYears = changeExperienceYears.getText();
+            iCRUDImpl.getRecruiterUI(changeUsername.getText());
+        }
+    }//GEN-LAST:event_ButtonEditAndSaveActionPerformed
+
+    private void ButtonMyCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMyCompanyActionPerformed
+        CompanyUI companyUI = new CompanyUI();
+        companyUI.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ButtonMyCompanyActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     /**
      * @param args the command line arguments
      */
@@ -281,13 +321,6 @@ public class RecruiterUI extends javax.swing.JFrame {
     private javax.swing.JButton ButtonEditAndSave;
     private javax.swing.JButton ButtonLogout;
     private javax.swing.JButton ButtonMyCompany;
-    private javax.swing.JTextField ChangeCompany;
-    private javax.swing.JTextField ChangeEmail;
-    private javax.swing.JTextField ChangeExperienceYears;
-    private javax.swing.JTextField ChangeName;
-    private javax.swing.JPasswordField ChangePassword;
-    private javax.swing.JTextField ChangeSurname;
-    private javax.swing.JTextField ChangeUsername;
     private javax.swing.JLabel Email;
     private javax.swing.JLabel ExperienceYears;
     private javax.swing.JLabel Username;
@@ -295,7 +328,85 @@ public class RecruiterUI extends javax.swing.JFrame {
     private javax.swing.JLabel Username2;
     private javax.swing.JLabel Username3;
     private javax.swing.JLabel WelcomeName;
+    private javax.swing.JTextField changeCompany;
+    private javax.swing.JTextField changeEmail;
+    private javax.swing.JTextField changeExperienceYears;
+    private javax.swing.JTextField changeName;
+    private javax.swing.JPasswordField changePassword;
+    private javax.swing.JTextField changeSurname;
+    private javax.swing.JTextField changeUsername;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the newPassword
+     */
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    /**
+     * @param newPassword the newPassword to set
+     */
+    public void setNewPassword(String newPassword) {
+        RecruiterUI.newPassword = newPassword;
+    }
+
+    /**
+     * @return the newName
+     */
+    public String getNewName() {
+        return newName;
+    }
+
+    /**
+     * @param newName the newName to set
+     */
+    public void setNewName(String newName) {
+        RecruiterUI.newName = newName;
+    }
+
+    /**
+     * @return the newSurname
+     */
+    public String getNewSurname() {
+        return newSurname;
+    }
+
+    /**
+     * @param newSurname the newSurname to set
+     */
+    public void setNewSurname(String newSurname) {
+        RecruiterUI.newSurname = newSurname;
+    }
+
+    /**
+     * @return the newEmail
+     */
+    public String getNewEmail() {
+        return newEmail;
+    }
+
+    /**
+     * @param newEmail the newEmail to set
+     */
+    public void setNewEmail(String newEmail) {
+        RecruiterUI.newEmail = newEmail;
+    }
+
+    /**
+     * @return the newExperienceYears
+     */
+    public String getNewExperienceYears() {
+        return newExperienceYears;
+    }
+
+    /**
+     * @param newExperienceYears the newExperienceYears to set
+     */
+    public void setNewExperienceYears(String newExperienceYears) {
+        RecruiterUI.newExperienceYears = newExperienceYears;
+    }
+
 }

@@ -13,6 +13,7 @@ import javamysql.model.Recruiter;
 import javamysql.model.User;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
+import javamysql.ui.RecruiterUI;
 
 /**
  *
@@ -30,4 +31,5 @@ public interface ICRUD {
     Applies getApplies(String username, int job_ID);
     Applies delApplies(String username, int job_ID);
     Company getCompany(int AFM);
+    RecruiterUI getRecruiterUI(String username);
 }
