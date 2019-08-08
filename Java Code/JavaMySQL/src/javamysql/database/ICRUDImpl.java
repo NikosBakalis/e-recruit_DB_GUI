@@ -17,10 +17,14 @@ import javamysql.model.Company;
 import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javamysql.ui.AddAJob;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
+import javamysql.ui.CompanyUI;
+import javamysql.ui.RecruiterNewPosition;
 import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -38,7 +42,7 @@ public class ICRUDImpl implements ICRUD {
             
             ResultSet resultSet;
             User user;
-            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
                 resultSet = preparedStatement.executeQuery();
                 user = null;
                 if(resultSet.next()) {
@@ -66,7 +70,7 @@ public class ICRUDImpl implements ICRUD {
             
             ResultSet resultSet;
             Recruiter recruiter;
-            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
                 resultSet = preparedStatement.executeQuery();
                 recruiter = null;
                 if(resultSet.next()) {
@@ -91,7 +95,7 @@ public class ICRUDImpl implements ICRUD {
             
             ResultSet resultSet;
             Candidate candidate;
-            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
                 resultSet = preparedStatement.executeQuery();
                 candidate = null;
                 if(resultSet.next()) {
@@ -114,7 +118,7 @@ public class ICRUDImpl implements ICRUD {
         openConnection();
         try{
             CandidateUI candidateUI = new CandidateUI();
-            Statement statement = connection.createStatement();
+            Statement statement = getConnection().createStatement();
             String query1 = "UPDATE user SET password = '" + candidateUI.getNewPassword() + "', name = '" + candidateUI.getNewName() + "', surname = '" + candidateUI.getNewSurname() + "', email = '" + candidateUI.getNewEmail() + "' WHERE username = '" + username + "'";
             String query2 = "UPDATE candidate SET bio = '" + candidateUI.getNewBio() + "' WHERE username = '" + username + "'";
             statement.addBatch(query1);
@@ -132,7 +136,7 @@ public class ICRUDImpl implements ICRUD {
         setDLM(new DefaultListModel());
         try{
             CandidateApplies candidateApplies = new CandidateApplies();
-            Statement statement = connection.createStatement();
+            Statement statement = getConnection().createStatement();
             String query = "SELECT DISTINCT position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname != '" + username + "'";
             ResultSet resultSet = statement.executeQuery(query);
             while(resultSet.next()) {
@@ -152,7 +156,7 @@ public class ICRUDImpl implements ICRUD {
         setDLM(new DefaultListModel());
         try{
             CandidateApplies candidateApplies = new CandidateApplies();
-            Statement statement = connection.createStatement();
+            Statement statement = getConnection().createStatement();
             String query = "SELECT DISTINCT position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname = '" + username + "'";
             ResultSet resultSet = statement.executeQuery(query);
             while(resultSet.next()) {
@@ -174,7 +178,7 @@ public class ICRUDImpl implements ICRUD {
             
             ResultSet resultSet;
             Job job;
-            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
                 resultSet = preparedStatement.executeQuery();
                 job = null;
                 if(resultSet.next()) {
@@ -201,7 +205,7 @@ public class ICRUDImpl implements ICRUD {
         openConnection();
         try{
             Applies applies = new Applies();
-            Statement statement = connection.createStatement();
+            Statement statement = getConnection().createStatement();
             String query = "INSERT INTO applies VALUES ('" + username + "', " + job_ID + ")";
             statement.addBatch(query);
             statement.executeBatch();
@@ -216,7 +220,7 @@ public class ICRUDImpl implements ICRUD {
         openConnection();
         try{
             Applies applies = new Applies();
-            Statement statement = connection.createStatement();
+            Statement statement = getConnection().createStatement();
             String query = "DELETE FROM applies WHERE cand_usrname = '" + username + "' AND job_id =  " + job_ID + "";
             statement.addBatch(query);
             statement.executeBatch();
@@ -234,7 +238,7 @@ public class ICRUDImpl implements ICRUD {
             
             ResultSet resultSet;
             Company company;
-            try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)) {
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
                 resultSet = preparedStatement.executeQuery();
                 company = null;
                 if(resultSet.next()) {
@@ -261,7 +265,7 @@ public class ICRUDImpl implements ICRUD {
         openConnection();
         try{
             RecruiterUI recruiterUI = new RecruiterUI();
-            Statement statement = connection.createStatement();
+            Statement statement = getConnection().createStatement();
             String query1 = "UPDATE user SET password = '" + recruiterUI.getNewPassword() + "', name = '" + recruiterUI.getNewName() + "', surname = '" + recruiterUI.getNewSurname() + "', email = '" + recruiterUI.getNewEmail() + "' WHERE username = '" + username + "'";
             String query2 = "UPDATE recruiter SET exp_years = '" + recruiterUI.getNewExperienceYears()+ "' WHERE username = '" + username + "'";
             statement.addBatch(query1);
@@ -272,15 +276,85 @@ public class ICRUDImpl implements ICRUD {
             return null;
         }
     }
+    
+    @Override
+    public CompanyUI getCompanyUI(int AFM) {
+        openConnection();
+        try{
+            CompanyUI companyUI = new CompanyUI();
+            Statement statement = getConnection().createStatement();
+            String query = "UPDATE etaireia SET tel = " + companyUI.getNewTelephone() + ", street = '" + companyUI.getNewStreet()+ "', num = " + companyUI.getNewNumber() + ", city = '" + companyUI.getNewCity()+ "', country = '" + companyUI.getNewCountry() + "' WHERE AFM = " + AFM + "";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return companyUI;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    /* ΕΔΩ ΝΑ ΕΡΘΕΙ Ο ΚΩΔΙΚΑ ΑΠΟ ΤΟ RecruiterNewPosition ΑΦΟΥ ΦΤΙΑΞΩ GETTER / SETTER ΓΙΑ ΤΟ TableJob */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*
+    @Override
+    public RecruiterNewPosition getNewJob(int id, String recruiter) {
+        openConnection();
+        // setDLM(new DefaultListModel());
+        try{
+            RecruiterNewPosition recruiterNewPosition = new RecruiterNewPosition();
+            String query = "SELECT * FROM job";
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            recruiterNewPosition.TableJob.setModel(DbUtils.resultSetToTableModel(resultSet));
+            System.out.println(id + " " + recruiter);
+            return recruiterNewPosition;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    */
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    @Override
+    public AddAJob newJob(int ID, String recruiter){
+        openConnection();
+        try{
+            AddAJob addAJob = new AddAJob();
+            Statement statement = getConnection().createStatement();
+            String query = "INSERT INTO job VALUES ('" + ID + "', '" + addAJob.getNewStartDate() + "', '" + addAJob.getNewSalary() + "', '" + addAJob.getNewPosition() + "', '" + addAJob.getNewSeat() + "', '" + recruiter + "', '" + addAJob.getNewAnnounceDate() + "', '" + addAJob.getNewSubmissionDate() + "')";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return addAJob;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     public void openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            this.connection = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/erecruit", "root", "");
+            this.setConnection((Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/erecruit", "root", ""));
             System.out.println("Connection established successfully with the database server.");
         } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Error: " + e.getMessage());
         }
+    }
+    
+    public String getCountJob(){
+        openConnection();
+        int count = 0;
+        String intToStringCount = null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM job");
+            while(resultSet.next()){
+                count = resultSet.getInt(1);
+            }
+            intToStringCount = Integer.toString(count);
+            return intToStringCount;
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return intToStringCount;
     }
 
     /**
@@ -295,6 +369,20 @@ public class ICRUDImpl implements ICRUD {
      */
     public void setDLM(DefaultListModel DLM) {
         this.DLM = DLM;
+    }
+
+    /**
+     * @return the connection
+     */
+    public Connection getConnection() {
+        return connection;
+    }
+
+    /**
+     * @param connection the connection to set
+     */
+    public void setConnection(Connection connection) {
+        this.connection = connection;
     }
 
 }

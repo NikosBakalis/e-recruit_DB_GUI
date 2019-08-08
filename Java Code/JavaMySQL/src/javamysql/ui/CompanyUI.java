@@ -15,15 +15,18 @@ import javamysql.model.Recruiter;
  */
 public class CompanyUI extends javax.swing.JFrame {
     
-    private String newTelephone, newStreet, newNumber, newCity, newCountry;
+    int counter = 0;
+    
+    private static String newStreet, newCity, newCountry;
+    private static int newTelephone, newNumber;
     
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
     Recruiter recruiter = new Recruiter();
     Company company = new Company();
     
-    String intToStringAFM = Integer.toString(company.getAFM());
-    String intToStringTelephone = Integer.toString(company.getTelephone());
-    String intToStringNumber = Integer.toString(company.getNumber());
+    protected String intToStringAFM = Integer.toString(company.getAFM());
+    protected String intToStringTelephone = Integer.toString(company.getTelephone());
+    protected String intToStringNumber = Integer.toString(company.getNumber());
 
     /**
      * Creates new form CompanyUI
@@ -61,6 +64,7 @@ public class CompanyUI extends javax.swing.JFrame {
         AFM = new javax.swing.JLabel();
         changeNumber = new javax.swing.JTextField();
         ButtonBack = new javax.swing.JButton();
+        ButtonOpenNewPosition = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -91,6 +95,11 @@ public class CompanyUI extends javax.swing.JFrame {
         Telephone.setText("Telephone");
 
         ButtonEditAndSave.setText("Edit");
+        ButtonEditAndSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEditAndSaveActionPerformed(evt);
+            }
+        });
 
         changeTelephone.setEditable(false);
         changeTelephone.setText(intToStringTelephone);
@@ -115,6 +124,13 @@ public class CompanyUI extends javax.swing.JFrame {
         ButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonBackActionPerformed(evt);
+            }
+        });
+
+        ButtonOpenNewPosition.setText("Open New Position");
+        ButtonOpenNewPosition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonOpenNewPositionActionPerformed(evt);
             }
         });
 
@@ -163,16 +179,16 @@ public class CompanyUI extends javax.swing.JFrame {
                             .addComponent(changeNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(42, 42, 42))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(269, 269, 269)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(260, 260, 260)
-                        .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 255, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(368, 368, 368)
-                        .addComponent(ButtonEditAndSave, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButtonBack)))
+                        .addComponent(ButtonEditAndSave, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(ButtonOpenNewPosition)
+                        .addGap(9, 9, 9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                .addComponent(ButtonBack)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,11 +229,13 @@ public class CompanyUI extends javax.swing.JFrame {
                             .addComponent(City, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeCity, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Country, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(ButtonEditAndSave)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonEditAndSave)
+                    .addComponent(ButtonOpenNewPosition))
                 .addGap(25, 25, 25))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -251,6 +269,41 @@ public class CompanyUI extends javax.swing.JFrame {
         recruiterUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonBackActionPerformed
+
+    private void ButtonEditAndSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditAndSaveActionPerformed
+        counter++;
+        if(counter%2 == 1){
+            changeTelephone.setEditable(true);
+            changeStreet.setEditable(true);
+            changeNumber.setEditable(true);
+            changeCity.setEditable(true);
+            changeCountry.setEditable(true);
+            ButtonEditAndSave.setText("Save");
+        } else {
+            changeTelephone.setEditable(false);
+            changeStreet.setEditable(false);
+            changeNumber.setEditable(false);
+            changeCity.setEditable(false);
+            changeCountry.setEditable(false);
+            ButtonEditAndSave.setText("Edit");
+            // int stringToIntTelephone = Integer.parseInt(this.intToStringTelephone);
+            intToStringTelephone = changeTelephone.getText();
+            newTelephone = Integer.parseInt(intToStringTelephone);
+            newStreet = changeStreet.getText();
+            intToStringNumber = changeNumber.getText();
+            newNumber = Integer.parseInt(intToStringNumber);
+            newCity = changeCity.getText();
+            newCountry = changeCountry.getText();
+            int stringToIntAFM = Integer.parseInt(intToStringAFM);
+            iCRUDImpl.getCompanyUI(stringToIntAFM);
+        }
+    }//GEN-LAST:event_ButtonEditAndSaveActionPerformed
+
+    private void ButtonOpenNewPositionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOpenNewPositionActionPerformed
+        RecruiterNewPosition recruiterNewPosition = new RecruiterNewPosition();
+        recruiterNewPosition.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ButtonOpenNewPositionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,6 +344,7 @@ public class CompanyUI extends javax.swing.JFrame {
     private javax.swing.JLabel AFM;
     private javax.swing.JButton ButtonBack;
     private javax.swing.JButton ButtonEditAndSave;
+    private javax.swing.JButton ButtonOpenNewPosition;
     private javax.swing.JLabel City;
     private javax.swing.JLabel CompanyName;
     private javax.swing.JLabel Country;
@@ -309,4 +363,74 @@ public class CompanyUI extends javax.swing.JFrame {
     private javax.swing.JTextField changeTelephone;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the newTelephone
+     */
+    public int getNewTelephone() {
+        return newTelephone;
+    }
+
+    /**
+     * @param newTelephone the newTelephone to set
+     */
+    public void setNewTelephone(int newTelephone) {
+        CompanyUI.newTelephone = newTelephone;
+    }
+
+    /**
+     * @return the newStreet
+     */
+    public String getNewStreet() {
+        return newStreet;
+    }
+
+    /**
+     * @param newStreet the newStreet to set
+     */
+    public void setNewStreet(String newStreet) {
+        CompanyUI.newStreet = newStreet;
+    }
+
+    /**
+     * @return the newNumber
+     */
+    public int getNewNumber() {
+        return newNumber;
+    }
+
+    /**
+     * @param newNumber the newNumber to set
+     */
+    public void setNewNumber(int newNumber) {
+        CompanyUI.newNumber = newNumber;
+    }
+
+    /**
+     * @return the newCity
+     */
+    public String getNewCity() {
+        return newCity;
+    }
+
+    /**
+     * @param newCity the newCity to set
+     */
+    public void setNewCity(String newCity) {
+        CompanyUI.newCity = newCity;
+    }
+
+    /**
+     * @return the newCountry
+     */
+    public String getNewCountry() {
+        return newCountry;
+    }
+
+    /**
+     * @param newCountry the newCountry to set
+     */
+    public void setNewCountry(String newCountry) {
+        CompanyUI.newCountry = newCountry;
+    }
 }

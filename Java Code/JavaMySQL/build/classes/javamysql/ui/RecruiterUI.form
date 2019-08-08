@@ -58,11 +58,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="Username1" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="Password" min="-2" pref="100" max="-2" attributes="0"/>
                                   <Component id="Username" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="Username3" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="Surname" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="Username2" min="-2" pref="100" max="-2" attributes="0"/>
+                              <Component id="Name" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -144,18 +144,18 @@
                       <Component id="jLabel1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="changeCompany" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="changePassword" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="Username1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="Password" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Username2" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="Name" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="changeName" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="ButtonMyCompany" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="changeSurname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="Username3" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="Surname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -196,12 +196,12 @@
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeUsername.setEditable(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="Username1">
+        <Component class="javax.swing.JLabel" name="Password">
           <Properties>
             <Property name="text" type="java.lang.String" value="Password"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="Username2">
+        <Component class="javax.swing.JLabel" name="Name">
           <Properties>
             <Property name="text" type="java.lang.String" value="Name"/>
           </Properties>
@@ -226,7 +226,7 @@
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeSurname.setEditable(false);"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="Username3">
+        <Component class="javax.swing.JLabel" name="Surname">
           <Properties>
             <Property name="text" type="java.lang.String" value="Surname"/>
           </Properties>
