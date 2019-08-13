@@ -122,6 +122,9 @@ public class Login extends javax.swing.JFrame {
         else if(user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are the Admin!!!");
+            AdminUI adminUI = new AdminUI();
+            adminUI.setVisible(true);
+            this.dispose();
         } else {
             System.err.println("Authentication Denied!");
         }

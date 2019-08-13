@@ -16,7 +16,7 @@ import javamysql.model.User;
  */
 public class RecruiterUI extends javax.swing.JFrame {
     
-    int counter = 0;
+    protected int counter = 0;
     
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
     Recruiter recruiter = new Recruiter();
@@ -46,11 +46,11 @@ public class RecruiterUI extends javax.swing.JFrame {
         WelcomeName = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
         changeUsername = new javax.swing.JTextField();
-        Username1 = new javax.swing.JLabel();
-        Username2 = new javax.swing.JLabel();
+        Password = new javax.swing.JLabel();
+        Name = new javax.swing.JLabel();
         changeName = new javax.swing.JTextField();
         changeSurname = new javax.swing.JTextField();
-        Username3 = new javax.swing.JLabel();
+        Surname = new javax.swing.JLabel();
         Email = new javax.swing.JLabel();
         changeEmail = new javax.swing.JTextField();
         changePassword = new javax.swing.JPasswordField();
@@ -74,9 +74,9 @@ public class RecruiterUI extends javax.swing.JFrame {
         changeUsername.setEditable(false);
         changeUsername.setText(recruiter.getUsername());
 
-        Username1.setText("Password");
+        Password.setText("Password");
 
-        Username2.setText("Name");
+        Name.setText("Name");
 
         changeName.setEditable(false);
         changeName.setText(user.getName());
@@ -84,7 +84,7 @@ public class RecruiterUI extends javax.swing.JFrame {
         changeSurname.setEditable(false);
         changeSurname.setText(user.getSurname());
 
-        Username3.setText("Surname");
+        Surname.setText("Surname");
 
         Email.setText("Email");
 
@@ -139,10 +139,10 @@ public class RecruiterUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Username1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(Username, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Username3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(Username2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Surname, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,16 +202,16 @@ public class RecruiterUI extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Username1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Username2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Name, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButtonMyCompany))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(changeSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Username3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Surname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Email, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,7 +269,7 @@ public class RecruiterUI extends javax.swing.JFrame {
             newSurname = changeSurname.getText();
             newEmail = changeEmail.getText();
             newExperienceYears = changeExperienceYears.getText();
-            iCRUDImpl.getRecruiterUI(changeUsername.getText());
+            iCRUDImpl.getRecruiterUI(getChangeUsername().getText());
         }
     }//GEN-LAST:event_ButtonEditAndSaveActionPerformed
 
@@ -323,10 +323,10 @@ public class RecruiterUI extends javax.swing.JFrame {
     private javax.swing.JButton ButtonMyCompany;
     private javax.swing.JLabel Email;
     private javax.swing.JLabel ExperienceYears;
+    private javax.swing.JLabel Name;
+    private javax.swing.JLabel Password;
+    private javax.swing.JLabel Surname;
     private javax.swing.JLabel Username;
-    private javax.swing.JLabel Username1;
-    private javax.swing.JLabel Username2;
-    private javax.swing.JLabel Username3;
     private javax.swing.JLabel WelcomeName;
     private javax.swing.JTextField changeCompany;
     private javax.swing.JTextField changeEmail;
@@ -407,6 +407,20 @@ public class RecruiterUI extends javax.swing.JFrame {
      */
     public void setNewExperienceYears(String newExperienceYears) {
         RecruiterUI.newExperienceYears = newExperienceYears;
+    }
+
+    /**
+     * @return the changeUsername
+     */
+    public javax.swing.JTextField getChangeUsername() {
+        return changeUsername;
+    }
+
+    /**
+     * @param changeUsername the changeUsername to set
+     */
+    public void setChangeUsername(javax.swing.JTextField changeUsername) {
+        this.changeUsername = changeUsername;
     }
 
 }

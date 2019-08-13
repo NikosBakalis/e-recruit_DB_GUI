@@ -12,11 +12,12 @@ import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
 import javamysql.ui.AddAJob;
+import javamysql.ui.AdminCreateCandidate;
+import javamysql.ui.AdminCreateRecruiter;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
 import javamysql.ui.EditAJob;
-import javamysql.ui.RecruiterNewPosition;
 import javamysql.ui.RecruiterUI;
 
 /**
@@ -42,4 +43,6 @@ public interface ICRUD {
     AddAJob newJob(int ID, String recruiter);
     Job delJob(int job_ID, String username);
     EditAJob editAJob(int ID);
+    AdminCreateCandidate adminCreateCandidate();
+    AdminCreateRecruiter adminCreateRecruiter();
 }

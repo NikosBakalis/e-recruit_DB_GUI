@@ -14,6 +14,20 @@ import javamysql.model.Recruiter;
  * @author Nikolas
  */
 public class CompanyUI extends javax.swing.JFrame {
+
+    /**
+     * @return the changeAFM
+     */
+    public javax.swing.JTextField getChangeAFM() {
+        return changeAFM;
+    }
+
+    /**
+     * @param changeAFM the changeAFM to set
+     */
+    public void setChangeAFM(javax.swing.JTextField changeAFM) {
+        this.changeAFM = changeAFM;
+    }
     
     int counter = 0;
     

@@ -18,14 +18,14 @@ import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
 import javamysql.ui.AddAJob;
+import javamysql.ui.AdminCreateCandidate;
+import javamysql.ui.AdminCreateRecruiter;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
 import javamysql.ui.EditAJob;
-import javamysql.ui.RecruiterNewPosition;
 import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -385,6 +385,40 @@ public class ICRUDImpl implements ICRUD {
             statement.addBatch(query);
             statement.executeBatch();
             return editAJob;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public AdminCreateCandidate adminCreateCandidate(){
+        openConnection();
+        try{
+            AdminCreateCandidate adminCreateCandidate = new AdminCreateCandidate();
+            Statement statement = getConnection().createStatement();
+            String query1 = "INSERT INTO user VALUES ('" + adminCreateCandidate.getNewUsername() + "', '" + adminCreateCandidate.getNewPassword() + "', '" + adminCreateCandidate.getNewName() + "', '" + adminCreateCandidate.getNewSurname() + "', '" + adminCreateCandidate.getNewRegisterDate() + "', '" + adminCreateCandidate.getNewEmail() + "')";
+            String query2 = "INSERT INTO candidate VALUES ('" + adminCreateCandidate.getNewUsername() + "', '" + adminCreateCandidate.getNewBio() + "', '" + adminCreateCandidate.getNewRecommendation() + "', '" + adminCreateCandidate.getNewCertificates() + "')";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
+            statement.executeBatch();
+            return adminCreateCandidate;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public AdminCreateRecruiter adminCreateRecruiter(){
+        openConnection();
+        try{
+            AdminCreateRecruiter adminCreateRecruiter = new AdminCreateRecruiter();
+            Statement statement = getConnection().createStatement();
+            String query1 = "INSERT INTO user VALUES ('" + adminCreateRecruiter.getNewUsername() + "', '" + adminCreateRecruiter.getNewPassword() + "', '" + adminCreateRecruiter.getNewName() + "', '" + adminCreateRecruiter.getNewSurname() + "', '" + adminCreateRecruiter.getNewRegisterDate() + "', '" + adminCreateRecruiter.getNewEmail() + "')";
+            String query2 = "INSERT INTO recruiter VALUES ('" + adminCreateRecruiter.getNewUsername() + "', '" + adminCreateRecruiter.getNewExperienceYears() + "', '" + adminCreateRecruiter.getNewFirm() + "')";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
+            statement.executeBatch();
+            return adminCreateRecruiter;
         } catch (SQLException e) {
             return null;
         }
