@@ -192,7 +192,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeID.setEditable(false);&#xa;int stringToIntCount = Integer.parseInt(iCRUDImpl.getCountJob()) + 1;&#xa;String intToStringCount = Integer.toString(stringToIntCount);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeID.setEditable(false);&#xa;int stringToIntCount = Integer.parseInt(iCRUDImpl.getCountJob()) + 1;&#xa;String intToStringCount = Integer.toString(stringToIntCount);&#xa;System.out.println(intToStringCount);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="StartDate">
@@ -244,6 +244,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="changeAnnounceDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="dateToStringAnnounceDate" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeAnnounceDate.setEditable(false);&#xa;String dateToStringAnnounceDate = dateFormatDate.format(System.currentTimeMillis());"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="SubmissionDate">
           <Properties>

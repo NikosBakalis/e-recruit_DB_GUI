@@ -15,6 +15,7 @@ import javamysql.ui.AddAJob;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
+import javamysql.ui.EditAJob;
 import javamysql.ui.RecruiterNewPosition;
 import javamysql.ui.RecruiterUI;
 
@@ -31,6 +32,7 @@ public interface ICRUD {
     CandidateApplies getCandidateOpenApplies(String username);
     CandidateApplies getCandidateApplies(String username);
     Job getJob(String position);
+    Job getJob(int ID);
     Applies getApplies(String username, int job_ID);
     Applies delApplies(String username, int job_ID);
     Company getCompany(int AFM);
@@ -38,4 +40,6 @@ public interface ICRUD {
     CompanyUI getCompanyUI(int AFM);
     /* RecruiterNewPosition getNewJob(int id, String recruiter); */
     AddAJob newJob(int ID, String recruiter);
+    Job delJob(int job_ID, String username);
+    EditAJob editAJob(int ID);
 }

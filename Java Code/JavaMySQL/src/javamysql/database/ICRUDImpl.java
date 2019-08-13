@@ -21,6 +21,7 @@ import javamysql.ui.AddAJob;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
+import javamysql.ui.EditAJob;
 import javamysql.ui.RecruiterNewPosition;
 import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
@@ -201,6 +202,36 @@ public class ICRUDImpl implements ICRUD {
     }
     
     @Override
+    public Job getJob(int ID) {
+        openConnection();
+        try {
+            String query = "SELECT * FROM job WHERE job.id = '" + ID + "'";
+            
+            ResultSet resultSet;
+            Job job;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                job = null;
+                if(resultSet.next()) {
+                    job = new Job();
+                    job.setId(resultSet.getInt("id"));
+                    job.setStartDate(resultSet.getDate("start_date"));
+                    job.setSalary(resultSet.getInt("salary"));
+                    job.setPosition(resultSet.getString("position"));
+                    job.setCountry(resultSet.getString("edra"));
+                    job.setRecruiter(resultSet.getString("recruiter"));
+                    job.setAnnounceDate(resultSet.getTimestamp("announce_date"));
+                    job.setSubmissionDate(resultSet.getDate("submission_date"));
+                }
+            }
+            resultSet.close();
+            return job;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
     public Applies getApplies(String username, int job_ID){
         openConnection();
         try{
@@ -324,6 +355,36 @@ public class ICRUDImpl implements ICRUD {
             statement.addBatch(query);
             statement.executeBatch();
             return addAJob;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Job delJob(int job_ID, String username){
+        openConnection();
+        try{
+            Job job = new Job();
+            Statement statement = getConnection().createStatement();
+            String query = "DELETE FROM job WHERE recruiter = '" + username + "' AND id =  " + job_ID + "";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return job;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public EditAJob editAJob(int ID){
+        openConnection();
+        try{
+            EditAJob editAJob = new EditAJob();
+            Statement statement = getConnection().createStatement();
+            String query = "UPDATE job SET start_date = '" + editAJob.getNewStartDate() + "', salary = '" + editAJob.getNewSalary() + "', position = '" + editAJob.getNewPosition() + "', edra = '" + editAJob.getNewSeat() + "', submission_date = '" + editAJob.getNewSubmissionDate() + "' WHERE id = '" + ID + "'";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return editAJob;
         } catch (SQLException e) {
             return null;
         }

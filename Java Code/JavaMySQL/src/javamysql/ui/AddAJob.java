@@ -88,6 +88,7 @@ public class AddAJob extends javax.swing.JFrame {
         changeID.setEditable(false);
         int stringToIntCount = Integer.parseInt(iCRUDImpl.getCountJob()) + 1;
         String intToStringCount = Integer.toString(stringToIntCount);
+        System.out.println(intToStringCount);
         changeID.setText(intToStringCount);
 
         StartDate.setText("Start Date");
@@ -104,6 +105,10 @@ public class AddAJob extends javax.swing.JFrame {
         changeRecruiter.setText(recruiter.getUsername());
 
         AnnounceDate.setText("Annaounce Date");
+
+        changeAnnounceDate.setEditable(false);
+        String dateToStringAnnounceDate = dateFormatDate.format(System.currentTimeMillis());
+        changeAnnounceDate.setText(dateToStringAnnounceDate);
 
         SubmissionDate.setText("Submission Date");
 
@@ -271,10 +276,13 @@ public class AddAJob extends javax.swing.JFrame {
         
         int stringToIntCount = Integer.parseInt(iCRUDImpl.getCountJob());
         iCRUDImpl.newJob(stringToIntCount + 1, recruiter.getUsername());
+        
+        this.dispose();
     }//GEN-LAST:event_ButtonAddActionPerformed
 
     private void ButtonDismissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDismissActionPerformed
         this.dispose();
+        dateFormatDate.format(System.currentTimeMillis());
     }//GEN-LAST:event_ButtonDismissActionPerformed
 
     /**
