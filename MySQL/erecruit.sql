@@ -333,8 +333,7 @@ interview_date DATE NOT NULL,
 starting_time TIME NOT NULL,
 duration TIME NOT NULL,
 comments VARCHAR(35),
-stars TINYINT NOT NULL,
-/*stars BETWEEN '0' AND '5',*/
+stars ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
 PRIMARY KEY (recruiter_username, candidate_username),
 CONSTRAINT INTERVIEW_RECRUITER_USERNAME FOREIGN KEY (recruiter_username) REFERENCES recruiter(username) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT INTERVIEW_CANDIDATE_USERNAME FOREIGN KEY (candidate_username) REFERENCES candidate(username) ON DELETE CASCADE ON UPDATE CASCADE
@@ -350,13 +349,28 @@ company_AFM CHAR(9) NOT NULL,
 sector_title VARCHAR(20) NOT NULL,
 short_text VARCHAR(100) NOT NULL,
 /*H malakia me ta epipeda. Edw h sthn Java?*/
+/*Eipa na to valo edo, kathos theoro oti moiazei poly me to antikeim*/
+belongs_to varchar(20),
 PRIMARY KEY (company_AFM, sector_title),
+CONSTRAINT TOMEAS FOREIGN KEY (belongs_to) REFERENCES sectors(sector_title),
 CONSTRAINT SECTORS_COMPANY_AFM FOREIGN KEY (company_AFM) REFERENCES etaireia(AFM) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
-insert into sectors (company_AFM, sector_title, short_text) values
-('023453344', 'Computer Engineering', 'short text sample 1'),
-('023451232', 'Computer Engineering', 'short text sample 2')
+insert into sectors (company_AFM, sector_title, short_text, belongs_to) values
+('023453344', 'Computer Engineering 1', 'short text sample 1', NULL),
+('023451232', 'Computer Engineering 2', 'short text sample 2', NULL),
+('023453344', 'Databases', 'short text sample 1', 'Computer Engineering 1'),
+('023453344', 'Networking', 'short text sample 1', 'Computer Engineering 1'),
+('023453344', 'NoSQL DBS', 'short text sample 1', 'Databases'),
+('023453344', 'Relational DBS', 'short text sample 1', 'Databases'),
+('023453344', 'Device Connectivity', 'short text sample 1', 'Networking'),
+('023453344', 'Networking Setup and Maintenance', 'short text sample 1', 'Networking'),
+('023451232', 'A.I.', 'short text sample 1', 'Computer Engineering 2'),
+('023451232', 'Graphics', 'short text sample 1', 'Computer Engineering 2'),
+('023451232', 'NLP', 'short text sample 1', 'A.I.'),
+('023451232', 'Robotics', 'short text sample 1', 'A.I.'),
+('023451232', '2D', 'short text sample 1', 'Graphics'),
+('023451232', '3D', 'short text sample 1', 'Graphics')
 ;
 
 CREATE TABLE history (
@@ -364,7 +378,7 @@ id INT(4) NOT NULL AUTO_INCREMENT,
 username_history VARCHAR(12) NOT NULL,
 date_history DATETIME NOT NULL,
 success BOOLEAN NOT NULL,
-kind_of_process SET('INSTER', 'UPDATE', 'DELETE'),
+kind_of_process SET('INSERT', 'UPDATE', 'DELETE'),
 name_of_table VARCHAR(15)NOT NULL,
 PRIMARY KEY (id),
 CONSTRAINT USERNAME_HISTORY FOREIGN KEY (username_history) REFERENCES `user`(username) ON DELETE CASCADE ON UPDATE CASCADE
