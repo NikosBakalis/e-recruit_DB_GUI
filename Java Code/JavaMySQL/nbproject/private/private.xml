@@ -3,17 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/helper/Controller.java</file>
             <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/CompanyUI.java</file>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/RecruiterNewPosition.java</file>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/EditAJob.java</file>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/AddAJob.java</file>
             <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/CandidateUI.java</file>
             <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/RecruiterUI.java</file>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/model/Recruiter.java</file>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/model/Company.java</file>
             <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/database/ICRUD.java</file>
-            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/model/Job.java</file>
+            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/AdminCreateCandidate.java</file>
+            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/AdminCreateRecruiter.java</file>
+            <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/ui/AdminUI.java</file>
             <file>file:/C:/Users/Nikolas/Documents/NetBeansProjects/JavaMySQL/src/javamysql/database/ICRUDImpl.java</file>
         </group>
     </open-files>
