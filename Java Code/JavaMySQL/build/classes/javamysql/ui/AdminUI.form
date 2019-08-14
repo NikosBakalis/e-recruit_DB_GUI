@@ -71,6 +71,11 @@
                   </Group>
                   <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -88,7 +93,9 @@
                       <Component id="ButtonCreateObject" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButtonHistory" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="ButtonLogout" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -130,6 +137,14 @@
               <Connection code="&quot;Welcome &quot; + user.getName()" type="code"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="ButtonLogout">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Log-out"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonLogoutActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
