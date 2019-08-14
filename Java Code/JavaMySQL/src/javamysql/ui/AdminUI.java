@@ -39,6 +39,7 @@ public class AdminUI extends javax.swing.JFrame {
         ButtonCreateObject = new javax.swing.JButton();
         ButtonHistory = new javax.swing.JButton();
         LabelWelcome = new javax.swing.JLabel();
+        ButtonLogout = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -65,6 +66,13 @@ public class AdminUI extends javax.swing.JFrame {
         LabelWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabelWelcome.setText("Welcome " + user.getName());
 
+        ButtonLogout.setText("Log-out");
+        ButtonLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -86,6 +94,10 @@ public class AdminUI extends javax.swing.JFrame {
                                 .addComponent(ButtonHistory)
                                 .addGap(24, 24, 24)))))
                 .addGap(116, 116, 116))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonLogout)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +112,9 @@ public class AdminUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonCreateObject)
                     .addComponent(ButtonHistory))
-                .addGap(65, 65, 65))
+                .addGap(31, 31, 31)
+                .addComponent(ButtonLogout)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,6 +147,12 @@ public class AdminUI extends javax.swing.JFrame {
         AdminCreateRecruiter adminCreateRecruiter = new AdminCreateRecruiter();
         adminCreateRecruiter.setVisible(true);
     }//GEN-LAST:event_ButtonCreateRecruiterActionPerformed
+
+    private void ButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLogoutActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ButtonLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +194,7 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCreateObject;
     private javax.swing.JButton ButtonCreateRecruiter;
     private javax.swing.JButton ButtonHistory;
+    private javax.swing.JButton ButtonLogout;
     private javax.swing.JLabel LabelWelcome;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
