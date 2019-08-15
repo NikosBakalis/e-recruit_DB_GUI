@@ -113,12 +113,14 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="Position" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="JobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="TextJobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="CompanyName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="TextCompanyName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="JobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="TextJobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -179,6 +181,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="TextCompanyName">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="company.getName()" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextCompanyName.setEditable(false);"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="TextSeat">
           <Properties>
