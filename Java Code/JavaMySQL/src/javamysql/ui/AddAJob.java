@@ -6,6 +6,9 @@
 package javamysql.ui;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,7 +28,7 @@ public class AddAJob extends javax.swing.JFrame {
     SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     DateFormat dateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
     
-    private static String newPosition, newSeat;
+    private static String newPosition, newSeat, newRequires;
     private static int newSalary;
     // private static Timestamp newAnnounceDate;
     // private static Date newStartDate, newSubmissionDate;
@@ -37,13 +40,15 @@ public class AddAJob extends javax.swing.JFrame {
     RecruiterUI recruiterUI = new RecruiterUI();
     Recruiter recruiter = new Recruiter();
     
-    
+    private static String[] fillComboBox;
+    // String[] array = getFillComboBox().toArray(new String[getFillComboBox().size()]);
 
     /**
      * Creates new form AddAJob
      */
     public AddAJob() {
         initComponents();
+        updateComboBox();
     }
 
     /**
@@ -75,6 +80,8 @@ public class AddAJob extends javax.swing.JFrame {
         changeSubmissionDate = new javax.swing.JTextField();
         ButtonAdd = new javax.swing.JButton();
         ButtonDismiss = new javax.swing.JButton();
+        Seat1 = new javax.swing.JLabel();
+        comboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -126,32 +133,34 @@ public class AddAJob extends javax.swing.JFrame {
             }
         });
 
+        Seat1.setText("Requires");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(changeID))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(changeStartDate))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Salary, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(changeSalary))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(changePosition, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(changeID))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(changeStartDate))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Salary, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(changeSalary))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(changePosition, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(339, 339, 339)
+                        .addGap(72, 72, 72)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(Recruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,15 +177,21 @@ public class AddAJob extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(changeSeat))))
+                                .addComponent(changeSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Seat1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(282, 282, 282)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ButtonAdd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButtonDismiss))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(ButtonAdd)
+                        .addGap(263, 263, 263)
+                        .addComponent(ButtonDismiss)
+                        .addGap(257, 257, 257))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(348, 348, 348)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,14 +204,17 @@ public class AddAJob extends javax.swing.JFrame {
                     .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(changeID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(changeSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(changeSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Seat1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Recruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeRecruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(19, 19, 19)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(AnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeAnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -216,7 +234,7 @@ public class AddAJob extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changePosition, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonAdd)
                     .addComponent(ButtonDismiss))
@@ -256,6 +274,7 @@ public class AddAJob extends javax.swing.JFrame {
         stringToIntSalary = Integer.parseInt(changeSalary.getText());
         setNewSalary(stringToIntSalary);
         setNewPosition(changePosition.getText());
+        setNewRequires((String) comboBox.getSelectedItem());
         setNewSeat(changeSeat.getText());
         
         try {
@@ -318,6 +337,7 @@ public class AddAJob extends javax.swing.JFrame {
                 new AddAJob().setVisible(true);
             }
         });
+        //AddAJob addAJob = new AddAJob();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -329,6 +349,7 @@ public class AddAJob extends javax.swing.JFrame {
     private javax.swing.JLabel Recruiter;
     private javax.swing.JLabel Salary;
     private javax.swing.JLabel Seat;
+    private javax.swing.JLabel Seat1;
     private javax.swing.JLabel StartDate;
     private javax.swing.JLabel SubmissionDate;
     private javax.swing.JTextField changeAnnounceDate;
@@ -339,10 +360,26 @@ public class AddAJob extends javax.swing.JFrame {
     private javax.swing.JTextField changeSeat;
     private javax.swing.JTextField changeStartDate;
     private javax.swing.JTextField changeSubmissionDate;
+    private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-
+    
+    
+    private void updateComboBox(){
+        iCRUDImpl.openConnection();
+        String query = "SELECT * FROM antikeim";
+        try {
+            PreparedStatement preparedStatement = iCRUDImpl.getConnection().prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                comboBox.addItem(resultSet.getString("title"));
+            }
+        } catch (SQLException e) {
+        }
+    }
+    
+    
     /**
      * @return the newPosition
      */
@@ -369,6 +406,20 @@ public class AddAJob extends javax.swing.JFrame {
      */
     public void setNewSeat(String newSeat) {
         AddAJob.newSeat = newSeat;
+    }
+    
+    /**
+     * @return the newRequires
+     */
+    public String getNewRequires() {
+        return newRequires;
+    }
+
+    /**
+     * @param newRequires the newSeat to set
+     */
+    public void setNewRequires(String newRequires) {
+        AddAJob.newRequires = newRequires;
     }
 
     /**
@@ -411,4 +462,19 @@ public class AddAJob extends javax.swing.JFrame {
     public java.util.Date getNewStartDate() {
         return newStartDate;
     }
+
+    /**
+     * @return the fillComboBox
+     */
+    public String[] getFillComboBox() {
+        return fillComboBox;
+    }
+
+    /**
+     * @param fillComboBox the fillComboBox to set
+     */
+    public void setFillComboBox(String[] fillComboBox) {
+        AddAJob.fillComboBox = fillComboBox;
+    }
+    
 }

@@ -61,7 +61,7 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
             new Object [][] {
             },
             new String [] {
-                "ID", "Name"
+                "job_ID", "position"
             }
         ));
         TableApplies.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,6 +86,11 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         });
 
         jButton3.setText("Completed");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Back");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +216,10 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         iCRUDImpl.getApplies(candidate.getUsername(), valueID);
     }//GEN-LAST:event_jButton7ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        getCompletedAppliesNew(candidate.getUsername());
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -250,7 +259,8 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         iCRUDImpl.openConnection();
         try{
             CandidateAppliesNew getAppliesNew = new CandidateAppliesNew();
-            String query = "SELECT DISTINCT applies.job_ID, position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname != '" + username + "'";
+            // String query = "SELECT DISTINCT applies.job_ID, position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname != '" + username + "' AND NOW() < job.submission_date";
+            String query = "SELECT id, position FROM job WHERE NOW() < job.submission_date";
             PreparedStatement preparedStatement = iCRUDImpl.getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             TableApplies.setModel(DbUtils.resultSetToTableModel(resultSet));
@@ -264,11 +274,25 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         iCRUDImpl.openConnection();
         try{
             CandidateAppliesNew getAppliesNew = new CandidateAppliesNew();
-            String query = "SELECT DISTINCT applies.job_ID, position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname = '" + username + "'";
+            String query = "SELECT DISTINCT applies.job_ID, position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname = '" + username + "' AND NOW() < job.submission_date";
             PreparedStatement preparedStatement = iCRUDImpl.getConnection().prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             TableApplies.setModel(DbUtils.resultSetToTableModel(resultSet));
             return getAppliesNew;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    public CandidateAppliesNew getCompletedAppliesNew(String username) {
+        iCRUDImpl.openConnection();
+        try{
+            CandidateAppliesNew getCompletedAppliesNew = new CandidateAppliesNew();
+            String query = "SELECT DISTINCT applies.job_ID, position FROM job INNER JOIN applies ON job.id = applies.job_id WHERE cand_usrname = '" + username + "' AND NOW() > job.submission_date";
+            PreparedStatement preparedStatement = iCRUDImpl.getConnection().prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            TableApplies.setModel(DbUtils.resultSetToTableModel(resultSet));
+            return getCompletedAppliesNew;
         } catch (SQLException e) {
             return null;
         }

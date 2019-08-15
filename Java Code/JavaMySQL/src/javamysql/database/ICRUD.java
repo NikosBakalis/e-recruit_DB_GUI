@@ -43,6 +43,7 @@ public interface ICRUD {
     AddAJob newJob(int ID, String recruiter);
     Job delJob(int job_ID, String username);
     EditAJob editAJob(int ID);
+    Object getObject();
     AdminCreateCandidate adminCreateCandidate();
     AdminCreateRecruiter adminCreateRecruiter();
 }

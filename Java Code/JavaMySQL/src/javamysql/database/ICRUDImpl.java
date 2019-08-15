@@ -11,10 +11,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javamysql.model.Applies;
 import javamysql.model.Candidate;
 import javamysql.model.Company;
 import javamysql.model.Job;
+import javamysql.model.Object;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
 import javamysql.ui.AddAJob;
@@ -351,8 +353,10 @@ public class ICRUDImpl implements ICRUD {
         try{
             AddAJob addAJob = new AddAJob();
             Statement statement = getConnection().createStatement();
-            String query = "INSERT INTO job VALUES ('" + ID + "', '" + addAJob.getNewStartDate() + "', '" + addAJob.getNewSalary() + "', '" + addAJob.getNewPosition() + "', '" + addAJob.getNewSeat() + "', '" + recruiter + "', '" + addAJob.getNewAnnounceDate() + "', '" + addAJob.getNewSubmissionDate() + "')";
-            statement.addBatch(query);
+            String query1 = "INSERT INTO job VALUES ('" + ID + "', '" + addAJob.getNewStartDate() + "', '" + addAJob.getNewSalary() + "', '" + addAJob.getNewPosition() + "', '" + addAJob.getNewSeat() + "', '" + recruiter + "', '" + addAJob.getNewAnnounceDate() + "', '" + addAJob.getNewSubmissionDate() + "')";
+            String query2 = "INSERT INTO requires VALUES ('" + ID + "', '" + addAJob.getNewRequires() + "')";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
             statement.executeBatch();
             return addAJob;
         } catch (SQLException e) {
@@ -385,6 +389,31 @@ public class ICRUDImpl implements ICRUD {
             statement.addBatch(query);
             statement.executeBatch();
             return editAJob;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Object getObject(){
+        openConnection();
+        try {
+            String query = "SELECT * FROM antikeim";
+            ResultSet resultSet;
+            Object object;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                object = null;
+                
+                while(resultSet.next()) {
+                    object = new Object();
+                    object.setTitle(resultSet.getString("title"));
+                    object.setDescription(resultSet.getString("descr"));
+                    object.setBelongsTo(resultSet.getString("belongs_to"));
+                }
+            }
+            resultSet.close();
+            return object;
         } catch (SQLException e) {
             return null;
         }

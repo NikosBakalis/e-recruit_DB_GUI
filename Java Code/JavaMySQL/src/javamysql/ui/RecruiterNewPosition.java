@@ -29,7 +29,6 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
      */
     public RecruiterNewPosition() {
         initComponents();
-        // getNewJob();
     }
 
     /**

@@ -9,6 +9,7 @@ package javamysql.ui;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javamysql.database.ICRUDImpl;
+import javamysql.model.Company;
 import javamysql.model.Job;
 
 /**
@@ -21,6 +22,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
     Job job = new Job();
     CandidateApplies candidateApplies = new CandidateApplies();
     CandidateAppliesNew candidateAppliesNew = new CandidateAppliesNew();
+    Company company = new Company();
     
     SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     DateFormat dateFormatDate = new SimpleDateFormat("yyyy/MM/dd");
@@ -90,6 +92,9 @@ public class JobMoreInfo extends javax.swing.JFrame {
         CompanyName.setText("Company Name");
 
         Seat.setText("Seat");
+
+        TextCompanyName.setEditable(false);
+        TextCompanyName.setText(company.getName());
 
         TextSeat.setEditable(false);
         TextSeat.setText(job.getCountry());
@@ -182,12 +187,13 @@ public class JobMoreInfo extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TextJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TextCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TextCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(JobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
