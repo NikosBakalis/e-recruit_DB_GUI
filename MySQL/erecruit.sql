@@ -329,27 +329,29 @@ insert into applies (cand_usrname, job_id) values
 CREATE TABLE interview (
 recruiter_username VARCHAR(12) NOT NULL,
 candidate_username VARCHAR(12) NOT NULL,
+job_id int(4) NOT NULL, 
 interview_date DATE NOT NULL,
 starting_time TIME NOT NULL,
 duration TIME NOT NULL,
 comments VARCHAR(35),
-stars ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
+per_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
+edu_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
+xp_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
 PRIMARY KEY (recruiter_username, candidate_username),
 CONSTRAINT INTERVIEW_RECRUITER_USERNAME FOREIGN KEY (recruiter_username) REFERENCES recruiter(username) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT INTERVIEW_CANDIDATE_USERNAME FOREIGN KEY (candidate_username) REFERENCES candidate(username) ON DELETE CASCADE ON UPDATE CASCADE
+CONSTRAINT INTERVIEW_CANDIDATE_USERNAME FOREIGN KEY (candidate_username) REFERENCES candidate(username) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT INTERVIES_JOB_ID FOREIGN KEY (job_id) REFERENCES job(id) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
-insert into interview (recruiter_username, candidate_username, interview_date, starting_time, duration, comments, stars) values
-('msmith', 'cleogeo', '2018-02-13', '12:23:34', '00:01:00', 'COOL BOI', '4'),
-('varcon82', 'zazahir23', '2019-06-24', '12:00:00', '00:03:00', 'SO FOCKING GOOD', '5')
+insert into interview (recruiter_username, candidate_username, interview_date, starting_time, duration, comments, per_sc, ed_sc, xp_sc, final_sc) values
+('msmith', 'cleogeo', '2018-02-13', '12:23:34', '00:01:00', 'COOL BOI', '4', '5', '4', '4'),
+('varcon82', 'zazahir23', '2019-06-24', '12:00:00', '00:03:00', 'SO FOCKING GOOD', '5', '3', '5', '4')
 ;
 
 CREATE TABLE sectors (
 company_AFM CHAR(9) NOT NULL,
 sector_title VARCHAR(20) NOT NULL,
 short_text VARCHAR(100) NOT NULL,
-/*H malakia me ta epipeda. Edw h sthn Java?*/
-/*Eipa na to valo edo, kathos theoro oti moiazei poly me to antikeim*/
 belongs_to varchar(20),
 PRIMARY KEY (company_AFM, sector_title),
 CONSTRAINT TOMEAS FOREIGN KEY (belongs_to) REFERENCES sectors(sector_title),
@@ -374,13 +376,12 @@ insert into sectors (company_AFM, sector_title, short_text, belongs_to) values
 ;
 
 CREATE TABLE history (
-id INT(4) NOT NULL AUTO_INCREMENT,
 username_history VARCHAR(12) NOT NULL,
 date_history DATETIME NOT NULL,
 success BOOLEAN NOT NULL,
 kind_of_process SET('INSERT', 'UPDATE', 'DELETE'),
 name_of_table VARCHAR(15)NOT NULL,
-PRIMARY KEY (id),
+PRIMARY KEY (username_history),
 CONSTRAINT USERNAME_HISTORY FOREIGN KEY (username_history) REFERENCES `user`(username) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
