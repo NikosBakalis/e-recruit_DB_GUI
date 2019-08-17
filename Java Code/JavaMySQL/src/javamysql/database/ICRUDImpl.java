@@ -11,10 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import javamysql.model.Applies;
+import javamysql.model.AveragePersonalityScore;
 import javamysql.model.Candidate;
 import javamysql.model.Company;
+import javamysql.model.Interview;
 import javamysql.model.Job;
 import javamysql.model.Object;
 import javamysql.model.Recruiter;
@@ -26,6 +27,8 @@ import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
 import javamysql.ui.EditAJob;
+import javamysql.ui.InterviewEdit;
+import javamysql.ui.InterviewStart;
 import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
 
@@ -452,7 +455,98 @@ public class ICRUDImpl implements ICRUD {
             return null;
         }
     }
+    
+    @Override
+    public Interview getInterview(String recruiterUsername, String candidateUsername, int jobID) {
+        openConnection();
+        try {
+            String query = "SELECT * FROM interview WHERE recruiter_username = '" + recruiterUsername + "' AND candidate_username = '" + candidateUsername + "' AND job_id = '" + jobID + "'";
+            
+            ResultSet resultSet;
+            Interview interview;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                interview  = null;
+                if(resultSet.next()) {
+                    interview = new Interview();
+                    interview.setRecruiterUsername(resultSet.getString("recruiter_username"));
+                    interview.setCandidateUsername(resultSet.getString("candidate_username"));
+                    interview.setJobID(resultSet.getInt("job_id"));
+                    interview.setInterviewDate(resultSet.getDate("interview_date"));
+                    interview.setStartingTime(resultSet.getTime("starting_time"));
+                    interview.setDuration(resultSet.getTime("duration"));
+                    interview.setComments(resultSet.getString("comments"));
+                    interview.setEducationScore(resultSet.getInt("edu_sc"));
+                    interview.setExperienceScore(resultSet.getInt("xp_sc"));
+                }
+            }
+            resultSet.close();
+            return interview;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public InterviewEdit interviewEdit(String recruiterUsername, String candidateUsername, int jobID) {
+        openConnection();
+        try{
+            InterviewEdit interviewEdit = new InterviewEdit();
+            Statement statement = getConnection().createStatement();
+            String query = "UPDATE interview SET interview_date = '" + interviewEdit.getNewInterviewDate() + "', starting_time = '" + interviewEdit.getNewStartingTime() + "', duration = '" + interviewEdit.getNewDuration() + "', comments = '" + interviewEdit.getNewComments() + "', edu_sc = '" + interviewEdit.getNewEducationScore() + "', xp_sc = '" + interviewEdit.getNewExperienceScore() + "' WHERE recruiter_username = '" + interviewEdit.getNewRecruiterUsername() + "' AND candidate_username = '" + interviewEdit.getNewCandidateUsername() + "' AND job_id = '" + interviewEdit.getNewJobID() + "'";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return interviewEdit;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public AveragePersonalityScore getAveragePersonalityScore(String recruiterUsername, String candidateUsername, int jobID) {
+        openConnection();
+        try {
+            String query = "SELECT id, recruiter_username, candidate_username, job_id, per_sc, AVG(per_sc) AS 'Average Personality Score' FROM average_personality_score WHERE recruiter_username = '" + recruiterUsername + "' AND candidate_username = '" + candidateUsername + "' AND job_id = '" + jobID + "'";
 
+            ResultSet resultSet;
+            AveragePersonalityScore averagePersonalityScore;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                averagePersonalityScore  = null;
+                if(resultSet.next()) {
+                    averagePersonalityScore = new AveragePersonalityScore();
+                    averagePersonalityScore.setId(resultSet.getInt("id"));
+                    averagePersonalityScore.setRecruiterUsername(resultSet.getString("recruiter_username"));
+                    averagePersonalityScore.setCandidateUsername(resultSet.getString("candidate_username"));
+                    averagePersonalityScore.setJobID(resultSet.getInt("job_id"));
+                    averagePersonalityScore.setPersonalityScore(resultSet.getInt("per_sc"));
+                    averagePersonalityScore.setAveragePersonalityScore(resultSet.getDouble("Average Personality Score"));
+                }
+            }
+            resultSet.close();
+            return averagePersonalityScore;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public InterviewStart interviewStart(String recruiterUsername,String candidateUsername, int jobID) {
+        openConnection();
+        try{
+            InterviewStart interviewStart = new InterviewStart();
+            Statement statement = getConnection().createStatement();
+            String query1 = "INSERT INTO interview VALUES ('" + interviewStart.getNewRecruiterUsername() + "', '" + interviewStart.getNewCandidateUsername() + "', '" + interviewStart.getNewJobID() + "', '" + interviewStart.getNewInterviewDate() + "', '" + interviewStart.getNewStartingTime() + "', '" + interviewStart.getNewDuration() + "', '" + interviewStart.getNewComments() + "', '" + (interviewStart.getNewEducationScore() + 1) + "', '" + (interviewStart.getNewExperienceScore() + 1) + "')";
+            String query2 = "INSERT INTO average_personality_score (recruiter_username, candidate_username, job_id, per_sc) VALUES ('" + interviewStart.getNewRecruiterUsername() + "', '" + interviewStart.getNewCandidateUsername() + "', '" + interviewStart.getNewJobID() + "', '" + (interviewStart.getNewPersonalityScore() + 1) + "')";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
+            statement.executeBatch();
+            return interviewStart;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
     public void openConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");

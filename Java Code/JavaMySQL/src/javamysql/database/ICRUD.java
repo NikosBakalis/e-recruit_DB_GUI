@@ -6,8 +6,10 @@
 package javamysql.database;
 
 import javamysql.model.Applies;
+import javamysql.model.AveragePersonalityScore;
 import javamysql.model.Candidate;
 import javamysql.model.Company;
+import javamysql.model.Interview;
 import javamysql.model.Job;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
@@ -18,6 +20,8 @@ import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
 import javamysql.ui.EditAJob;
+import javamysql.ui.InterviewEdit;
+import javamysql.ui.InterviewStart;
 import javamysql.ui.RecruiterUI;
 
 /**
@@ -46,4 +50,8 @@ public interface ICRUD {
     Object getObject();
     AdminCreateCandidate adminCreateCandidate();
     AdminCreateRecruiter adminCreateRecruiter();
+    Interview getInterview(String recruiterUsername, String candidateUsername, int jobID);
+    InterviewEdit interviewEdit(String recruiterUsername, String candidateUsername, int jobID);
+    AveragePersonalityScore getAveragePersonalityScore(String recruiterUsername, String candidateUsername, int jobID);
+    InterviewStart interviewStart(String recruiterUsername, String candidateUsername, int jobID);
 }

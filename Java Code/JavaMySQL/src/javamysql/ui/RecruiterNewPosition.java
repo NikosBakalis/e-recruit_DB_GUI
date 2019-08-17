@@ -21,8 +21,8 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
     
     ICRUDImpl iCRUDImpl = new ICRUDImpl();
     
-    int valueID = 0;
-    String valueRecruiter = null;
+    private static int valueID = 0;
+    private static String valueRecruiter = null;
 
     /**
      * Creates new form RecruiterNewPosition
@@ -49,6 +49,7 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        ButtonInterview = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -74,7 +75,7 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Add a Job");
+        jButton2.setText("Add Job");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -109,6 +110,13 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             }
         });
 
+        ButtonInterview.setText("Interview");
+        ButtonInterview.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonInterviewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -118,17 +126,19 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
-                        .addGap(114, 114, 114)
+                        .addGap(413, 413, 413)
                         .addComponent(jButton5)
-                        .addGap(116, 116, 116)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(ButtonInterview)
+                        .addGap(212, 212, 212)
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
                         .addComponent(jButton3)
-                        .addGap(120, 120, 120)
-                        .addComponent(jButton2)
-                        .addGap(120, 120, 120)
-                        .addComponent(ButtonBack))
-                    .addComponent(jScrollPane1))
+                        .addGap(210, 210, 210)
+                        .addComponent(ButtonBack)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -136,14 +146,17 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4)
+                    .addComponent(jButton5)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
                     .addComponent(ButtonBack)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(ButtonInterview))
                 .addContainerGap())
         );
 
@@ -193,25 +206,37 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
     private void TableJobMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableJobMouseClicked
         int row = TableJob.getSelectedRow();
         TableModel model = TableJob.getModel();
-        valueID = Integer.parseInt(model.getValueAt(row, 0).toString());
-        valueRecruiter = TableJob.getModel().getValueAt(row, 5).toString();
+        setValueID(Integer.parseInt(model.getValueAt(row, 0).toString()));
+        setValueRecruiter(TableJob.getModel().getValueAt(row, 5).toString());
     }//GEN-LAST:event_TableJobMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         RecruiterUI recruiterUI = new RecruiterUI();
-        iCRUDImpl.delJob(valueID, recruiterUI.getChangeUsername().getText());
+        iCRUDImpl.delJob(getValueID(), recruiterUI.getChangeUsername().getText());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        iCRUDImpl.getJob(valueID);
+        iCRUDImpl.getJob(getValueID());
         EditAJob editAJob = new EditAJob();
         RecruiterUI recruiterUI = new RecruiterUI();
-        if(recruiterUI.getChangeUsername().getText().equals(valueRecruiter)){
+        if(recruiterUI.getChangeUsername().getText().equals(getValueRecruiter())){
             editAJob.setVisible(true);
         } else {
             System.err.println("Sorry this is not your job!!!");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void ButtonInterviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonInterviewActionPerformed
+        // iCRUDImpl.getInterview(getValueRecruiter(), null, getValueID());
+        InterviewUI interviewUI = new InterviewUI();
+        RecruiterUI recruiterUI = new RecruiterUI();
+        if(recruiterUI.getChangeUsername().getText().equals(getValueRecruiter())){
+            interviewUI.setVisible(true);
+            this.dispose();
+        } else {
+            System.err.println("Sorry this is not your job!!!");
+        }
+    }//GEN-LAST:event_ButtonInterviewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,6 +302,7 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonBack;
+    private javax.swing.JButton ButtonInterview;
     private javax.swing.JTable TableJob;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -286,4 +312,32 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the valueID
+     */
+    public int getValueID() {
+        return valueID;
+    }
+
+    /**
+     * @param valueID the valueID to set
+     */
+    public void setValueID(int valueID) {
+        RecruiterNewPosition.valueID = valueID;
+    }
+
+    /**
+     * @return the valueRecruiter
+     */
+    public String getValueRecruiter() {
+        return valueRecruiter;
+    }
+
+    /**
+     * @param valueRecruiter the valueRecruiter to set
+     */
+    public void setValueRecruiter(String valueRecruiter) {
+        RecruiterNewPosition.valueRecruiter = valueRecruiter;
+    }
 }

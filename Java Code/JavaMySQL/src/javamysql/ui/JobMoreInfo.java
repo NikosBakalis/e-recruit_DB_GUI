@@ -94,7 +94,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
         Seat.setText("Seat");
 
         TextCompanyName.setEditable(false);
-        TextCompanyName.setText(company.getName());
+        TextCompanyName.setText("MAKE IT WORK");
 
         TextSeat.setEditable(false);
         TextSeat.setText(job.getCountry());
