@@ -51,7 +51,7 @@ ORDER BY AVG(job.salary);
 DELIMITER $$
 CREATE PROCEDURE evaluation (in id INT(4))
 BEGIN 
-	DECLARE recruiter VARCHAR(12);
+	DECLARE id_in INT(4);
     DECLARE per_sc INT(1);
 	DECLARE edu_sc INT(1);
     DECLARE xp_sc INT(1);
@@ -71,8 +71,8 @@ BEGIN
     
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET fin = 1;
     
-    SELECT job.recruiter
-    INTO recruiter
+    SELECT job.id
+    INTO id_in
     FROM job
     WHERE job.id = id;
     
@@ -133,21 +133,21 @@ END$$
 DELIMITER $$
 CREATE TRIGGER cand_insert AFTER INSERT ON candidate FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','INSERT','candidate');
+		INSERT INTO history VALUES (username_history, date_history,'1','INSERT','candidate');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER cand_delete AFTER DELETE ON candidate FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','DELETE','candidate');
+		INSERT INTO history VALUES (username_history, date_history,'1','DELETE','candidate');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER cand_update AFTER UPDATE ON candidate FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','UPDATE','candidate');
+		INSERT INTO history VALUES (username_history, date_history,'1','UPDATE','candidate');
 	END $$
 DELIMITER ;
 
@@ -156,21 +156,21 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER rec_insert AFTER INSERT ON recruiter FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','INSERT','recruiter');
+		INSERT INTO history VALUES (username_history, date_history,'1','INSERT','recruiter');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER rec_delete AFTER DELETE ON recruiter FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','DELETE','recruiter');
+		INSERT INTO history VALUES (username_history, date_history,'1','DELETE','recruiter');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER rec_update AFTER UPDATE ON recruiter FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','UPDATE','recruiter');
+		INSERT INTO history VALUES (username_history, date_history,'1','UPDATE','recruiter');
 	END $$
 DELIMITER ;
 
@@ -179,21 +179,21 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER user_insert AFTER INSERT ON `user` FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','INSERT','user');
+		INSERT INTO history VALUES (username_history, date_history,'1','INSERT','user');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER user_delete AFTER DELETE ON `user` FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','DELETE','user');
+		INSERT INTO history VALUES (username_history, date_history,'1','DELETE','user');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER user_update AFTER UPDATE ON `user` FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','UPDATE','user');
+		INSERT INTO history VALUES (username_history, date_history,'1','UPDATE','user');
 	END $$
 DELIMITER ;
 
@@ -202,21 +202,21 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER job_insert AFTER INSERT ON job FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','INSERT','job');
+		INSERT INTO history VALUES (username_history, date_history,'1','INSERT','job');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER job_delete AFTER DELETE ON job FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','DELETE','job');
+		INSERT INTO history VALUES (username_history, date_history,'1','DELETE','job');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER job_update AFTER UPDATE ON job FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','UPDATE','job');
+		INSERT INTO history VALUES (username_history, date_history,'1','UPDATE','job');
 	END $$
 DELIMITER ;
 
@@ -226,21 +226,21 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER etaireia_insert AFTER INSERT ON etaireia FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','INSERT','etaireia');
+		INSERT INTO history VALUES (username_history, date_history,'1','INSERT','etaireia');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER etaireia_delete AFTER DELETE ON etaireia FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','DELETE','etaireia');
+		INSERT INTO history VALUES (username_history, date_history,'1','DELETE','etaireia');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER etaireia_update AFTER UPDATE ON etaireia FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (current_user(), now(),'1','UPDATE','etaireia');
+		INSERT INTO history VALUES (username_history, date_history,'1','UPDATE','etaireia');
 	END $$
 DELIMITER ;
 
