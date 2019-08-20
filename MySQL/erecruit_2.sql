@@ -68,6 +68,11 @@ email varchar(30),
 PRIMARY KEY (username)
 )engine=InnoDB;
 
+/* add ADMIN */
+insert into `user` (username, `password`, `name`, surname, reg_date, email) values 
+('admin', 'admin', 'admin', 'admin', '2019-08-19 12:23:34', 'admin@gmail.com')
+;
+
 /* add CANDIDATES */
 insert into `user` (username, `password`, `name`, surname, reg_date, email) values 
 ('cleogeo', 'upL34r', 'Cleomenis', 'Georgiadis', '2018-02-13 12:23:34', 'cleom17@gmail.com'),
@@ -371,15 +376,28 @@ insert into average_personality_score (recruiter_username, candidate_username, j
 CREATE TABLE sectors (
 company_AFM CHAR(9) NOT NULL,
 sector_title VARCHAR(20) NOT NULL,
-short_text VARCHAR(100) NOT NULL,
-belongs_to varchar(20),
 PRIMARY KEY (company_AFM, sector_title),
-CONSTRAINT TOMEAS FOREIGN KEY (belongs_to) REFERENCES sectors(sector_title),
 CONSTRAINT SECTORS_COMPANY_AFM FOREIGN KEY (company_AFM) REFERENCES etaireia(AFM) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
-insert into sectors (company_AFM, sector_title, short_text, belongs_to) values
-('023453344', 'Computer Engineering 1', 'short text sample 1', NULL),
+insert into sectors (company_AFM, sector_title) values
+('023453344', 'Computer Engineering'),
+('023453344', 'Something else')
+;
+
+CREATE TABLE sectors_levels (
+sector_title VARCHAR(36) NOT NULL,
+description TINYTEXT,
+belongs_to VARCHAR(36),
+PRIMARY KEY (sector_title),
+CONSTRAINT SECTORS_SECTOR_TITLE FOREIGN KEY (belongs_to) REFERENCES sectors_levels(sector_title) ON DELETE CASCADE ON UPDATE CASCADE
+)engine=InnoDB;
+
+insert into sectors_levels (sector_title, description, belongs_to) values
+('Computer Engineering', 'Root sector, no more general sector', NULL),
+('Something else', 'Level one sector, child of Computer Engineering', 'Computer Engineering')
+;
+/*('023453344', 'Computer Engineering 1', 'short text sample 1', NULL),
 ('023451232', 'Computer Engineering 2', 'short text sample 2', NULL),
 ('023453344', 'Databases', 'short text sample 1', 'Computer Engineering 1'),
 ('023453344', 'Networking', 'short text sample 1', 'Computer Engineering 1'),
@@ -393,21 +411,21 @@ insert into sectors (company_AFM, sector_title, short_text, belongs_to) values
 ('023451232', 'Robotics', 'short text sample 1', 'A.I.'),
 ('023451232', '2D', 'short text sample 1', 'Graphics'),
 ('023451232', '3D', 'short text sample 1', 'Graphics')
-;
+;*/
 
 CREATE TABLE history (
-username_history VARCHAR(12) NOT NULL,
+username_history VARCHAR(255) NOT NULL,
 date_history DATETIME NOT NULL,
-success BOOLEAN NOT NULL,
+success_fail SET('SUCCESS', 'FAIL'),
 kind_of_process SET('INSERT', 'UPDATE', 'DELETE'),
-name_of_table VARCHAR(15)NOT NULL,
-PRIMARY KEY (username_history),
-CONSTRAINT USERNAME_HISTORY FOREIGN KEY (username_history) REFERENCES `user`(username) ON DELETE CASCADE ON UPDATE CASCADE
+name_of_table VARCHAR(15)NOT NULL
+/* PRIMARY KEY (username_history),
+CONSTRAINT USERNAME_HISTORY FOREIGN KEY (username_history) REFERENCES `user`(username) ON DELETE CASCADE ON UPDATE CASCADE*/
 )engine=InnoDB;
 
 insert into history (username_history, date_history, success, kind_of_process, name_of_table) values
-('msmith','2017-06-23 13:12:34','1','UPDATE','sectors'),
-('varcon82','2019-06-24 13:12:34','0','DELETE','sectors')
+('msmith','2017-06-23 13:12:34','SUCCESS','UPDATE','sectors'),
+('varcon82','2019-06-24 13:12:34','FAIL','DELETE','sectors')
 ;
 
 CREATE TABLE testing_table (
