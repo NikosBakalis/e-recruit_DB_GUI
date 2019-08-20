@@ -5,6 +5,9 @@
  */
 package javamysql.ui;
 
+import java.sql.Time;
+import java.util.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -21,9 +24,13 @@ public class AdminCreateRecruiter extends javax.swing.JFrame {
     
     private static String newUsername, newPassword, newName, newSurname, newEmail;
     private static int newExperienceYears, newFirm;
-    private static java.util.Date newRegisterDate;
+    private static Date newRegisterDate;
+    private static Time newRegisterTime;
+    private static String newRegisterDateTime;
     
-    private static final SimpleDateFormat dateFormatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
+    long newRegisterTimeTest;
 
     /**
      * Creates new form AdminCreateRecruiter
@@ -229,23 +236,31 @@ public class AdminCreateRecruiter extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonDismissActionPerformed
 
     private void ButtonCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateActionPerformed
-        newUsername = changeUsername.getText();
-        newPassword = changePassword.getText();
-        newName = changeName.getText();
-        newSurname = changeSurname.getText();
-        try{
-            newRegisterDate = dateFormatDate.parse(changeRegisterDate.getText());
-        }catch (ParseException ex) {
-            Logger.getLogger(AddAJob.class.getName()).log(Level.SEVERE, null, ex);
+        setNewUsername(changeUsername.getText());
+        setNewPassword(changePassword.getText());
+        setNewName(changeName.getText());
+        setNewSurname(changeSurname.getText());
+        try {
+            newRegisterDate = dateFormatTimestamp.parse(changeRegisterDate.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminCreateRecruiter.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.sql.Date sqlNewRegisterDate = new java.sql.Date(newRegisterDate.getTime());
         setNewRegisterDate(sqlNewRegisterDate);
-        newEmail = changeEmail.getText();
+        try {
+            newRegisterTimeTest = dateFormatTimestamp.parse(changeRegisterDate.getText()).getTime();
+        } catch (ParseException ex) {
+            Logger.getLogger(AdminCreateRecruiter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setNewRegisterTime(new Time(newRegisterTimeTest));
+        setNewRegisterDateTime(getNewRegisterDate() + " " + getNewRegisterTime());
+        setNewEmail(changeEmail.getText());
         int stringToIntExperienceYears = Integer.parseInt(changeExperienceYears.getText());
-        newExperienceYears = stringToIntExperienceYears;
+        setNewExperienceYears(stringToIntExperienceYears);
         int stringToIntFirm = Integer.parseInt(changeFirm.getText());
-        newFirm = stringToIntFirm;
+        setNewFirm(stringToIntFirm);
         iCRUDImpl.adminCreateRecruiter();
+        this.dispose();
     }//GEN-LAST:event_ButtonCreateActionPerformed
 
     /**
@@ -407,14 +422,42 @@ public class AdminCreateRecruiter extends javax.swing.JFrame {
     /**
      * @return the newRegisterDate
      */
-    public java.util.Date getNewRegisterDate() {
+    public Date getNewRegisterDate() {
         return newRegisterDate;
     }
 
     /**
      * @param newRegisterDate the newRegisterDate to set
      */
-    public void setNewRegisterDate(java.util.Date newRegisterDate) {
+    public void setNewRegisterDate(Date newRegisterDate) {
         AdminCreateRecruiter.newRegisterDate = newRegisterDate;
+    }
+    
+    /**
+     * @return the newRegisterTime
+     */
+    public Time getNewRegisterTime() {
+        return newRegisterTime;
+    }
+
+    /**
+     * @param newRegisterTime the newRegisterTime to set
+     */
+    public void setNewRegisterTime(Time newRegisterTime) {
+        AdminCreateRecruiter.newRegisterTime = newRegisterTime;
+    }
+    
+    /**
+     * @return the newRegisterDateTime
+     */
+    public String getNewRegisterDateTime() {
+        return newRegisterDateTime;
+    }
+
+    /**
+     * @param newRegisterDateTime the newDateTime to set
+     */
+    public void setNewRegisterDateTime(String newRegisterDateTime) {
+        AdminCreateRecruiter.newRegisterDateTime = newRegisterDateTime;
     }
 }

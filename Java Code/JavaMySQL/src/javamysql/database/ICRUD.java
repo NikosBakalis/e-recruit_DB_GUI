@@ -12,10 +12,13 @@ import javamysql.model.Company;
 import javamysql.model.Interview;
 import javamysql.model.Job;
 import javamysql.model.Recruiter;
+import javamysql.model.Sectors;
 import javamysql.model.User;
 import javamysql.ui.AddAJob;
 import javamysql.ui.AdminCreateCandidate;
+import javamysql.ui.AdminCreateObject;
 import javamysql.ui.AdminCreateRecruiter;
+import javamysql.ui.AdminCreateSector;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
@@ -54,4 +57,9 @@ public interface ICRUD {
     InterviewEdit interviewEdit(String recruiterUsername, String candidateUsername, int jobID);
     AveragePersonalityScore getAveragePersonalityScore(String recruiterUsername, String candidateUsername, int jobID);
     InterviewStart interviewStart(String recruiterUsername, String candidateUsername, int jobID);
+    AdminCreateObject adminCreateObject();
+    AdminCreateObject adminCreateObjectNull();
+    Sectors getSectors();
+    AdminCreateSector adminCreateSector();
+    AdminCreateSector adminCreateSectorNull();
 }
