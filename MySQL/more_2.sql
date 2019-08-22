@@ -52,77 +52,92 @@ DELIMITER $$
 CREATE PROCEDURE evaluation (in id INT(4))
 BEGIN 
 	DECLARE recruiter VARCHAR(12);
-    DECLARE per_sc INT(1);
+	DECLARE per_sc INT(1);
 	DECLARE edu_sc INT(1);
-    DECLARE xp_sc INT(1);
-	DECLARE comments VARCHAR(35);
-    DECLARE fin INT DEFAULT 0;
+	DECLARE xp_sc INT(1);
+	DECLARE message VARCHAR(100);
+	DECLARE fin INT DEFAULT 0;
 	DECLARE eval INT DEFAULT 1;
-    DECLARE fail INT DEFAULT 0;
+	DECLARE fail INT DEFAULT 0;
+	DECLARE the_date DATE;
 	DECLARE message_1 CHAR(20);
 	DECLARE message_2 CHAR(20);
 	DECLARE message_3 CHAR(20);
-        
-    DECLARE score_cur CURSOR FOR
-    SELECT /*interview.per_sc, */interview.edu_sc, interview.xp_sc
-    FROM interview
-    INNER JOIN job ON interview.job_id = job.id
-    WHERE job.id = id;
-    
-    DECLARE CONTINUE HANDLER FOR NOT FOUND SET fin = 1;
-    
-    SELECT job.recruiter
-    INTO recruiter
-    FROM job
-    WHERE job.id = id;
-    
-    OPEN score_cur;
-    score_check: LOOP
+		
+	DECLARE score_cur CURSOR FOR
+	SELECT AVG(average_personality_score.per_sc) AS 'Personality Score', interview.edu_sc, interview.xp_sc
+	FROM interview
+	INNER JOIN applies ON applies.job_id = interview.job_id
+	INNER JOIN job ON job.id = interview.job_id
+	INNER JOIN average_personality_score ON average_personality_score.job_id = interview.job_id AND average_personality_score.recruiter_username = interview.recruiter_username AND average_personality_score.candidate_username = interview.candidate_username
+	WHERE job.id = id
+	/*GROUP BY interview.candidate_username*/;
+	
+	DECLARE submission_date CURSOR FOR
+	SELECT job.submission_date
+	FROM job;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET fin = 1;
+	
+	SELECT job.recruiter
+	INTO recruiter
+	FROM job
+	WHERE job.id = id;
+	
+	OPEN score_cur;
+	OPEN submission_date;
+	
+	score_check: LOOP
 		FETCH score_cur INTO per_sc, edu_sc, xp_sc;
-        IF fin = 1 then 
-			LEAVE score_cur;
-		END IF;	
-		IF (per_sc IS NULL OR edu_SC IS NULL OR xp_sc IS NULL) THEN
+		FETCH submission_date INTO the_date;
+		IF (the_date > CURRENT_DATE()) THEN
 			SET eval = 0;
-			LEAVE score_cur;
+			LEAVE score_check;
 		END IF;
-        IF (per_sc = 0 OR edu_sc = 0 OR xp_sc = 0) THEN
+		IF (per_sc = 0 OR edu_sc = 0 OR xp_sc = 0) THEN
 			SET fail = 1;
+			LEAVE score_check;
+		END IF;
+		IF fin = 1 THEN
+			LEAVE score_check;
 		END IF;
 	END LOOP score_check;    
-    CLOSE score_cur;
-    
-    IF eval = 0 THEN
+	CLOSE score_cur;
+	
+	IF eval = 0 THEN
 		SET message = 'The evaluation of this job is incomplete.';
 		SELECT message;
 	ELSE
 		SET message = 'The evaluation of this job is completed.';
 		SELECT message;
-        
-        SELECT cand_usrname AS Candidate, 
-		(per_sc + edu_score + xp_score) AS Final_Score, 
-		per_sc AS Personality_Score, 
-		edu_score AS Education_Score, 
-		xp_score AS Experience_Score,
+		
+		SELECT cand_usrname AS Candidate, 
+		(AVG(average_personality_score.per_sc) + interview.edu_sc + interview.xp_sc - 2) AS Final_Score,
+		/*(per_sc + edu_sc + xp_sc) AS Final_Score,*/
+		AVG(average_personality_score.per_sc) AS Personality_Score, 
+		interview.edu_sc AS Education_Score, 
+		interview.xp_sc AS Experience_Score,
 		COUNT(interview.candidate_username) AS Number_of_Interviews
 		FROM applies
 		INNER JOIN candidate ON applies.cand_usrname = candidate.username
 		INNER JOIN interview ON candidate.username = interview.candidate_username
+		INNER JOIN average_personality_score ON interview.candidate_username = average_personality_score.candidate_username
 		WHERE applies.job_id = id AND interview.job_id = id
-		HAVING per_sc > 0 AND edu_sc > 0 AND xp_sc > 0;
-        
-        IF fail = 1 THEN
+		GROUP BY Candidate
+		HAVING (AVG(average_personality_score.per_sc) > 0 AND interview.edu_sc > 0 AND interview.xp_sc > 0)
+		ORDER BY Final_Score DESC;
+		
+		IF fail = 1 THEN
 			SELECT Candidate, Explanation
 			FROM(
-			SELECT cand_usrname AS Candidate, CONCAT_WS(', ',@message_3,@message_2,@message_1) AS Explanation,
-			IF (interview.per_sc = 0, @message_1 := 'failed the interview', @message_1 := ''),
-			IF (interview.edu_sc = 0, @message_2 := 'inadequate education', @message_2 :=''),
-			IF (interview.xp_sc = 0, @message_3 := 'no prior experience', @message_3 := '')
-			FROM interview) AS SOURCE;
-			END IF;
+			SELECT interview.candidate_username AS Candidate, CONCAT_WS(', ',@message_3,@message_2,@message_1) AS Explanation,
+			IF (per_sc = 0, @message_1 := 'failed the interview', @message_1 := ''),
+			IF (edu_sc = 0, @message_2 := 'inadequate education', @message_2 :=''),
+			IF (xp_sc = 0, @message_3 := 'no prior experience', @message_3 := '')
+			FROM interview
+			WHERE interview.job_id = id AND (per_sc = 0 OR edu_sc = 0 OR xp_sc = 0)) AS SOURCE;
+		END IF;
 	END IF;
-
-
 END$$
 DELIMITER ;
 
