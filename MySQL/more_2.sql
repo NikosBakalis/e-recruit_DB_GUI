@@ -75,7 +75,8 @@ BEGIN
 	
 	DECLARE submission_date CURSOR FOR
 	SELECT job.submission_date
-	FROM job;
+	FROM job
+	WHERE job.id = id;
 	
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET fin = 1;
 	
