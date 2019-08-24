@@ -50,6 +50,7 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         ButtonInterview = new javax.swing.JButton();
+        ButtonEvaluation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -117,6 +118,13 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             }
         });
 
+        ButtonEvaluation.setText("Evaluation");
+        ButtonEvaluation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEvaluationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,21 +132,27 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(413, 413, 413)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(ButtonInterview)
-                        .addGap(212, 212, 212)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 322, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(210, 210, 210)
-                        .addComponent(ButtonBack)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(413, 413, 413)
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ButtonInterview)
+                                .addGap(212, 212, 212)
+                                .addComponent(jButton1)
+                                .addGap(105, 105, 105)
+                                .addComponent(ButtonEvaluation, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(112, 112, 112)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton3)
+                                .addGap(220, 220, 220)
+                                .addComponent(ButtonBack)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -146,7 +160,7 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5)
@@ -156,7 +170,8 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(ButtonBack)
                     .addComponent(jButton3)
-                    .addComponent(ButtonInterview))
+                    .addComponent(ButtonInterview)
+                    .addComponent(ButtonEvaluation))
                 .addContainerGap())
         );
 
@@ -238,6 +253,17 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ButtonInterviewActionPerformed
 
+    private void ButtonEvaluationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEvaluationActionPerformed
+        RecruiterUI recruiterUI = new RecruiterUI();
+        if(recruiterUI.getChangeUsername().getText().equals(getValueRecruiter())){
+            iCRUDImpl.evaluation(getValueID());
+            RecruiterEvaluation recruiterEvaluation = new RecruiterEvaluation();
+            recruiterEvaluation.setVisible(true);
+        } else {
+            System.out.println("Sorry this is not your job!!!");
+        }
+    }//GEN-LAST:event_ButtonEvaluationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,6 +328,7 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonBack;
+    private javax.swing.JButton ButtonEvaluation;
     private javax.swing.JButton ButtonInterview;
     private javax.swing.JTable TableJob;
     private javax.swing.JButton jButton1;

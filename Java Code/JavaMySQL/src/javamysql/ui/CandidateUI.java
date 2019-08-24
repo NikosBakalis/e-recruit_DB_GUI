@@ -256,7 +256,7 @@ public class CandidateUI extends javax.swing.JFrame {
     private void JobAppliesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JobAppliesActionPerformed
         // CandidateApplies candidateApplies = new CandidateApplies();
         // candidateApplies.setVisible(true);
-        CandidateAppliesNew candidateAppliesNew = new CandidateAppliesNew();
+        CandidateNewApplies candidateAppliesNew = new CandidateNewApplies();
         candidateAppliesNew.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_JobAppliesActionPerformed
