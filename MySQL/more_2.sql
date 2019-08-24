@@ -60,9 +60,9 @@ BEGIN
 	DECLARE eval INT DEFAULT 1;
 	DECLARE fail INT DEFAULT 0;
 	DECLARE the_date DATE;
-	DECLARE message_1 CHAR(20);
-	DECLARE message_2 CHAR(20);
-	DECLARE message_3 CHAR(20);
+	DECLARE message_1 VARCHAR(20);
+	DECLARE message_2 VARCHAR(20);
+	DECLARE message_3 VARCHAR(20);
 		
 	DECLARE score_cur CURSOR FOR
 	SELECT AVG(average_personality_score.per_sc) AS 'Personality Score', interview.edu_sc, interview.xp_sc
@@ -73,8 +73,8 @@ BEGIN
 	WHERE job.id = id
 	/*GROUP BY interview.candidate_username*/;
 	
-	DECLARE submission_date CURSOR FOR
-	SELECT job.submission_date
+	DECLARE submission_dates CURSOR FOR
+	SELECT submission_date
 	FROM job
 	WHERE job.id = id;
 	
@@ -86,11 +86,11 @@ BEGIN
 	WHERE job.id = id;
 	
 	OPEN score_cur;
-	OPEN submission_date;
+	OPEN submission_dates;
 	
 	score_check: LOOP
 		FETCH score_cur INTO per_sc, edu_sc, xp_sc;
-		FETCH submission_date INTO the_date;
+		FETCH submission_dates INTO the_date;
 		IF (the_date > CURRENT_DATE()) THEN
 			SET eval = 0;
 			LEAVE score_check;
@@ -112,28 +112,28 @@ BEGIN
 		SET message = 'The evaluation of this job is completed.';
 		SELECT message;
 		
-		SELECT cand_usrname AS Candidate, 
+		SELECT /*(@this := @this + 1) AS Place, */cand_usrname AS Candidate, 
 		(AVG(average_personality_score.per_sc) + interview.edu_sc + interview.xp_sc - 2) AS Final_Score,
-		/*(per_sc + edu_sc + xp_sc) AS Final_Score,*/
-		AVG(average_personality_score.per_sc) AS Personality_Score, 
-		interview.edu_sc AS Education_Score, 
-		interview.xp_sc AS Experience_Score,
-		COUNT(interview.candidate_username) AS Number_of_Interviews
+		AVG(average_personality_score.per_sc) AS 'Personality Score', 
+		interview.edu_sc AS 'Education Score', 
+		interview.xp_sc AS 'Experience Score',
+		COUNT(average_personality_score.candidate_username) AS 'Number of Interviews'
 		FROM applies
+		/*CROSS JOIN (SELECT @this := 0) AS dummy*/
 		INNER JOIN candidate ON applies.cand_usrname = candidate.username
 		INNER JOIN interview ON candidate.username = interview.candidate_username
 		INNER JOIN average_personality_score ON interview.candidate_username = average_personality_score.candidate_username
-		WHERE applies.job_id = id AND interview.job_id = id
+		WHERE applies.job_id = 9 AND interview.job_id = 9
 		GROUP BY Candidate
-		HAVING (AVG(average_personality_score.per_sc) > 0 AND interview.edu_sc > 0 AND interview.xp_sc > 0)
+		/*HAVING (per_sc > 0 AND edu_sc > 0 AND xp_sc > 0)*/
 		ORDER BY Final_Score DESC;
 		
 		IF fail = 1 THEN
-			SELECT Candidate, Explanation
+			SELECT Candidate AS 'Candidate Username', Explanation
 			FROM(
 			SELECT interview.candidate_username AS Candidate, CONCAT_WS(', ',@message_3,@message_2,@message_1) AS Explanation,
 			IF (per_sc = 0, @message_1 := 'failed the interview', @message_1 := ''),
-			IF (edu_sc = 0, @message_2 := 'inadequate education', @message_2 :=''),
+			IF (edu_sc = 0, @message_2 := 'inadequate education', @message_2 := ''),
 			IF (xp_sc = 0, @message_3 := 'no prior experience', @message_3 := '')
 			FROM interview
 			WHERE interview.job_id = id AND (per_sc = 0 OR edu_sc = 0 OR xp_sc = 0)) AS SOURCE;

@@ -304,7 +304,7 @@ CONSTRAINT APPL_JOB FOREIGN KEY (job_id) REFERENCES job(id) ON DELETE CASCADE ON
 CONSTRAINT APPL_CAND FOREIGN KEY (cand_usrname) REFERENCES candidate(username) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
-insert into applies (cand_usrname, job_id) values 
+insert into applies (cand_usrname, job_id) values
 ('cleogeo', 2),
 ('cleogeo',7),
 ('cleogeo', 9),
@@ -340,8 +340,7 @@ job_id int(4) NOT NULL,
 interview_date DATE NOT NULL,
 starting_time TIME NOT NULL,
 duration TIME NOT NULL,
-comments VARCHAR(35),	
-/* per_sc_avg ENUM('0', '1', '2', '3', '4', '5') NOT NULL, */
+comments VARCHAR(35),
 edu_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
 xp_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
 PRIMARY KEY (recruiter_username, candidate_username, job_id),
@@ -362,8 +361,8 @@ candidate_username VARCHAR(12) NOT NULL,
 job_id int(4) NOT NULL,
 per_sc int(4) NOT NULL,
 PRIMARY KEY (id),
-CONSTRAINT AVGERAGE_PERSONALITY_SCORE_RECRUITER_USERNAME FOREIGN KEY (recruiter_username) REFERENCES interview(recruiter_username) ON DELETE CASCADE ON UPDATE CASCADE,
-CONSTRAINT AVGERAGE_PERSONALITY_SCORE_CANDIDATE_USERNAME FOREIGN KEY (candidate_username) REFERENCES interview(candidate_username) ON DELETE CASCADE ON UPDATE CASCADE,
+/*CONSTRAINT AVGERAGE_PERSONALITY_SCORE_RECRUITER_USERNAME FOREIGN KEY (recruiter_username) REFERENCES interview(recruiter_username) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT AVGERAGE_PERSONALITY_SCORE_CANDIDATE_USERNAME FOREIGN KEY (candidate_username) REFERENCES interview(candidate_username) ON DELETE CASCADE ON UPDATE CASCADE,*/
 CONSTRAINT AVGERAGE_PERSONALITY_SCORE_JOB_ID FOREIGN KEY (job_id) REFERENCES interview(job_id) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
@@ -395,7 +394,9 @@ CONSTRAINT SECTORS_SECTOR_TITLE FOREIGN KEY (belongs_to) REFERENCES sectors_leve
 
 insert into sectors_levels (sector_title, description, belongs_to) values
 ('Computer Engineering', 'Root sector, no more general sector', NULL),
-('Something else', 'Level one sector, child of Computer Engineering', 'Computer Engineering')
+('Software', 'Level one sector, child of Computer Engineering', 'Computer Engineering'),
+('Darth Vader', 'Root of all evils', NULL),
+('Luke', 'Level one crook, Darth Vader is his father', 'Darth Vader')
 ;
 /*('023453344', 'Computer Engineering 1', 'short text sample 1', NULL),
 ('023451232', 'Computer Engineering 2', 'short text sample 2', NULL),
@@ -423,7 +424,7 @@ name_of_table VARCHAR(15)NOT NULL
 CONSTRAINT USERNAME_HISTORY FOREIGN KEY (username_history) REFERENCES `user`(username) ON DELETE CASCADE ON UPDATE CASCADE*/
 )engine=InnoDB;
 
-insert into history (username_history, date_history, success, kind_of_process, name_of_table) values
+insert into history (username_history, date_history, success_fail, kind_of_process, name_of_table) values
 ('msmith','2017-06-23 13:12:34','SUCCESS','UPDATE','sectors'),
 ('varcon82','2019-06-24 13:12:34','FAIL','DELETE','sectors')
 ;
