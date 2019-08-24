@@ -40,7 +40,6 @@ public class AdminUI extends javax.swing.JFrame {
         ButtonHistory = new javax.swing.JButton();
         LabelWelcome = new javax.swing.JLabel();
         ButtonLogout = new javax.swing.JButton();
-        ButtonCreateSector = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -60,18 +59,8 @@ public class AdminUI extends javax.swing.JFrame {
         });
 
         ButtonCreateObject.setText("Create Object");
-        ButtonCreateObject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCreateObjectActionPerformed(evt);
-            }
-        });
 
         ButtonHistory.setText("History");
-        ButtonHistory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonHistoryActionPerformed(evt);
-            }
-        });
 
         LabelWelcome.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         LabelWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -84,13 +73,6 @@ public class AdminUI extends javax.swing.JFrame {
             }
         });
 
-        ButtonCreateSector.setText("Create Sector");
-        ButtonCreateSector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonCreateSectorActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,26 +80,22 @@ public class AdminUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabelWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ButtonCreateCandidate)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(ButtonCreateObject)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addComponent(ButtonCreateSector)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
+                            .addComponent(ButtonCreateRecruiter, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButtonCreateRecruiter))))
-                    .addComponent(LabelWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(ButtonHistory)
+                                .addGap(24, 24, 24)))))
                 .addGap(116, 116, 116))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButtonHistory)
-                .addGap(151, 151, 151)
                 .addComponent(ButtonLogout)
                 .addContainerGap())
         );
@@ -133,11 +111,9 @@ public class AdminUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButtonCreateObject)
-                    .addComponent(ButtonCreateSector))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonLogout)
                     .addComponent(ButtonHistory))
+                .addGap(31, 31, 31)
+                .addComponent(ButtonLogout)
                 .addContainerGap())
         );
 
@@ -178,24 +154,6 @@ public class AdminUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ButtonLogoutActionPerformed
 
-    private void ButtonCreateObjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateObjectActionPerformed
-        iCRUDImpl.getObject();
-        AdminCreateObject adminCreateObject = new AdminCreateObject();
-        adminCreateObject.setVisible(true);
-    }//GEN-LAST:event_ButtonCreateObjectActionPerformed
-
-    private void ButtonHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonHistoryActionPerformed
-        AdminHistory adminHistory = new AdminHistory();
-        adminHistory.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_ButtonHistoryActionPerformed
-
-    private void ButtonCreateSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCreateSectorActionPerformed
-        iCRUDImpl.getSectors();
-        AdminCreateSector adminCreateSector = new AdminCreateSector();
-        adminCreateSector.setVisible(true);
-    }//GEN-LAST:event_ButtonCreateSectorActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -235,7 +193,6 @@ public class AdminUI extends javax.swing.JFrame {
     private javax.swing.JButton ButtonCreateCandidate;
     private javax.swing.JButton ButtonCreateObject;
     private javax.swing.JButton ButtonCreateRecruiter;
-    private javax.swing.JButton ButtonCreateSector;
     private javax.swing.JButton ButtonHistory;
     private javax.swing.JButton ButtonLogout;
     private javax.swing.JLabel LabelWelcome;

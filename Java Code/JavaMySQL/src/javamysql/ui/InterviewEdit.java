@@ -318,7 +318,6 @@ public class InterviewEdit extends javax.swing.JFrame {
             Logger.getLogger(InterviewEdit.class.getName()).log(Level.SEVERE, null, ex);
         }
         setNewStartingTime(new Time(newStartingTimeTest));
-        
         try {
             newDurationTest = dateFormatTime.parse(changeDuration.getText()).getTime();
         } catch (ParseException ex) {

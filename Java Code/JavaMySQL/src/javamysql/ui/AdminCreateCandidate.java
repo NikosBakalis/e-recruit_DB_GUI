@@ -5,7 +5,6 @@
  */
 package javamysql.ui;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -22,13 +21,9 @@ public class AdminCreateCandidate extends javax.swing.JFrame {
     
     private static String newUsername, newPassword, newName, newSurname, newEmail, newBio, newRecommendation, newCertificates;
     private static java.util.Date newRegisterDate;
-    private static Time newRegisterTime;
-    private static String newRegisterDateTime;
     
-    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private static final SimpleDateFormat dateFormatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    long newRegisterTimeTest;
-    
     /**
      * Creates new form AdminCreateCandidate
      */
@@ -242,26 +237,18 @@ public class AdminCreateCandidate extends javax.swing.JFrame {
         newPassword = changePassword.getText();
         newName = changeName.getText();
         newSurname = changeSurname.getText();
-        try {
-            newRegisterDate = dateFormatTimestamp.parse(changeRegisterDate.getText());
-        } catch (ParseException ex) {
-            Logger.getLogger(AdminCreateRecruiter.class.getName()).log(Level.SEVERE, null, ex);
+        try{
+            newRegisterDate = dateFormatDate.parse(changeRegisterDate.getText());
+        }catch (ParseException ex) {
+            Logger.getLogger(AddAJob.class.getName()).log(Level.SEVERE, null, ex);
         }
         java.sql.Date sqlNewRegisterDate = new java.sql.Date(newRegisterDate.getTime());
         setNewRegisterDate(sqlNewRegisterDate);
-        try {
-            newRegisterTimeTest = dateFormatTimestamp.parse(changeRegisterDate.getText()).getTime();
-        } catch (ParseException ex) {
-            Logger.getLogger(AdminCreateCandidate.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        setNewRegisterTime(new Time(newRegisterTimeTest));
-        setNewRegisterDateTime(getNewRegisterDate() + " " + getNewRegisterTime());
         newEmail = changeEmail.getText();
         newBio = changeBio.getText();
         newRecommendation = changeRecommendation.getText();
         newCertificates = changeCertificates.getText();
         iCRUDImpl.adminCreateCandidate();
-        this.dispose();
     }//GEN-LAST:event_ButtonCreateActionPerformed
 
     private void ButtonDismissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDismissActionPerformed
@@ -452,34 +439,6 @@ public class AdminCreateCandidate extends javax.swing.JFrame {
      */
     public void setNewRegisterDate(java.util.Date newRegisterDate) {
         AdminCreateCandidate.newRegisterDate = newRegisterDate;
-    }
-    
-    /**
-     * @return the newRegisterTime
-     */
-    public Time getNewRegisterTime() {
-        return newRegisterTime;
-    }
-
-    /**
-     * @param newRegisterTime the newRegisterTime to set
-     */
-    public void setNewRegisterTime(Time newRegisterTime) {
-        AdminCreateCandidate.newRegisterTime = newRegisterTime;
-    }
-
-    /**
-     * @return the newRegisterDateTime
-     */
-    public String getNewRegisterDateTime() {
-        return newRegisterDateTime;
-    }
-
-    /**
-     * @param newRegisterDateTime the newRegisterDateTime to set
-     */
-    public void setNewRegisterDateTime(String newRegisterDateTime) {
-        AdminCreateCandidate.newRegisterDateTime = newRegisterDateTime;
     }
 
 }

@@ -11,8 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javamysql.model.Applies;
 import javamysql.model.AveragePersonalityScore;
 import javamysql.model.Candidate;
@@ -21,13 +19,10 @@ import javamysql.model.Interview;
 import javamysql.model.Job;
 import javamysql.model.Object;
 import javamysql.model.Recruiter;
-import javamysql.model.Sectors;
 import javamysql.model.User;
 import javamysql.ui.AddAJob;
 import javamysql.ui.AdminCreateCandidate;
-import javamysql.ui.AdminCreateObject;
 import javamysql.ui.AdminCreateRecruiter;
-import javamysql.ui.AdminCreateSector;
 import javamysql.ui.CandidateApplies;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
@@ -430,9 +425,8 @@ public class ICRUDImpl implements ICRUD {
     @Override
     public AdminCreateCandidate adminCreateCandidate(){
         openConnection();
-        AdminCreateCandidate adminCreateCandidate = new AdminCreateCandidate();
-        User user = new User();
         try{
+            AdminCreateCandidate adminCreateCandidate = new AdminCreateCandidate();
             Statement statement = getConnection().createStatement();
             String query1 = "INSERT INTO user VALUES ('" + adminCreateCandidate.getNewUsername() + "', '" + adminCreateCandidate.getNewPassword() + "', '" + adminCreateCandidate.getNewName() + "', '" + adminCreateCandidate.getNewSurname() + "', '" + adminCreateCandidate.getNewRegisterDate() + "', '" + adminCreateCandidate.getNewEmail() + "')";
             String query2 = "INSERT INTO candidate VALUES ('" + adminCreateCandidate.getNewUsername() + "', '" + adminCreateCandidate.getNewBio() + "', '" + adminCreateCandidate.getNewRecommendation() + "', '" + adminCreateCandidate.getNewCertificates() + "')";
@@ -441,46 +435,25 @@ public class ICRUDImpl implements ICRUD {
             statement.executeBatch();
             return adminCreateCandidate;
         } catch (SQLException e) {
-            try {
-                Statement statement = getConnection().createStatement();
-                String query3 = "INSERT INTO history VALUES ('admin', NOW(), 'FAIL', 'INSERT', 'user')";
-                String query4 = "INSERT INTO history VALUES ('" + user.getUsername() + "', NOW(), 'FAIL', 'INSERT', 'candidate')";
-                statement.addBatch(query3);
-                statement.addBatch(query4);
-                statement.executeBatch();
-            } catch (SQLException ex) {
-                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            return null;
         }
-        return adminCreateCandidate;
     }
     
     @Override
     public AdminCreateRecruiter adminCreateRecruiter(){
         openConnection();
-        AdminCreateRecruiter adminCreateRecruiter = new AdminCreateRecruiter();
-        User user = new User();
         try{
+            AdminCreateRecruiter adminCreateRecruiter = new AdminCreateRecruiter();
             Statement statement = getConnection().createStatement();
-            String query1 = "INSERT INTO user VALUES ('" + adminCreateRecruiter.getNewUsername() + "', '" + adminCreateRecruiter.getNewPassword() + "', '" + adminCreateRecruiter.getNewName() + "', '" + adminCreateRecruiter.getNewSurname() + "', '" + adminCreateRecruiter.getNewRegisterDateTime() + "', '" + adminCreateRecruiter.getNewEmail() + "')";
+            String query1 = "INSERT INTO user VALUES ('" + adminCreateRecruiter.getNewUsername() + "', '" + adminCreateRecruiter.getNewPassword() + "', '" + adminCreateRecruiter.getNewName() + "', '" + adminCreateRecruiter.getNewSurname() + "', '" + adminCreateRecruiter.getNewRegisterDate() + "', '" + adminCreateRecruiter.getNewEmail() + "')";
             String query2 = "INSERT INTO recruiter VALUES ('" + adminCreateRecruiter.getNewUsername() + "', '" + adminCreateRecruiter.getNewExperienceYears() + "', '" + adminCreateRecruiter.getNewFirm() + "')";
             statement.addBatch(query1);
             statement.addBatch(query2);
             statement.executeBatch();
             return adminCreateRecruiter;
         } catch (SQLException e) {
-            try {
-                Statement statement = getConnection().createStatement();
-                String query3 = "INSERT INTO history VALUES ('admin', NOW(), 'FAIL', 'INSERT', 'user')";
-                String query4 = "INSERT INTO history VALUES ('" + user.getUsername() + "', NOW(), 'FAIL', 'INSERT', 'recruiter')";
-                statement.addBatch(query3);
-                statement.addBatch(query4);
-                statement.executeBatch();
-            } catch (SQLException ex) {
-                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            return null;
         }
-        return adminCreateRecruiter;
     }
     
     @Override
@@ -569,99 +542,6 @@ public class ICRUDImpl implements ICRUD {
             statement.addBatch(query2);
             statement.executeBatch();
             return interviewStart;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-    
-    @Override
-    public AdminCreateObject adminCreateObject() {
-        openConnection();
-        try{
-            AdminCreateObject adminCreateObject = new AdminCreateObject();
-            Statement statement = getConnection().createStatement();
-            String query = "INSERT INTO antikeim VALUES ('" + adminCreateObject.getNewTitle() + "', '" + adminCreateObject.getNewDescription() + "', '" + adminCreateObject.getNewBelongsTo() + "')";
-            statement.addBatch(query);
-            statement.executeBatch();
-            return adminCreateObject;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-    
-    @Override
-    public AdminCreateObject adminCreateObjectNull() {
-        openConnection();
-        try{
-            AdminCreateObject adminCreateObject = new AdminCreateObject();
-            Statement statement = getConnection().createStatement();
-            String query = "INSERT INTO antikeim VALUES ('" + adminCreateObject.getNewTitle() + "', '" + adminCreateObject.getNewDescription() + "', NULL)";
-            statement.addBatch(query);
-            statement.executeBatch();
-            return adminCreateObject;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-    
-    @Override
-    public Sectors getSectors(){
-        openConnection();
-        try {
-            String query = "SELECT * FROM sectors_levels";
-            ResultSet resultSet;
-            Sectors sectors;
-            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
-                resultSet = preparedStatement.executeQuery();
-                sectors = null;
-                
-                while(resultSet.next()) {
-                    sectors = new Sectors();
-                    sectors.setTitle(resultSet.getString("sectors_title"));
-                    sectors.setDescription(resultSet.getString("description"));
-                    sectors.setBelongsTo(resultSet.getString("belongs_to"));
-                }
-            }
-            resultSet.close();
-            return sectors;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-    
-    @Override
-    public AdminCreateSector adminCreateSector() {
-        openConnection();
-        try{
-            AdminCreateSector adminCreateSector = new AdminCreateSector();
-            Statement statement = getConnection().createStatement();
-            System.out.println(adminCreateSector.getNewCompanysAFM());
-            System.out.println(adminCreateSector.getNewTitle());
-            System.out.println(adminCreateSector.getNewDescription());
-            System.out.println(adminCreateSector.getNewBelongsTo());
-            String query1 = "INSERT INTO sectors VALUES ('" + adminCreateSector.getNewCompanysAFM() + "', '" + adminCreateSector.getNewTitle() + "')";
-            String query2 = "INSERT INTO sectors_levels VALUES ('" + adminCreateSector.getNewTitle() + "', '" + adminCreateSector.getNewDescription() + "', '" + adminCreateSector.getNewBelongsTo() + "')";
-            statement.addBatch(query1);
-            statement.addBatch(query2);
-            statement.executeBatch();
-            return adminCreateSector;
-        } catch (SQLException e) {
-            return null;
-        }
-    }
-    
-    @Override
-    public AdminCreateSector adminCreateSectorNull() {
-        openConnection();
-        try{
-            AdminCreateSector adminCreateSector = new AdminCreateSector();
-            Statement statement = getConnection().createStatement();
-            String query1 = "INSERT INTO sectors VALUES ('" + adminCreateSector.getNewCompanysAFM() + "', '" + adminCreateSector.getNewTitle() + "')";
-            String query2 = "INSERT INTO sectors_levels VALUES ('" + adminCreateSector.getNewTitle() + "', '" + adminCreateSector.getNewDescription() + "', NULL)";
-            statement.addBatch(query1);
-            statement.addBatch(query2);
-            statement.executeBatch();
-            return adminCreateSector;
         } catch (SQLException e) {
             return null;
         }
