@@ -5,12 +5,16 @@
  */
 package javamysql.ui;
 
+import java.awt.Component;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javamysql.database.ICRUDImpl;
-import javamysql.model.Interview;
+import javamysql.model.Job;
 import javamysql.model.Recruiter;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -27,6 +31,10 @@ public class InterviewUI extends javax.swing.JFrame {
     
     private static String valueRecruiterUsername = null, valueCandidateUsername = null;
     private static int valueJobID = 0;
+    
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    
+    Date now = new Date(System.currentTimeMillis());
 
     /**
      * Creates new form InterviewUI
@@ -164,7 +172,14 @@ public class InterviewUI extends javax.swing.JFrame {
     private void ButtonNewInterviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonNewInterviewsActionPerformed
         ButtonStartEdit.setText("Start");
         ButtonStartEdit.setVisible(true);
-        getNewInterviews(recruiterNewPosition.getValueID());
+        iCRUDImpl.getJob(recruiterNewPosition.getValueID());
+        Job job = new Job();
+        if(job.getLastInterviewDate().before(now)){
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "You can't make new interview for this job right now!\n           Last interview date has passed");
+        } else {
+            getNewInterviews(recruiterNewPosition.getValueID());
+        }
     }//GEN-LAST:event_ButtonNewInterviewsActionPerformed
 
     private void ButtonStartEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonStartEditActionPerformed

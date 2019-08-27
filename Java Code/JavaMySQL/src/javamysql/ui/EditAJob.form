@@ -46,7 +46,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -94,13 +94,18 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="changeSeat" max="32767" attributes="0"/>
                               </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="LastInterviewDate" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="changeLastInterviewDate" min="-2" pref="100" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="282" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="ButtonAdd" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ButtonSave" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="ButtonDismiss" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -108,7 +113,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="53" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,16 +122,14 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" pref="50" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ID" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="changeID" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="Seat" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="changeSeat" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Seat" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="changeSeat" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Recruiter" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="changeRecruiter" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -141,8 +144,19 @@
                               <Component id="SubmissionDate" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="changeSubmissionDate" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="LastInterviewDate" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="changeLastInterviewDate" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="ID" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="changeID" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="StartDate" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                               <Component id="changeStartDate" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
@@ -159,12 +173,12 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="51" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="ButtonAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="ButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ButtonDismiss" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -191,7 +205,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeID.setEditable(false);&#xa;String intToStringID = Integer.toString(job.getId());&#xa;System.out.println(intToStringID);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="changeID.setEditable(false);&#xa;String intToStringID = Integer.toString(job.getId());"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="StartDate">
@@ -293,12 +307,12 @@
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String dateToStringSubmissionDate = dateFormatDate.format(job.getSubmissionDate());"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="ButtonAdd">
+        <Component class="javax.swing.JButton" name="ButtonSave">
           <Properties>
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonAddActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonSaveActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ButtonDismiss">
@@ -308,6 +322,21 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonDismissActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LastInterviewDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Last Interview Date"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="changeLastInterviewDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="dateToStringLastInterviewDate" type="code"/>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="String dateToStringLastInterviewDate = dateFormatDate.format(job.getLastInterviewDate());"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

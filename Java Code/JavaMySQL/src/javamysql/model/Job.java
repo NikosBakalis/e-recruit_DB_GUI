@@ -17,7 +17,7 @@ public class Job {
     private static String position, country, recruiter;
     private static int id, salary;
     private static Timestamp announceDate;
-    private static Date startDate, submissionDate;
+    private static Date startDate, submissionDate, lastInterviewDate;
 
     /**
      * @return the position
@@ -129,6 +129,20 @@ public class Job {
      */
     public void setStartDate(Date startDate) {
         Job.startDate = startDate;
+    }
+    
+    /**
+     * @return the lastInterviewDate
+     */
+    public Date getLastInterviewDate() {
+        return lastInterviewDate;
+    }
+
+    /**
+     * @param lastInterviewDate the lastInterviewDate to set
+     */
+    public void setLastInterviewDate(Date lastInterviewDate) {
+        Job.lastInterviewDate = lastInterviewDate;
     }
     
 }

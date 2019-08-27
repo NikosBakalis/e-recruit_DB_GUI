@@ -5,10 +5,13 @@
  */
 package javamysql.ui;
 
+import java.awt.Component;
+import javamysql.database.ICRUDImpl;
 import javamysql.helper.Controller;
 import javamysql.model.Candidate;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +19,7 @@ import javamysql.model.User;
  */
 public class Login extends javax.swing.JFrame {
     
+    ICRUDImpl iCRUDImpl = new ICRUDImpl();
     private final Controller controller;
 
     /**
@@ -106,6 +110,7 @@ public class Login extends javax.swing.JFrame {
         if(candidate != null && user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Candidate!");
+            iCRUDImpl.login(this.username.getText());
             CandidateUI candidateUI = new CandidateUI();
             candidateUI.setVisible(true);
             this.dispose();
@@ -114,6 +119,7 @@ public class Login extends javax.swing.JFrame {
         else if(recruiter != null && user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are a Recruiter!");
+            iCRUDImpl.login(this.username.getText());
             RecruiterUI recruiterUI = new RecruiterUI();
             recruiterUI.setVisible(true);
             this.dispose();
@@ -122,11 +128,14 @@ public class Login extends javax.swing.JFrame {
         else if(user != null) {
             System.out.println("You have Loged-In successfully!");
             System.out.println("You are the Admin!!!");
+            iCRUDImpl.login(this.username.getText());
             AdminUI adminUI = new AdminUI();
             adminUI.setVisible(true);
             this.dispose();
         } else {
-            System.err.println("Authentication Denied!");
+            // System.err.println("Authentication Denied!");
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "Authentication Denied!");
         }
 
     }//GEN-LAST:event_loginActionPerformed

@@ -26,9 +26,9 @@ public class EditAJob extends javax.swing.JFrame {
     
     DateFormat dateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
     
-    private static  String newPosition, newSeat;
+    private static  String newRecruiter, newPosition, newSeat;
     private static int newSalary;
-    private static java.util.Date newStartDate, newSubmissionDate;
+    private static java.util.Date newStartDate, newSubmissionDate, newLastInterviewDate;
     
     protected int stringToIntSalary;
     
@@ -69,8 +69,10 @@ public class EditAJob extends javax.swing.JFrame {
         changeAnnounceDate = new javax.swing.JTextField();
         SubmissionDate = new javax.swing.JLabel();
         changeSubmissionDate = new javax.swing.JTextField();
-        ButtonAdd = new javax.swing.JButton();
+        ButtonSave = new javax.swing.JButton();
         ButtonDismiss = new javax.swing.JButton();
+        LastInterviewDate = new javax.swing.JLabel();
+        changeLastInterviewDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,7 +84,6 @@ public class EditAJob extends javax.swing.JFrame {
 
         changeID.setEditable(false);
         String intToStringID = Integer.toString(job.getId());
-        System.out.println(intToStringID);
         changeID.setText(intToStringID);
 
         StartDate.setText("Start Date");
@@ -119,10 +120,10 @@ public class EditAJob extends javax.swing.JFrame {
         String dateToStringSubmissionDate = dateFormatDate.format(job.getSubmissionDate());
         changeSubmissionDate.setText(dateToStringSubmissionDate);
 
-        ButtonAdd.setText("Save");
-        ButtonAdd.addActionListener(new java.awt.event.ActionListener() {
+        ButtonSave.setText("Save");
+        ButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonAddActionPerformed(evt);
+                ButtonSaveActionPerformed(evt);
             }
         });
 
@@ -132,6 +133,11 @@ public class EditAJob extends javax.swing.JFrame {
                 ButtonDismissActionPerformed(evt);
             }
         });
+
+        LastInterviewDate.setText("Last Interview Date");
+
+        String dateToStringLastInterviewDate = dateFormatDate.format(job.getLastInterviewDate());
+        changeLastInterviewDate.setText(dateToStringLastInterviewDate);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -175,12 +181,16 @@ public class EditAJob extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(changeSeat))))
+                                .addComponent(changeSeat))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(LastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(changeLastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(282, 282, 282)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(ButtonAdd)
+                                .addComponent(ButtonSave)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(ButtonDismiss))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -191,15 +201,13 @@ public class EditAJob extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(changeID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(changeSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Seat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(changeSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Recruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeRecruiter, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -210,8 +218,17 @@ public class EditAJob extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(SubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(changeSubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(changeSubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(LastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(changeLastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(changeID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(StartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changeStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -223,11 +240,11 @@ public class EditAJob extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Position, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(changePosition, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonAdd)
+                    .addComponent(ButtonSave)
                     .addComponent(ButtonDismiss))
-                .addContainerGap())
+                .addGap(29, 29, 29))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -256,7 +273,7 @@ public class EditAJob extends javax.swing.JFrame {
         dateFormatDate.format(System.currentTimeMillis());
     }//GEN-LAST:event_ButtonDismissActionPerformed
 
-    private void ButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAddActionPerformed
+    private void ButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSaveActionPerformed
         try {
             newStartDate = dateFormatDate.parse(changeStartDate.getText());
         } catch (ParseException ex) {
@@ -268,6 +285,7 @@ public class EditAJob extends javax.swing.JFrame {
         newSalary = stringToIntSalary;
         newPosition = changePosition.getText();
         newSeat = changeSeat.getText();
+        setNewRecruiter(changeRecruiter.getText());
         try {
             newSubmissionDate = dateFormatDate.parse(changeSubmissionDate.getText());
         } catch (ParseException ex) {
@@ -275,10 +293,16 @@ public class EditAJob extends javax.swing.JFrame {
         }
         java.sql.Date sqlNewSubmissionDate = new java.sql.Date(newSubmissionDate.getTime());
         setNewSubmissionDate(sqlNewSubmissionDate);
-        //newSubmissionDate = changeSubmissionDate.getText();
+        try {
+            newLastInterviewDate = dateFormatDate.parse(changeLastInterviewDate.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(AddAJob.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        java.sql.Date sqlNewLastInterviewDate = new java.sql.Date(newLastInterviewDate.getTime());
+        setNewLastInterviewDate(sqlNewLastInterviewDate);
         iCRUDImpl.editAJob(job.getId());
         this.dispose();
-    }//GEN-LAST:event_ButtonAddActionPerformed
+    }//GEN-LAST:event_ButtonSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -317,9 +341,10 @@ public class EditAJob extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AnnounceDate;
-    private javax.swing.JButton ButtonAdd;
     private javax.swing.JButton ButtonDismiss;
+    private javax.swing.JButton ButtonSave;
     private javax.swing.JLabel ID;
+    private javax.swing.JLabel LastInterviewDate;
     private javax.swing.JLabel Position;
     private javax.swing.JLabel Recruiter;
     private javax.swing.JLabel Salary;
@@ -328,6 +353,7 @@ public class EditAJob extends javax.swing.JFrame {
     private javax.swing.JLabel SubmissionDate;
     private javax.swing.JTextField changeAnnounceDate;
     private javax.swing.JTextField changeID;
+    private javax.swing.JTextField changeLastInterviewDate;
     private javax.swing.JTextField changePosition;
     private javax.swing.JTextField changeRecruiter;
     private javax.swing.JTextField changeSalary;
@@ -338,6 +364,20 @@ public class EditAJob extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * @return the newRecruiter
+     */
+    public String getNewRecruiter() {
+        return newRecruiter;
+    }
+
+    /**
+     * @param newRecruiter the newRecruiter to set
+     */
+    public void setNewRecruiter(String newRecruiter) {
+        EditAJob.newRecruiter = newRecruiter;
+    }
+    
     /**
      * @return the newPosition
      */
@@ -420,5 +460,19 @@ public class EditAJob extends javax.swing.JFrame {
      */
     public void setChangeRecruiter(javax.swing.JTextField changeRecruiter) {
         this.changeRecruiter = changeRecruiter;
+    }
+    
+    /**
+     * @return the newLastInterviewDate
+     */
+    public java.util.Date getNewLastInterviewDate() {
+        return newLastInterviewDate;
+    }
+
+    /**
+     * @param newLastInterviewDate the newLastInterviewDate to set
+     */
+    public void setNewLastInterviewDate(java.util.Date newLastInterviewDate) {
+        EditAJob.newLastInterviewDate = newLastInterviewDate;
     }
 }

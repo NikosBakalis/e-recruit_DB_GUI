@@ -36,7 +36,7 @@ public class InterviewStart extends javax.swing.JFrame {
     
     private static Date newInterviewDate = new Date(System.currentTimeMillis());
     private static Time newStartingTime = new Time(System.currentTimeMillis());
-    private static Date newEndingTime/* = new Date(System.currentTimeMillis())*/;
+    private static Date newEndingTime;
     private static Time newDuration;
     
     protected long newDurationLong;
@@ -46,11 +46,6 @@ public class InterviewStart extends javax.swing.JFrame {
      */
     public InterviewStart() {
         initComponents();
-        //setNewInterviewDate(newInterviewDate);
-        //setNewStartingTime(newStartingTime);
-        //System.out.println(dateFormatDate.format(getNewInterviewDate()));
-        //System.out.println("Starting Time");
-        //System.out.println(dateFormatTime.format(getNewStartingTime().getTime()));
     }
 
     /**

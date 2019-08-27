@@ -6,10 +6,12 @@
 package javamysql.ui;
 
 // import com.mysql.jdbc.Connection;
+import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javamysql.database.ICRUDImpl;
+import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -233,11 +235,14 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         iCRUDImpl.getJob(getValueID());
         EditAJob editAJob = new EditAJob();
+        System.out.println("TEST 1");
         RecruiterUI recruiterUI = new RecruiterUI();
         if(recruiterUI.getChangeUsername().getText().equals(getValueRecruiter())){
             editAJob.setVisible(true);
         } else {
             System.err.println("Sorry this is not your job!!!");
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "Sorry this is not your job!");
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -250,6 +255,8 @@ public class RecruiterNewPosition extends javax.swing.JFrame {
             this.dispose();
         } else {
             System.err.println("Sorry this is not your job!!!");
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "Sorry this is not your job!");
         }
     }//GEN-LAST:event_ButtonInterviewActionPerformed
 

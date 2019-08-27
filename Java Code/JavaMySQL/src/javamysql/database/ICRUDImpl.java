@@ -19,9 +19,12 @@ import javamysql.model.AveragePersonalityScore;
 import javamysql.model.Candidate;
 import javamysql.model.Company;
 import javamysql.model.Evaluation;
+import javamysql.model.HasDegree;
 import javamysql.model.Interview;
 import javamysql.model.Job;
+import javamysql.model.Languages;
 import javamysql.model.Object;
+import javamysql.model.Project;
 import javamysql.model.Recruiter;
 import javamysql.model.Sectors;
 import javamysql.model.User;
@@ -30,11 +33,19 @@ import javamysql.ui.AdminCreateCandidate;
 import javamysql.ui.AdminCreateObject;
 import javamysql.ui.AdminCreateRecruiter;
 import javamysql.ui.AdminCreateSector;
+import javamysql.ui.CandidateAddANewDegree;
+import javamysql.ui.CandidateAddANewProject;
+import javamysql.ui.CandidateDegrees;
+import javamysql.ui.CandidateEditADegree;
+import javamysql.ui.CandidateEditAProject;
+import javamysql.ui.CandidateLanguages;
+import javamysql.ui.CandidateProject;
 import javamysql.ui.CandidateUI;
 import javamysql.ui.CompanyUI;
 import javamysql.ui.EditAJob;
 import javamysql.ui.InterviewEdit;
 import javamysql.ui.InterviewStart;
+import javamysql.ui.Login;
 import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
 
@@ -129,8 +140,8 @@ public class ICRUDImpl implements ICRUD {
     @Override
     public CandidateUI getCandidateUI(String username) {
         openConnection();
+        CandidateUI candidateUI = new CandidateUI();
         try{
-            CandidateUI candidateUI = new CandidateUI();
             Statement statement = getConnection().createStatement();
             String query1 = "UPDATE user SET password = '" + candidateUI.getNewPassword() + "', name = '" + candidateUI.getNewName() + "', surname = '" + candidateUI.getNewSurname() + "', email = '" + candidateUI.getNewEmail() + "' WHERE username = '" + username + "'";
             String query2 = "UPDATE candidate SET bio = '" + candidateUI.getNewBio() + "' WHERE username = '" + username + "'";
@@ -139,8 +150,18 @@ public class ICRUDImpl implements ICRUD {
             statement.executeBatch();
             return candidateUI;
         } catch (SQLException e) {
-            return null;
+            try {
+                Statement statement = getConnection().createStatement();
+                String query3 = "INSERT INTO history VALUES ('" + username + "', NOW(), 'FAIL', 'UPDATE', 'user')";
+                String query4 = "INSERT INTO history VALUES ('" + username + "', NOW(), 'FAIL', 'UPDATE', 'candidate')";
+                statement.addBatch(query3);
+                statement.addBatch(query4);
+                statement.executeBatch();
+            } catch (SQLException ex) {
+                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return candidateUI;
     }
     
     @Override
@@ -164,6 +185,7 @@ public class ICRUDImpl implements ICRUD {
                     job.setRecruiter(resultSet.getString("recruiter"));
                     job.setAnnounceDate(resultSet.getTimestamp("announce_date"));
                     job.setSubmissionDate(resultSet.getDate("submission_date"));
+                    job.setLastInterviewDate(resultSet.getDate("last_interview_date"));
                 }
             }
             resultSet.close();
@@ -194,6 +216,7 @@ public class ICRUDImpl implements ICRUD {
                     job.setRecruiter(resultSet.getString("recruiter"));
                     job.setAnnounceDate(resultSet.getTimestamp("announce_date"));
                     job.setSubmissionDate(resultSet.getDate("submission_date"));
+                    job.setLastInterviewDate(resultSet.getDate("last_interview_date")); 
                 }
             }
             resultSet.close();
@@ -266,8 +289,8 @@ public class ICRUDImpl implements ICRUD {
     @Override
     public RecruiterUI getRecruiterUI(String username) {
         openConnection();
+        RecruiterUI recruiterUI = new RecruiterUI();
         try{
-            RecruiterUI recruiterUI = new RecruiterUI();
             Statement statement = getConnection().createStatement();
             String query1 = "UPDATE user SET password = '" + recruiterUI.getNewPassword() + "', name = '" + recruiterUI.getNewName() + "', surname = '" + recruiterUI.getNewSurname() + "', email = '" + recruiterUI.getNewEmail() + "' WHERE username = '" + username + "'";
             String query2 = "UPDATE recruiter SET exp_years = '" + recruiterUI.getNewExperienceYears()+ "' WHERE username = '" + username + "'";
@@ -276,23 +299,42 @@ public class ICRUDImpl implements ICRUD {
             statement.executeBatch();
             return recruiterUI;
         } catch (SQLException e) {
-            return null;
+            try {
+                Statement statement = getConnection().createStatement();
+                String query3 = "INSERT INTO history VALUES ('" + username + "', NOW(), 'FAIL', 'UPDATE', 'user')";
+                String query4 = "INSERT INTO history VALUES ('" + username + "', NOW(), 'FAIL', 'UPDATE', 'recruiter')";
+                statement.addBatch(query3);
+                statement.addBatch(query4);
+                statement.executeBatch();
+            } catch (SQLException ex) {
+                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return recruiterUI;
     }
     
     @Override
     public CompanyUI getCompanyUI(int AFM) {
         openConnection();
+        CompanyUI companyUI = new CompanyUI();
         try{
-            CompanyUI companyUI = new CompanyUI();
             Statement statement = getConnection().createStatement();
             String query = "UPDATE etaireia SET tel = " + companyUI.getNewTelephone() + ", street = '" + companyUI.getNewStreet()+ "', num = " + companyUI.getNewNumber() + ", city = '" + companyUI.getNewCity()+ "', country = '" + companyUI.getNewCountry() + "' WHERE AFM = " + AFM + "";
             statement.addBatch(query);
             statement.executeBatch();
             return companyUI;
         } catch (SQLException e) {
-            return null;
+            try {
+                RecruiterUI recruiterUI = new RecruiterUI();
+                Statement statement = getConnection().createStatement();
+                String query3 = "INSERT INTO history VALUES ('" + recruiterUI.getNewUsername() + "', NOW(), 'FAIL', 'UPDATE', 'etaireia')";
+                statement.addBatch(query3);
+                statement.executeBatch();
+            } catch (SQLException ex) {
+                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return companyUI;
     }
     
     /* ΕΔΩ ΝΑ ΕΡΘΕΙ Ο ΚΩΔΙΚΑ ΑΠΟ ΤΟ RecruiterNewPosition ΑΦΟΥ ΦΤΙΑΞΩ GETTER / SETTER ΓΙΑ ΤΟ TableJob */
@@ -320,48 +362,72 @@ public class ICRUDImpl implements ICRUD {
     @Override
     public AddAJob newJob(int ID, String recruiter){
         openConnection();
+        AddAJob addAJob = new AddAJob();
         try{
-            AddAJob addAJob = new AddAJob();
             Statement statement = getConnection().createStatement();
-            String query1 = "INSERT INTO job VALUES ('" + ID + "', '" + addAJob.getNewStartDate() + "', '" + addAJob.getNewSalary() + "', '" + addAJob.getNewPosition() + "', '" + addAJob.getNewSeat() + "', '" + recruiter + "', '" + addAJob.getNewAnnounceDate() + "', '" + addAJob.getNewSubmissionDate() + "')";
+            String query1 = "INSERT INTO job VALUES ('" + ID + "', '" + addAJob.getNewStartDate() + "', '" + addAJob.getNewSalary() + "', '" + addAJob.getNewPosition() + "', '" + addAJob.getNewSeat() + "', '" + recruiter + "', '" + addAJob.getNewAnnounceDate() + "', '" + addAJob.getNewSubmissionDate() + "', '" + addAJob.getNewLastInterviewDate() + "')";
             String query2 = "INSERT INTO requires VALUES ('" + ID + "', '" + addAJob.getNewRequires() + "')";
             statement.addBatch(query1);
             statement.addBatch(query2);
             statement.executeBatch();
             return addAJob;
         } catch (SQLException e) {
-            return null;
+            try {
+                Statement statement = getConnection().createStatement();
+                String query3 = "INSERT INTO history VALUES ('" + recruiter + "', NOW(), 'FAIL', 'INSERT', 'job')";
+                statement.addBatch(query3);
+                statement.executeBatch();
+            } catch (SQLException ex) {
+                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return addAJob;
     }
     
     @Override
     public Job delJob(int job_ID, String username){
         openConnection();
+        Job job = new Job();
         try{
-            Job job = new Job();
             Statement statement = getConnection().createStatement();
             String query = "DELETE FROM job WHERE recruiter = '" + username + "' AND id =  " + job_ID + "";
             statement.addBatch(query);
             statement.executeBatch();
             return job;
         } catch (SQLException e) {
-            return null;
+            try {
+                Statement statement = getConnection().createStatement();
+                String query3 = "INSERT INTO history VALUES ('" + username + "', NOW(), 'FAIL', 'DELETE', 'job')";
+                statement.addBatch(query3);
+                statement.executeBatch();
+            } catch (SQLException ex) {
+                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return job;
     }
     
     @Override
     public EditAJob editAJob(int ID){
         openConnection();
+        EditAJob editAJob = new EditAJob();
         try{
-            EditAJob editAJob = new EditAJob();
             Statement statement = getConnection().createStatement();
-            String query = "UPDATE job SET start_date = '" + editAJob.getNewStartDate() + "', salary = '" + editAJob.getNewSalary() + "', position = '" + editAJob.getNewPosition() + "', edra = '" + editAJob.getNewSeat() + "', submission_date = '" + editAJob.getNewSubmissionDate() + "' WHERE id = '" + ID + "'";
+            String query = "UPDATE job SET start_date = '" + editAJob.getNewStartDate() + "', salary = '" + editAJob.getNewSalary() + "', position = '" + editAJob.getNewPosition() + "', edra = '" + editAJob.getNewSeat() + "', submission_date = '" + editAJob.getNewSubmissionDate() + "', last_interview_date = '" + editAJob.getNewLastInterviewDate() + "' WHERE id = '" + ID + "'";
             statement.addBatch(query);
             statement.executeBatch();
             return editAJob;
         } catch (SQLException e) {
-            return null;
+            try {
+                Statement statement = getConnection().createStatement();
+                String query3 = "INSERT INTO history VALUES ('" + editAJob.getNewRecruiter() + "', NOW(), 'FAIL', 'UPDATE', 'job')";
+                statement.addBatch(query3);
+                statement.executeBatch();
+            } catch (SQLException ex) {
+                Logger.getLogger(ICRUDImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        return editAJob;
     }
     
     @Override
@@ -509,7 +575,7 @@ public class ICRUDImpl implements ICRUD {
                     averagePersonalityScore.setCandidateUsername(resultSet.getString("candidate_username"));
                     averagePersonalityScore.setJobID(resultSet.getInt("job_id"));
                     averagePersonalityScore.setPersonalityScore(resultSet.getInt("per_sc"));
-                    averagePersonalityScore.setAveragePersonalityScore(resultSet.getDouble("Average Personality Score"));
+                    averagePersonalityScore.setAveragePersonalityScore(resultSet.getDouble("Average Personality Score")); // TO SEE
                 }
             }
             resultSet.close();
@@ -597,10 +663,6 @@ public class ICRUDImpl implements ICRUD {
         try{
             AdminCreateSector adminCreateSector = new AdminCreateSector();
             Statement statement = getConnection().createStatement();
-            System.out.println(adminCreateSector.getNewCompanysAFM());
-            System.out.println(adminCreateSector.getNewTitle());
-            System.out.println(adminCreateSector.getNewDescription());
-            System.out.println(adminCreateSector.getNewBelongsTo());
             String query1 = "INSERT INTO sectors VALUES ('" + adminCreateSector.getNewCompanysAFM() + "', '" + adminCreateSector.getNewTitle() + "')";
             String query2 = "INSERT INTO sectors_levels VALUES ('" + adminCreateSector.getNewTitle() + "', '" + adminCreateSector.getNewDescription() + "', '" + adminCreateSector.getNewBelongsTo() + "')";
             statement.addBatch(query1);
@@ -676,6 +738,204 @@ public class ICRUDImpl implements ICRUD {
         }
         return evaluation;
     }
+    
+    @Override
+    public Login login(String username) {
+        openConnection();
+        try{
+            Login login = new Login();
+            Statement statement = getConnection().createStatement();
+            String query1 = "INSERT INTO login VALUES ('" + username + "', NOW())";
+            statement.addBatch(query1);
+            statement.executeBatch();
+            return login;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Languages getLanguages(String candidateUsername){
+        openConnection();
+        try {
+            String query = "SELECT * FROM languages WHERE candid = '" + candidateUsername + "'";
+            ResultSet resultSet;
+            Languages languages;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                languages = null;
+                
+                while(resultSet.next()) {
+                    languages = new Languages();
+                    languages.setCandidateUsername(resultSet.getString(1));
+                    languages.setLanguages(resultSet.getString(2));
+                }
+            }
+            resultSet.close();
+            return languages;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateLanguages newCandidateLanguages(String candidateUsername) {
+        openConnection();
+        try{
+            CandidateLanguages candidateLanguages = new CandidateLanguages();
+            Statement statement = getConnection().createStatement();
+            String query1 = "DELETE FROM languages WHERE candid = '" + candidateUsername + "'";
+            String query2 = "INSERT INTO languages VALUES ('" + candidateUsername + "', '" + candidateLanguages.getLanguagesCombinations()+ "')";
+            statement.addBatch(query1);
+            statement.addBatch(query2);
+            statement.executeBatch();
+            return candidateLanguages;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public Project getProject(String candidateUsername, int numberOfProject){
+        openConnection();
+        try {
+            String query = "SELECT * FROM project WHERE candid = '" + candidateUsername + "' AND num = '" + numberOfProject + "'";
+            ResultSet resultSet;
+            Project project;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                project = null;
+                
+                while(resultSet.next()) {
+                    project = new Project();
+                    project.setCandidateUsername(resultSet.getString(1));
+                    project.setNumber(resultSet.getInt(2));
+                    project.setDesciption(resultSet.getString(3));
+                    project.setUrl(resultSet.getString(4));
+                }
+            }
+            resultSet.close();
+            return project;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateProject delCandidateProject(String candidateUsername, int numberOfProject) {
+        openConnection();
+        try{
+            CandidateProject candidateProject = new CandidateProject();
+            Statement statement = getConnection().createStatement();
+            String query = "DELETE FROM project WHERE candid = '" + candidateUsername + "' AND num = '" + numberOfProject + "'";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return candidateProject;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateAddANewProject candidateAddANewProject() {
+        openConnection();
+        try{
+            CandidateAddANewProject candidateAddANewProject = new CandidateAddANewProject();
+            Statement statement = getConnection().createStatement();
+            String query = "INSERT INTO project VALUES('" + candidateAddANewProject.getNewCandidateUsername() + "', '" + candidateAddANewProject.getNewNumber() + "', '" + candidateAddANewProject.getNewDescription() + "', '" + candidateAddANewProject.getNewURL() + "')";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return candidateAddANewProject;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateEditAProject candidateEditAProject(String candidateUsername, int numberOfProject) {
+        openConnection();
+        try{
+            CandidateEditAProject candidateEditAProject = new CandidateEditAProject();
+            Statement statement = getConnection().createStatement();
+            String query = "UPDATE project SET descr = '" + candidateEditAProject.getNewDescription() + "', url = '" + candidateEditAProject.getNewURL() + "' WHERE candid = '" + candidateUsername + "' AND num = '" + numberOfProject + "'";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return candidateEditAProject;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public HasDegree hasDegree(String title, String institution, String candidateUsername){
+        openConnection();
+        try {
+            String query = "SELECT * FROM has_degree WHERE degr_title = '" + title + "' AND degr_idryma = '" + institution + "' AND cand_usrname = '" + candidateUsername + "'";
+            ResultSet resultSet;
+            HasDegree hasDegree;
+            try (PreparedStatement preparedStatement = this.getConnection().prepareStatement(query)) {
+                resultSet = preparedStatement.executeQuery();
+                hasDegree = null;
+                while(resultSet.next()) {
+                    hasDegree = new HasDegree();
+                    hasDegree.setTitle(resultSet.getString(1));
+                    hasDegree.setInsitution(resultSet.getString(2));
+                    hasDegree.setCandidateUsername(resultSet.getString(3));
+                    hasDegree.setYear(resultSet.getDate(4));
+                    hasDegree.setGrade(resultSet.getDouble(5));
+                }
+            }
+            resultSet.close();
+            return hasDegree;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateDegrees delCandidateDegrees(String title, String institution, String candidateUsername) {
+        openConnection();
+        try{
+            CandidateDegrees candidateDegrees = new CandidateDegrees();
+            Statement statement = getConnection().createStatement();
+            String query = "DELETE FROM has_degree WHERE degr_title = '" + title + "' AND degr_idryma = '" + institution + "' AND cand_usrname = '" + candidateUsername + "'";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return candidateDegrees;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateEditADegree candidateEditADegree(String title, String institution, String candidateUsername) {
+        openConnection();
+        try{
+            CandidateEditADegree candidateEditADegree = new CandidateEditADegree();
+            Statement statement = getConnection().createStatement();
+            String query = "UPDATE has_degree SET etos = '" + candidateEditADegree.getIntNewYear()+ "', grade = '" + candidateEditADegree.getNewGrade() + "' WHERE degr_title = '" + title + "' AND degr_idryma = '" + institution + "' AND cand_usrname = '" + candidateUsername + "'";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return candidateEditADegree;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public CandidateAddANewDegree candidateAddANewDegree(String candidateUsername) {
+        openConnection();
+        try{
+            CandidateAddANewDegree candidateAddANewDegree = new CandidateAddANewDegree();
+            Statement statement = getConnection().createStatement();
+            String query = "INSERT INTO has_degree VALUES('" + candidateAddANewDegree.getNewTitle() + "', '" + candidateAddANewDegree.getNewInstitution()+ "', '" + candidateUsername + "', '" + candidateAddANewDegree.getNewYear() + "', '" + candidateAddANewDegree.getNewGrade() + "')";
+            statement.addBatch(query);
+            statement.executeBatch();
+            return candidateAddANewDegree;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 
     public void openConnection() {
         try {
@@ -687,24 +947,44 @@ public class ICRUDImpl implements ICRUD {
         }
     }
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public String getCountJob(){
         openConnection();
-        int count = 0;
+        int jobID = 0;
         String intToStringCount = null;
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM job");
+            ResultSet resultSet = statement.executeQuery("SELECT id FROM job ORDER BY id ASC;");
             while(resultSet.next()){
-                count = resultSet.getInt(1);
+                jobID = resultSet.getInt("id");
             }
-            intToStringCount = Integer.toString(count);
+            intToStringCount = Integer.toString(jobID);
             return intToStringCount;
         } catch (SQLException e) {
             System.err.println("Error: " + e.getMessage());
         }
         return intToStringCount;
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public String getProjectNumber(String candidateUsername){
+        openConnection();
+        int projectNumber = 0;
+        String intToStringProjectNumber = null;
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT num FROM project WHERE candid = '" + candidateUsername + "' ORDER BY num ASC;");
+            while(resultSet.next()){
+                projectNumber = resultSet.getInt("num");
+            }
+            intToStringProjectNumber = Integer.toString(projectNumber);
+            return intToStringProjectNumber;
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+        return intToStringProjectNumber;
+    }
+    
     /**
      * @return the DLM
      */

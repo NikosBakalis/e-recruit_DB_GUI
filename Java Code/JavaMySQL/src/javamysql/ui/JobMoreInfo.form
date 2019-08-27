@@ -62,9 +62,9 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="TextJobID" min="-2" pref="120" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="CompanyName" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <Component id="LastInterviewDate" min="-2" pref="130" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="TextCompanyName" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="TextLastInterviewDate" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -101,21 +101,13 @@
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                                           <Component id="TextResults" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="Results" min="-2" pref="100" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="Results" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -134,8 +126,8 @@
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="CompanyName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="TextCompanyName" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="LastInterviewDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="TextLastInterviewDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="JobID" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -165,7 +157,6 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="TextAnnounceDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="AnnounceDate" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -193,10 +184,13 @@
               <Connection code="job.getPosition()" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="PositionAncestorAdded"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="CompanyName">
+        <Component class="javax.swing.JLabel" name="LastInterviewDate">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Company Name"/>
+            <Property name="text" type="java.lang.String" value="Last Interview Date"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Seat">
@@ -204,14 +198,17 @@
             <Property name="text" type="java.lang.String" value="Seat"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="TextCompanyName">
+        <Component class="javax.swing.JTextField" name="TextLastInterviewDate">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;MAKE IT WORK&quot;" type="code"/>
+              <Connection code="dateToStringLastInterviewDate" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextLastInterviewDateAncestorAdded"/>
+          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextCompanyName.setEditable(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextLastInterviewDate.setEditable(false);"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="TextSeat">
@@ -220,6 +217,9 @@
               <Connection code="job.getCountry()" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextSeatAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// System.out.println(job.getCountry());"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextSeat.setEditable(false);"/>
@@ -236,6 +236,9 @@
               <Connection code="job.getRecruiter()" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextRecruiterAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="// System.out.println(job.getCountry());"/>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextRecruiter.setEditable(false);"/>
@@ -252,6 +255,9 @@
               <Connection code="intToStringSalary" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextSalaryAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextSalary.setEditable(false);"/>
           </AuxValues>
@@ -267,6 +273,9 @@
               <Connection code="timestampToStringAnnounceDate" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextAnnounceDateAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextAnnounceDate.setEditable(false);"/>
           </AuxValues>
@@ -282,6 +291,9 @@
               <Connection code="dateToStringSubmissionDate" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextSubmissionDateAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextSubmissionDate.setEditable(false);"/>
           </AuxValues>
@@ -297,6 +309,9 @@
               <Connection code="dateToStringStartDate" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextStartDateAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextStartDate.setEditable(false);"/>
           </AuxValues>
@@ -312,6 +327,9 @@
               <Connection code="intToStringID" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextJobIDAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextJobID.setEditable(false);"/>
           </AuxValues>
@@ -328,17 +346,12 @@
               <Connection code="&quot;Your Ranking is &quot; + iCRUDImpl.getMyPlacement() + &quot; out of &quot; + iCRUDImpl.getAllCandidates() + &quot; candidates&quot;" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="TextResultsAncestorAdded"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TextResults.setEditable(false);"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jButton1"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

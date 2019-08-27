@@ -5,19 +5,15 @@
  */
 package javamysql.ui;
 
-// import javamysql.helper.Controller;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.Component;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javamysql.database.ICRUDImpl;
 import javamysql.model.Company;
 import javamysql.model.Evaluation;
 import javamysql.model.Job;
-import net.proteanit.sql.DbUtils;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,37 +27,24 @@ public class JobMoreInfo extends javax.swing.JFrame {
     Company company = new Company();
     Evaluation evaluation = new Evaluation();
     
-    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    DateFormat dateFormatDate = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat dateFormatTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    DateFormat dateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
     
     String intToStringSalary = null;
     String timestampToStringAnnounceDate;
     String dateToStringSubmissionDate;
     String intToStringID = null;
     String dateToStringStartDate;
+    String dateToStringLastInterviewDate;
+    
+    Date now = new Date(System.currentTimeMillis());
 
     /**
      * Creates new form JobMoreInfo
      */
     public JobMoreInfo() {
         initComponents();
-        iCRUDImpl.evaluation(job.getId());
         iCRUDImpl.getJob(candidateAppliesNew.getValueID());
-        Position.setText(job.getPosition());
-        TextSeat.setText(job.getCountry());
-        TextRecruiter.setText(job.getRecruiter());
-        intToStringSalary = Integer.toString(job.getSalary());
-        TextSalary.setText(intToStringSalary);
-        timestampToStringAnnounceDate = dateFormatTimestamp.format(job.getAnnounceDate());
-        TextAnnounceDate.setText(timestampToStringAnnounceDate);
-        dateToStringSubmissionDate = dateFormatDate.format(job.getSubmissionDate());
-        TextSubmissionDate.setText(dateToStringSubmissionDate);
-        intToStringID = Integer.toString(job.getId());
-        TextJobID.setText(intToStringID);
-        dateToStringStartDate = dateFormatDate.format(job.getStartDate());
-        TextStartDate.setText(dateToStringStartDate);
-        iCRUDImpl.evaluation(job.getId());
-        TextResults.setText("Your ranking is " + iCRUDImpl.getMyPlacement() + " out of " + iCRUDImpl.getAllCandidates() + " candidates");
     }
 
     /**
@@ -75,9 +58,9 @@ public class JobMoreInfo extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Position = new javax.swing.JLabel();
-        CompanyName = new javax.swing.JLabel();
+        LastInterviewDate = new javax.swing.JLabel();
         Seat = new javax.swing.JLabel();
-        TextCompanyName = new javax.swing.JTextField();
+        TextLastInterviewDate = new javax.swing.JTextField();
         TextSeat = new javax.swing.JTextField();
         Recruiter = new javax.swing.JLabel();
         TextRecruiter = new javax.swing.JTextField();
@@ -93,7 +76,6 @@ public class JobMoreInfo extends javax.swing.JFrame {
         TextJobID = new javax.swing.JTextField();
         Results = new javax.swing.JLabel();
         TextResults = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -101,59 +83,142 @@ public class JobMoreInfo extends javax.swing.JFrame {
         Position.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
         Position.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Position.setText(job.getPosition());
+        Position.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                PositionAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
-        CompanyName.setText("Company Name");
+        LastInterviewDate.setText("Last Interview Date");
 
         Seat.setText("Seat");
 
-        TextCompanyName.setEditable(false);
-        TextCompanyName.setText("MAKE IT WORK");
+        TextLastInterviewDate.setEditable(false);
+        TextLastInterviewDate.setText(dateToStringLastInterviewDate);
+        TextLastInterviewDate.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextLastInterviewDateAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         TextSeat.setEditable(false);
         TextSeat.setText(job.getCountry());
         // System.out.println(job.getCountry());
+        TextSeat.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextSeatAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         Recruiter.setText("Recruiter");
 
         TextRecruiter.setEditable(false);
         TextRecruiter.setText(job.getRecruiter());
         // System.out.println(job.getCountry());
+        TextRecruiter.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextRecruiterAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         Salary.setText("Salary");
 
         TextSalary.setEditable(false);
         TextSalary.setText(intToStringSalary);
+        TextSalary.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextSalaryAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         AnnounceDate.setText("Announce Date");
 
         TextAnnounceDate.setEditable(false);
         TextAnnounceDate.setText(timestampToStringAnnounceDate);
+        TextAnnounceDate.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextAnnounceDateAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         SubmissionDate.setText("Submission Date");
 
         TextSubmissionDate.setEditable(false);
         TextSubmissionDate.setText(dateToStringSubmissionDate);
+        TextSubmissionDate.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextSubmissionDateAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         StartDate.setText("Start Date");
 
         TextStartDate.setEditable(false);
         TextStartDate.setText(dateToStringStartDate);
+        TextStartDate.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextStartDateAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         JobID.setText("Job ID");
 
         TextJobID.setEditable(false);
         TextJobID.setText(intToStringID);
+        TextJobID.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextJobIDAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         Results.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Results.setText("Results");
 
         TextResults.setEditable(false);
         TextResults.setText("Your Ranking is " + iCRUDImpl.getMyPlacement() + " out of " + iCRUDImpl.getAllCandidates() + " candidates");
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        TextResults.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                TextResultsAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -175,9 +240,9 @@ public class JobMoreInfo extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(TextJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(TextCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(TextLastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -206,17 +271,12 @@ public class JobMoreInfo extends javax.swing.JFrame {
                                         .addComponent(TextSeat, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(101, 101, 101)
+                                        .addGap(71, 71, 71)
                                         .addComponent(TextResults))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(74, 74, 74))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jButton1)
-                                                .addGap(75, 75, 75)))))))))
+                                        .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(93, 93, 93)))))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -227,8 +287,8 @@ public class JobMoreInfo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TextCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(LastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TextLastInterviewDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(JobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(TextJobID, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -250,8 +310,7 @@ public class JobMoreInfo extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TextAnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(AnnounceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SubmissionDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,12 +343,56 @@ public class JobMoreInfo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //if(evaluation.getCandidateUsername().equals("cleogeo")){
-            // TextResults.setText(evaluation.getMessage());
-           // System.out.println(evaluation.getPlace());
-        //}
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void TextResultsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextResultsAncestorAdded
+        if(job.getLastInterviewDate().before(now)){
+            iCRUDImpl.evaluation(job.getId());
+            TextResults.setText("Your ranking is " + iCRUDImpl.getMyPlacement() + " out of " + iCRUDImpl.getAllCandidates() + " candidates");
+        } else {
+            TextResults.setText("Results still in progress...");
+        }
+    }//GEN-LAST:event_TextResultsAncestorAdded
+
+    private void TextLastInterviewDateAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextLastInterviewDateAncestorAdded
+        dateToStringLastInterviewDate = dateFormatDate.format(job.getLastInterviewDate());
+        TextLastInterviewDate.setText(dateToStringLastInterviewDate);
+    }//GEN-LAST:event_TextLastInterviewDateAncestorAdded
+
+    private void TextStartDateAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextStartDateAncestorAdded
+        dateToStringStartDate = dateFormatDate.format(job.getStartDate());
+        TextStartDate.setText(dateToStringStartDate);
+    }//GEN-LAST:event_TextStartDateAncestorAdded
+
+    private void TextSubmissionDateAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextSubmissionDateAncestorAdded
+        dateToStringSubmissionDate = dateFormatDate.format(job.getSubmissionDate());
+        TextSubmissionDate.setText(dateToStringSubmissionDate);
+    }//GEN-LAST:event_TextSubmissionDateAncestorAdded
+
+    private void TextAnnounceDateAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextAnnounceDateAncestorAdded
+        timestampToStringAnnounceDate = dateFormatTimestamp.format(job.getAnnounceDate());
+        TextAnnounceDate.setText(timestampToStringAnnounceDate);
+    }//GEN-LAST:event_TextAnnounceDateAncestorAdded
+
+    private void TextSalaryAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextSalaryAncestorAdded
+        intToStringSalary = Integer.toString(job.getSalary());
+        TextSalary.setText(intToStringSalary);
+    }//GEN-LAST:event_TextSalaryAncestorAdded
+
+    private void TextRecruiterAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextRecruiterAncestorAdded
+        TextRecruiter.setText(job.getRecruiter());
+    }//GEN-LAST:event_TextRecruiterAncestorAdded
+
+    private void TextSeatAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextSeatAncestorAdded
+        TextSeat.setText(job.getCountry());
+    }//GEN-LAST:event_TextSeatAncestorAdded
+
+    private void TextJobIDAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_TextJobIDAncestorAdded
+        intToStringID = Integer.toString(job.getId());
+        TextJobID.setText(intToStringID);
+    }//GEN-LAST:event_TextJobIDAncestorAdded
+
+    private void PositionAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_PositionAncestorAdded
+        Position.setText(job.getPosition());
+    }//GEN-LAST:event_PositionAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -329,8 +432,8 @@ public class JobMoreInfo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AnnounceDate;
-    private javax.swing.JLabel CompanyName;
     private javax.swing.JLabel JobID;
+    private javax.swing.JLabel LastInterviewDate;
     private javax.swing.JLabel Position;
     private javax.swing.JLabel Recruiter;
     private javax.swing.JLabel Results;
@@ -339,15 +442,14 @@ public class JobMoreInfo extends javax.swing.JFrame {
     private javax.swing.JLabel StartDate;
     private javax.swing.JLabel SubmissionDate;
     private javax.swing.JTextField TextAnnounceDate;
-    private javax.swing.JTextField TextCompanyName;
     private javax.swing.JTextField TextJobID;
+    private javax.swing.JTextField TextLastInterviewDate;
     private javax.swing.JTextField TextRecruiter;
     private javax.swing.JTextField TextResults;
     private javax.swing.JTextField TextSalary;
     private javax.swing.JTextField TextSeat;
     private javax.swing.JTextField TextStartDate;
     private javax.swing.JTextField TextSubmissionDate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
