@@ -58,13 +58,6 @@
                   </Group>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
-                          <Component id="Title" min="-2" pref="215" max="-2" attributes="0"/>
-                          <EmptySpace pref="200" max="32767" attributes="0"/>
-                          <Component id="Logout" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="changeUsername" max="32767" attributes="0"/>
@@ -85,12 +78,24 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
-                          <Component id="EditAndSave" min="-2" pref="66" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
-                          <Component id="JobApplies" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="175" max="-2" attributes="0"/>
+                                  <Component id="Title" min="-2" pref="215" max="-2" attributes="0"/>
+                                  <EmptySpace pref="200" max="32767" attributes="0"/>
+                                  <Component id="Logout" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
+                                  <Component id="EditAndSave" min="-2" pref="66" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                                  <Component id="JobApplies" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="ButtonMoreInfo" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -104,43 +109,51 @@
                       <Component id="Title" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="Logout" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Username" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="Bio" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="changeUsername" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="Username" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="Bio" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="changeUsername" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Password" pref="40" max="32767" attributes="0"/>
-                              <Component id="changePassword" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="Password" pref="40" max="32767" attributes="0"/>
+                                      <Component id="changePassword" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Name" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="changeName" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Surname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="changeSurname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="Email" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                      <Component id="changeEmail" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jScrollPane2" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Name" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="changeName" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Surname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="changeSurname" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="Email" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="changeEmail" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="20" pref="63" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="JobApplies" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="EditAndSave" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="ButtonMoreInfo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace type="separate" pref="20" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="JobApplies" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="EditAndSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -275,6 +288,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JobAppliesActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="ButtonMoreInfo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="More Info"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ButtonMoreInfoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
