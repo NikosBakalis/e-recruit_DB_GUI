@@ -140,7 +140,7 @@ PRIMARY KEY (candid, lang),
 CONSTRAINT CAND_LANG FOREIGN KEY (candid) REFERENCES candidate(username) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
-insert into languages (candid, lang) values 
+insert into languages (candid, lang) values
 ('cleogeo', 'EN,SP,GR'),
 ('zazahir23', 'GR,EN'),
 ('lionarF', 'EN,FR'),
@@ -239,24 +239,25 @@ edra VARCHAR(45),
 recruiter VARCHAR(12) NOT NULL,
 announce_date DATETIME DEFAULT NOW(),
 submission_date DATE NOT NULL,
+last_interview_date DATE NOT NULL,
 PRIMARY KEY (id),
 CONSTRAINT JOB_RECR FOREIGN KEY (recruiter) REFERENCES recruiter(username) ON DELETE CASCADE ON UPDATE CASCADE
 )engine=InnoDB;
 
-insert into job (start_date, salary, position, edra, recruiter, announce_date, submission_date) values 
-('2019-01-01', 1800, 'data analyst', 'Patra, Greece', 'n_tri', '2018-07-13', '2018-12-20'),
-('2019-02-01', 1450, 'web programmer', 'Patra, Greece', 'n_tri', '2018-07-13', '2019-01-10'),
-('2019-02-01', 2100, 'mobile app developer', 'Patra, Greece', 'n_tri', '2018-10-24', '2018-01-12'),
-('2018-12-25', 2700, 'NLP expert', 'Peiraias, Greece', 'msmith', '2018-10-10', '2018-11-10'),
-('2019-03-01', 2100, 'Graphics designer', 'Peiraias, Greece', 'msmith', '2018-10-10', '2019-02-01'),
-('2019-03-01', 2100, 'Graphics designer TEST', 'Peiraias, Greece', 'msmith', '2018-10-10', '2019-02-01'),
-('2019-03-01', 2300, 'Visualization expert', 'Peiraias, Greece','Giankost', '2018-10-20', '2019-01-10'),
-('2019-05-01', 1850, 'web and mobile app programmer', 'Athina, Greece','papad', '2018-11-20', '2019-04-12'),
-('2019-05-01', 1600, 'graphics expert', 'Athina, Greece','bettyg', '2018-11-20', '2019-04-12'),
-('2019-05-01', 1850, 'DB expert', 'Athina, Greece','papad', '2018-11-20', '2019-04-12'),
-('2019-04-01', 2100, 'AI expert', 'Sofia, Bulgaria', 'pavkie', '2018-11-21', '2019-03-10'),
-('2019-02-01', 2600, 'Algorithmic efficiency expert', 'Sofia, Bulgaria', 'pavkie', '2018-11-01', '2019-01-16'),
-('2019-03-01', 2800, 'web and media programmer', 'Oxford, London', 'varcon82', '2018-11-01', '2019-01-03')
+insert into job (start_date, salary, position, edra, recruiter, announce_date, submission_date, last_interview_date) values
+('2019-01-01', 1800, 'data analyst', 'Patra, Greece', 'n_tri', '2018-07-13', '2018-12-20', '2018-12-25'),
+('2019-02-01', 1450, 'web programmer', 'Patra, Greece', 'n_tri', '2018-07-13', '2019-01-10', '2019-01-15'),
+('2019-02-01', 2100, 'mobile app developer', 'Patra, Greece', 'n_tri', '2018-10-24', '2018-01-12', '2018-01-17'),
+('2018-12-25', 2700, 'NLP expert', 'Peiraias, Greece', 'msmith', '2018-10-10', '2018-11-10', '2018-11-15'),
+('2019-03-01', 2100, 'Graphics designer', 'Peiraias, Greece', 'msmith', '2018-10-10', '2019-02-01', '2019-02-06'),
+('2019-03-01', 2100, 'Graphics designer TEST', 'Peiraias, Greece', 'msmith', '2018-10-10', '2019-02-01', '2019-02-06'),
+('2019-03-01', 2300, 'Visualization expert', 'Peiraias, Greece','Giankost', '2018-10-20', '2019-01-10', '2019-01-15'),
+('2019-05-01', 1850, 'web and mobile app programmer', 'Athina, Greece','papad', '2018-11-20', '2019-04-12', '2019-04-17'),
+('2019-05-01', 1600, 'graphics expert', 'Athina, Greece','bettyg', '2018-11-20', '2019-04-12', '2019-04-17'),
+('2019-05-01', 1850, 'DB expert', 'Athina, Greece','papad', '2018-11-20', '2019-04-12', '2019-04-17'),
+('2019-04-01', 2100, 'AI expert', 'Sofia, Bulgaria', 'pavkie', '2018-11-21', '2019-03-10', '2019-03-15'),
+('2019-02-01', 2600, 'Algorithmic efficiency expert', 'Sofia, Bulgaria', 'pavkie', '2018-11-01', '2019-01-16', '2019-01-21'),
+('2019-03-01', 2800, 'web and media programmer', 'Oxford, London', 'varcon82', '2018-11-01', '2019-01-03', '2019-01-08')
 ;
 
 
@@ -293,7 +294,7 @@ insert into requires (job_id, antikeim_title) values
 (12, 'Web Programming'),
 (12, 'Mobile Apps'),
 (12, 'Animation'),
-(13, 'Something')
+(13, 'Animation')
 ;
 
 CREATE TABLE applies (
@@ -341,8 +342,8 @@ interview_date DATE NOT NULL,
 starting_time TIME NOT NULL,
 duration TIME NOT NULL,
 comments VARCHAR(35),
-edu_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
-xp_sc ENUM('0', '1', '2', '3', '4', '5') NOT NULL,
+edu_sc int(4) NOT NULL,
+xp_sc int(4) NOT NULL,
 PRIMARY KEY (recruiter_username, candidate_username, job_id),
 CONSTRAINT INTERVIEW_RECRUITER_USERNAME FOREIGN KEY (recruiter_username) REFERENCES recruiter(username) ON DELETE CASCADE ON UPDATE CASCADE,
 CONSTRAINT INTERVIEW_CANDIDATE_USERNAME FOREIGN KEY (candidate_username) REFERENCES candidate(username) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -351,7 +352,7 @@ CONSTRAINT INTERVIEW_JOB_ID FOREIGN KEY (job_id) REFERENCES job(id) ON DELETE CA
 
 insert into interview (recruiter_username, candidate_username, job_id, interview_date, starting_time, duration, comments, edu_sc, xp_sc) values
 ('bettyg', 'cleogeo', '9', '2019-08-16', '12:23:34', '00:01:00', 'COOL BOI', '5', '4'),
-('bettyg', 'lionarF', '9', '2019-08-17', '12:23:34', '00:12:00', 'NOT GOOD BOI', '2', '1')
+('bettyg', 'lionarF', '9', '2019-08-17', '12:23:34', '00:12:00', 'NOT GOOD BOI', '2', '0')
 ;
 
 CREATE TABLE average_personality_score (
@@ -370,18 +371,6 @@ insert into average_personality_score (recruiter_username, candidate_username, j
 ('bettyg', 'cleogeo', '9', '1'),
 ('bettyg', 'cleogeo', '9', '5'),
 ('bettyg', 'lionarF', '9', '2')
-;
-
-CREATE TABLE sectors (
-company_AFM CHAR(9) NOT NULL,
-sector_title VARCHAR(20) NOT NULL,
-PRIMARY KEY (company_AFM, sector_title),
-CONSTRAINT SECTORS_COMPANY_AFM FOREIGN KEY (company_AFM) REFERENCES etaireia(AFM) ON DELETE CASCADE ON UPDATE CASCADE
-)engine=InnoDB;
-
-insert into sectors (company_AFM, sector_title) values
-('023453344', 'Computer Engineering'),
-('023453344', 'Something else')
 ;
 
 CREATE TABLE sectors_levels (
@@ -414,6 +403,21 @@ insert into sectors_levels (sector_title, description, belongs_to) values
 ('023451232', '3D', 'short text sample 1', 'Graphics')
 ;*/
 
+CREATE TABLE sectors (
+company_AFM CHAR(9) NOT NULL,
+sector_titles VARCHAR(20) NOT NULL,
+PRIMARY KEY (company_AFM, sector_titles),
+CONSTRAINT SECTORS_COMPANY_AFM FOREIGN KEY (company_AFM) REFERENCES etaireia(AFM) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT SECTORS_SECTOR_TITLES FOREIGN KEY (sector_titles) REFERENCES sectors_levels(sector_title) ON DELETE CASCADE ON UPDATE CASCADE
+)engine=InnoDB;
+
+insert into sectors (company_AFM, sector_titles) values
+('023453344', 'Computer Engineering'),
+('023453344', 'Software'),
+('023451232', 'Darth Vader'),
+('023451232', 'Luke')
+;
+
 CREATE TABLE history (
 username_history VARCHAR(255) NOT NULL,
 date_history DATETIME NOT NULL,
@@ -428,6 +432,11 @@ insert into history (username_history, date_history, success_fail, kind_of_proce
 ('msmith','2017-06-23 13:12:34','SUCCESS','UPDATE','sectors'),
 ('varcon82','2019-06-24 13:12:34','FAIL','DELETE','sectors')
 ;
+
+CREATE TABLE login (
+username VARCHAR(255) NOT NULL,
+login_date DATETIME NOT NULL
+)engine=InnoDB;
 
 CREATE TABLE testing_table (
 testing_field VARCHAR(12),

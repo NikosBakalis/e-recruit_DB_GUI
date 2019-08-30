@@ -35,19 +35,8 @@ INNER JOIN (SELECT recruiter.username, COUNT(*) AS co FROM recruiter
 			GROUP BY recruiter.username) s ON s.username = recruiter.username 
 GROUP BY s.username HAVING COUNT(*) >= 2 ORDER BY AVG(job.salary) DESC;
 
-/*
-SELECT recruiter.username, COUNT(job.recruiter), COUNT(interview.recruiter_username),
-SUM(CASE WHEN HAVING COUNT(job.recruiter) > 2 THEN 1 ELSE 0 END) Count1,
-SUM(CASE WHEN HAVING COUNT(job.recruiter) > 2 THEN 1 ELSE 0 END) Count2,
-AVG(job.salary) FROM recruiter
-INNER JOIN job ON job.recruiter = recruiter.username
-INNER JOIN interview ON interview.recruiter_username = recruiter.username
-GROUP BY job.salary
-HAVING COUNT(job.recruiter) > 2
-ORDER BY AVG(job.salary);
-*/
-
 /* 4.a */
+DROP PROCEDURE evaluation;
 DELIMITER $$
 CREATE PROCEDURE evaluation (in id INT(4))
 BEGIN 
@@ -60,9 +49,9 @@ BEGIN
 	DECLARE eval INT DEFAULT 1;
 	DECLARE fail INT DEFAULT 0;
 	DECLARE the_date DATE;
-	DECLARE message_1 VARCHAR(20);
-	DECLARE message_2 VARCHAR(20);
-	DECLARE message_3 VARCHAR(20);
+	DECLARE message_1 TEXT(100);
+	DECLARE message_2 TEXT(100);
+	DECLARE message_3 TEXT(100);
 		
 	DECLARE score_cur CURSOR FOR
 	SELECT AVG(average_personality_score.per_sc) AS 'Personality Score', interview.edu_sc, interview.xp_sc
@@ -73,8 +62,8 @@ BEGIN
 	WHERE job.id = id
 	/*GROUP BY interview.candidate_username*/;
 	
-	DECLARE submission_dates CURSOR FOR
-	SELECT submission_date
+	DECLARE last_interview_dates CURSOR FOR
+	SELECT last_interview_date
 	FROM job
 	WHERE job.id = id;
 	
@@ -86,21 +75,20 @@ BEGIN
 	WHERE job.id = id;
 	
 	OPEN score_cur;
-	OPEN submission_dates;
+	OPEN last_interview_dates;
 	
 	score_check: LOOP
 		FETCH score_cur INTO per_sc, edu_sc, xp_sc;
-		FETCH submission_dates INTO the_date;
+		FETCH last_interview_dates INTO the_date;
+		IF fin = 1 THEN
+			LEAVE score_check;
+		END IF;
 		IF (the_date > CURRENT_DATE()) THEN
 			SET eval = 0;
 			LEAVE score_check;
 		END IF;
 		IF (per_sc = 0 OR edu_sc = 0 OR xp_sc = 0) THEN
 			SET fail = 1;
-			LEAVE score_check;
-		END IF;
-		IF fin = 1 THEN
-			LEAVE score_check;
 		END IF;
 	END LOOP score_check;    
 	CLOSE score_cur;
@@ -112,35 +100,38 @@ BEGIN
 		SET message = 'The evaluation of this job is completed.';
 		SELECT message;
 		
-		SELECT /*(@this := @this + 1) AS Place, */cand_usrname AS Candidate, 
-		(AVG(average_personality_score.per_sc) + interview.edu_sc + interview.xp_sc - 2) AS Final_Score,
+		SELECT cand_usrname AS Candidate, 
+		(AVG(average_personality_score.per_sc) + interview.edu_sc + interview.xp_sc) AS Final_Score,
 		AVG(average_personality_score.per_sc) AS 'Personality Score', 
 		interview.edu_sc AS 'Education Score', 
 		interview.xp_sc AS 'Experience Score',
 		COUNT(average_personality_score.candidate_username) AS 'Number of Interviews'
 		FROM applies
-		/*CROSS JOIN (SELECT @this := 0) AS dummy*/
 		INNER JOIN candidate ON applies.cand_usrname = candidate.username
 		INNER JOIN interview ON candidate.username = interview.candidate_username
 		INNER JOIN average_personality_score ON interview.candidate_username = average_personality_score.candidate_username
-		WHERE applies.job_id = 9 AND interview.job_id = 9
+		WHERE applies.job_id = id AND interview.job_id = id
 		GROUP BY Candidate
 		/*HAVING (per_sc > 0 AND edu_sc > 0 AND xp_sc > 0)*/
 		ORDER BY Final_Score DESC;
 		
-		IF fail = 1 THEN
+		/*IF fail = 1 THEN*/
 			SELECT Candidate AS 'Candidate Username', Explanation
 			FROM(
 			SELECT interview.candidate_username AS Candidate, CONCAT_WS(', ',@message_3,@message_2,@message_1) AS Explanation,
-			IF (per_sc = 0, @message_1 := 'failed the interview', @message_1 := ''),
-			IF (edu_sc = 0, @message_2 := 'inadequate education', @message_2 := ''),
-			IF (xp_sc = 0, @message_3 := 'no prior experience', @message_3 := '')
+			IF (AVG(average_personality_score.per_sc) = 0, @message_1 := 'failed the interview', @message_1 := ''),
+			IF (interview.edu_sc = 0, @message_2 := 'inadequate education', @message_2 := ''),
+			IF (interview.xp_sc = 0, @message_3 := 'no prior experience', @message_3 := '')
 			FROM interview
-			WHERE interview.job_id = id AND (per_sc = 0 OR edu_sc = 0 OR xp_sc = 0)) AS SOURCE;
-		END IF;
+			INNER JOIN average_personality_score ON average_personality_score.job_id = interview.job_id AND average_personality_score.recruiter_username = interview.recruiter_username AND average_personality_score.candidate_username = interview.candidate_username
+			WHERE interview.job_id = id
+			GROUP BY interview.edu_sc, interview.xp_sc
+			HAVING (AVG(average_personality_score.per_sc) = 0 OR interview.edu_sc = 0 OR interview.xp_sc = 0)) AS SOURCE;
+		/*END IF;*/
 	END IF;
 END$$
 DELIMITER ;
+
 
 /* 4.b */
 
@@ -149,21 +140,27 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER cand_insert AFTER INSERT ON candidate FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','INSERT','candidate');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','INSERT','candidate');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER cand_delete AFTER DELETE ON candidate FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','DELETE','candidate');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','DELETE','candidate');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER cand_update AFTER UPDATE ON candidate FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','UPDATE','candidate');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','UPDATE','candidate');
 	END $$
 DELIMITER ;
 
@@ -172,21 +169,27 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER rec_insert AFTER INSERT ON recruiter FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','INSERT','recruiter');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','INSERT','recruiter');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER rec_delete AFTER DELETE ON recruiter FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','DELETE','recruiter');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','DELETE','recruiter');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER rec_update AFTER UPDATE ON recruiter FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','UPDATE','recruiter');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','UPDATE','recruiter');
 	END $$
 DELIMITER ;
 
@@ -195,21 +198,27 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER user_insert AFTER INSERT ON `user` FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','INSERT','user');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','INSERT','user');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER user_delete AFTER DELETE ON `user` FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','DELETE','user');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','DELETE','user');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER user_update AFTER UPDATE ON `user` FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','UPDATE','user');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','UPDATE','user');
 	END $$
 DELIMITER ;
 
@@ -218,21 +227,27 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER job_insert AFTER INSERT ON job FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','INSERT','job');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','INSERT','job');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER job_delete AFTER DELETE ON job FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','DELETE','job');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','DELETE','job');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER job_update AFTER UPDATE ON job FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','UPDATE','job');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','UPDATE','job');
 	END $$
 DELIMITER ;
 
@@ -242,21 +257,27 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER etaireia_insert AFTER INSERT ON etaireia FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','INSERT','etaireia');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','INSERT','etaireia');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER etaireia_delete AFTER DELETE ON etaireia FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','DELETE','etaireia');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','DELETE','etaireia');
 	END $$
 DELIMITER ;
 
 DELIMITER $$
 CREATE TRIGGER etaireia_update AFTER UPDATE ON etaireia FOR EACH ROW
 	BEGIN
-		INSERT INTO history VALUES (user(), now(),'SUCCESS','UPDATE','etaireia');
+		DECLARE username VARCHAR(16);
+		SELECT login.username INTO username FROM login ORDER BY login_date DESC LIMIT 1;
+		INSERT INTO history VALUES (username, now(),'SUCCESS','UPDATE','etaireia');
 	END $$
 DELIMITER ;
 
@@ -273,16 +294,17 @@ DELIMITER ;
 /* 4.c */
 
 DELIMITER $$
-CREATE TRIGGER apply_delete BEFORE DELETE ON applies FOR EACH ROW
+CREATE TRIGGER apply_delete BEFORE DELETE ON applies FOR EACH ROW 
 	BEGIN
-		DECLARE sub_date DATE;
-        SELECT job.submission_date
-        INTO sub_date
-        FROM job;
-        SET date_check=datediff(job_date, current_date());
-        IF ABS(date_check) < 0 then
-			SIGNAL SQLSTATE '45000' /* Για καποιο λογο μου πετα error με την εκδοση εδω. Εκανα κι εναν ελεγχο με τον κωδικα των παιδιων, τα ιδια. */
-			SET MESSAGE_TEXT = 'Submission date has passed. Deletion denied.';
+		DECLARE job_date DATE;
+		SELECT job.submission_date
+		INTO job_date
+		FROM applies
+		INNER JOIN job ON applies.job_id = job.id
+		WHERE old.job_id = job.id;
+		IF DATEDIFF(job_date, CURRENT_DATE()) < 0 THEN
+			SIGNAL SQLSTATE '45000'
+			SET MESSAGE_TEXT = 'Cannot delete this row.';
 		END IF;
 	END $$
 DELIMITER ;
