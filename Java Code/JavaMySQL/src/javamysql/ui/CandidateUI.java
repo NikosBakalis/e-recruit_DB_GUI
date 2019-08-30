@@ -5,9 +5,11 @@
  */
 package javamysql.ui;
 
+import java.awt.Component;
 import javamysql.database.ICRUDImpl;
 import javamysql.model.Candidate;
 import javamysql.model.User;
+import javax.swing.JOptionPane;
 
 
 
@@ -267,12 +269,12 @@ public class CandidateUI extends javax.swing.JFrame {
             newEmail = changeEmail.getText();
             newBio = changeBio.getText();
             iCRUDImpl.getCandidateUI(changeUsername.getText());
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "Logout and Login again to see the changes");
         }
     }//GEN-LAST:event_EditAndSaveActionPerformed
 
     private void JobAppliesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JobAppliesActionPerformed
-        // CandidateApplies candidateApplies = new CandidateApplies();
-        // candidateApplies.setVisible(true);
         CandidateNewApplies candidateAppliesNew = new CandidateNewApplies();
         candidateAppliesNew.setVisible(true);
         this.dispose();

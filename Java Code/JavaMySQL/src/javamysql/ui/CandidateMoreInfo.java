@@ -5,11 +5,15 @@
  */
 package javamysql.ui;
 
+import javamysql.database.ICRUDImpl;
+
 /**
  *
  * @author Nikolas
  */
 public class CandidateMoreInfo extends javax.swing.JFrame {
+    
+    ICRUDImpl iCRUDImpl = new ICRUDImpl();
 
     /**
      * Creates new form CandidateMoreInfo

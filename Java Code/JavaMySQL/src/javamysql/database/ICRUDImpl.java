@@ -28,7 +28,7 @@ import javamysql.model.Project;
 import javamysql.model.Recruiter;
 import javamysql.model.Sectors;
 import javamysql.model.User;
-import javamysql.ui.AddAJob;
+import javamysql.ui.RecruiterAddAJob;
 import javamysql.ui.AdminCreateCandidate;
 import javamysql.ui.AdminCreateObject;
 import javamysql.ui.AdminCreateRecruiter;
@@ -41,10 +41,10 @@ import javamysql.ui.CandidateEditAProject;
 import javamysql.ui.CandidateLanguages;
 import javamysql.ui.CandidateProject;
 import javamysql.ui.CandidateUI;
-import javamysql.ui.CompanyUI;
-import javamysql.ui.EditAJob;
-import javamysql.ui.InterviewEdit;
-import javamysql.ui.InterviewStart;
+import javamysql.ui.RecruiterCompanyUI;
+import javamysql.ui.RecruiterEditAJob;
+import javamysql.ui.RecruiterInterviewEdit;
+import javamysql.ui.RecruiterInterviewStart;
 import javamysql.ui.Login;
 import javamysql.ui.RecruiterUI;
 import javax.swing.DefaultListModel;
@@ -314,9 +314,9 @@ public class ICRUDImpl implements ICRUD {
     }
     
     @Override
-    public CompanyUI getCompanyUI(int AFM) {
+    public RecruiterCompanyUI getCompanyUI(int AFM) {
         openConnection();
-        CompanyUI companyUI = new CompanyUI();
+        RecruiterCompanyUI companyUI = new RecruiterCompanyUI();
         try{
             Statement statement = getConnection().createStatement();
             String query = "UPDATE etaireia SET tel = " + companyUI.getNewTelephone() + ", street = '" + companyUI.getNewStreet()+ "', num = " + companyUI.getNewNumber() + ", city = '" + companyUI.getNewCity()+ "', country = '" + companyUI.getNewCountry() + "' WHERE AFM = " + AFM + "";
@@ -360,9 +360,9 @@ public class ICRUDImpl implements ICRUD {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     @Override
-    public AddAJob newJob(int ID, String recruiter){
+    public RecruiterAddAJob newJob(int ID, String recruiter){
         openConnection();
-        AddAJob addAJob = new AddAJob();
+        RecruiterAddAJob addAJob = new RecruiterAddAJob();
         try{
             Statement statement = getConnection().createStatement();
             String query1 = "INSERT INTO job VALUES ('" + ID + "', '" + addAJob.getNewStartDate() + "', '" + addAJob.getNewSalary() + "', '" + addAJob.getNewPosition() + "', '" + addAJob.getNewSeat() + "', '" + recruiter + "', '" + addAJob.getNewAnnounceDate() + "', '" + addAJob.getNewSubmissionDate() + "', '" + addAJob.getNewLastInterviewDate() + "')";
@@ -408,9 +408,9 @@ public class ICRUDImpl implements ICRUD {
     }
     
     @Override
-    public EditAJob editAJob(int ID){
+    public RecruiterEditAJob editAJob(int ID){
         openConnection();
-        EditAJob editAJob = new EditAJob();
+        RecruiterEditAJob editAJob = new RecruiterEditAJob();
         try{
             Statement statement = getConnection().createStatement();
             String query = "UPDATE job SET start_date = '" + editAJob.getNewStartDate() + "', salary = '" + editAJob.getNewSalary() + "', position = '" + editAJob.getNewPosition() + "', edra = '" + editAJob.getNewSeat() + "', submission_date = '" + editAJob.getNewSubmissionDate() + "', last_interview_date = '" + editAJob.getNewLastInterviewDate() + "' WHERE id = '" + ID + "'";
@@ -543,10 +543,10 @@ public class ICRUDImpl implements ICRUD {
     }
     
     @Override
-    public InterviewEdit interviewEdit(String recruiterUsername, String candidateUsername, int jobID) {
+    public RecruiterInterviewEdit interviewEdit(String recruiterUsername, String candidateUsername, int jobID) {
         openConnection();
         try{
-            InterviewEdit interviewEdit = new InterviewEdit();
+            RecruiterInterviewEdit interviewEdit = new RecruiterInterviewEdit();
             Statement statement = getConnection().createStatement();
             String query = "UPDATE interview SET interview_date = '" + interviewEdit.getNewInterviewDate() + "', starting_time = '" + interviewEdit.getNewStartingTime() + "', duration = '" + interviewEdit.getNewDuration() + "', comments = '" + interviewEdit.getNewComments() + "', edu_sc = '" + interviewEdit.getNewEducationScore() + "', xp_sc = '" + interviewEdit.getNewExperienceScore() + "' WHERE recruiter_username = '" + interviewEdit.getNewRecruiterUsername() + "' AND candidate_username = '" + interviewEdit.getNewCandidateUsername() + "' AND job_id = '" + interviewEdit.getNewJobID() + "'";
             statement.addBatch(query);
@@ -586,10 +586,10 @@ public class ICRUDImpl implements ICRUD {
     }
     
     @Override
-    public InterviewStart interviewStart(String recruiterUsername,String candidateUsername, int jobID) {
+    public RecruiterInterviewStart interviewStart(String recruiterUsername,String candidateUsername, int jobID) {
         openConnection();
         try{
-            InterviewStart interviewStart = new InterviewStart();
+            RecruiterInterviewStart interviewStart = new RecruiterInterviewStart();
             Statement statement = getConnection().createStatement();
             String query1 = "INSERT INTO interview VALUES ('" + interviewStart.getNewRecruiterUsername() + "', '" + interviewStart.getNewCandidateUsername() + "', '" + interviewStart.getNewJobID() + "', '" + interviewStart.getNewInterviewDate() + "', '" + interviewStart.getNewStartingTime() + "', '" + interviewStart.getNewDuration() + "', '" + interviewStart.getNewComments() + "', '" + interviewStart.getNewEducationScore() + "', '" + interviewStart.getNewExperienceScore() + "')";
             String query2 = "INSERT INTO average_personality_score (recruiter_username, candidate_username, job_id, per_sc) VALUES ('" + interviewStart.getNewRecruiterUsername() + "', '" + interviewStart.getNewCandidateUsername() + "', '" + interviewStart.getNewJobID() + "', '" + interviewStart.getNewPersonalityScore() + "')";

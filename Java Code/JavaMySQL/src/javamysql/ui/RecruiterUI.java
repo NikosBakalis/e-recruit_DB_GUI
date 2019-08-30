@@ -5,10 +5,12 @@
  */
 package javamysql.ui;
 
+import java.awt.Component;
 import javamysql.database.ICRUDImpl;
 import javamysql.model.Company;
 import javamysql.model.Recruiter;
 import javamysql.model.User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -271,11 +273,13 @@ public class RecruiterUI extends javax.swing.JFrame {
             newEmail = changeEmail.getText();
             newExperienceYears = changeExperienceYears.getText();
             iCRUDImpl.getRecruiterUI(getChangeUsername().getText());
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "Logout and Login again to see the changes");
         }
     }//GEN-LAST:event_ButtonEditAndSaveActionPerformed
 
     private void ButtonMyCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMyCompanyActionPerformed
-        CompanyUI companyUI = new CompanyUI();
+        RecruiterCompanyUI companyUI = new RecruiterCompanyUI();
         companyUI.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ButtonMyCompanyActionPerformed
