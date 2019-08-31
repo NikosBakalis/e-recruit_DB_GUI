@@ -46,13 +46,13 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableApplies = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        ButtonOpenForApply = new javax.swing.JButton();
+        ButtonMyApplies = new javax.swing.JButton();
+        ButtonCompleted = new javax.swing.JButton();
+        ButtonBack = new javax.swing.JButton();
+        ButtonJobMoreInfo = new javax.swing.JButton();
+        ButtonDeleteApplies = new javax.swing.JButton();
+        ButtonApply = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -71,52 +71,52 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(TableApplies);
 
-        jButton1.setText("Open For Apply");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ButtonOpenForApply.setText("Open For Apply");
+        ButtonOpenForApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ButtonOpenForApplyActionPerformed(evt);
             }
         });
 
-        jButton2.setText("My Applies");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        ButtonMyApplies.setText("My Applies");
+        ButtonMyApplies.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                ButtonMyAppliesActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Completed");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        ButtonCompleted.setText("Completed");
+        ButtonCompleted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                ButtonCompletedActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Back");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ButtonBack.setText("Back");
+        ButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ButtonBackActionPerformed(evt);
             }
         });
 
-        jButton5.setText("More Info");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        ButtonJobMoreInfo.setText("More Info");
+        ButtonJobMoreInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                ButtonJobMoreInfoActionPerformed(evt);
             }
         });
 
-        jButton6.setText("Delete Apply");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        ButtonDeleteApplies.setText("Delete Apply");
+        ButtonDeleteApplies.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                ButtonDeleteAppliesActionPerformed(evt);
             }
         });
 
-        jButton7.setText("Apply");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        ButtonApply.setText("Apply");
+        ButtonApply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                ButtonApplyActionPerformed(evt);
             }
         });
 
@@ -129,19 +129,19 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(ButtonOpenForApply)
                         .addGap(55, 55, 55)
-                        .addComponent(jButton2)
+                        .addComponent(ButtonMyApplies)
                         .addGap(57, 57, 57)
-                        .addComponent(jButton3)
+                        .addComponent(ButtonCompleted)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(jButton6)
+                        .addComponent(ButtonDeleteApplies)
                         .addGap(61, 61, 61)
-                        .addComponent(jButton7)
+                        .addComponent(ButtonApply)
                         .addGap(59, 59, 59)
-                        .addComponent(jButton5)
+                        .addComponent(ButtonJobMoreInfo)
                         .addGap(48, 48, 48)
-                        .addComponent(jButton4)))
+                        .addComponent(ButtonBack)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -151,13 +151,13 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
+                    .addComponent(ButtonOpenForApply)
+                    .addComponent(ButtonMyApplies)
+                    .addComponent(ButtonCompleted)
+                    .addComponent(ButtonBack)
+                    .addComponent(ButtonJobMoreInfo)
+                    .addComponent(ButtonDeleteApplies)
+                    .addComponent(ButtonApply))
                 .addContainerGap())
         );
 
@@ -182,24 +182,24 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void ButtonOpenForApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOpenForApplyActionPerformed
         getOpenAppliesNew(candidate.getUsername());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_ButtonOpenForApplyActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void ButtonMyAppliesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonMyAppliesActionPerformed
         getAppliesNew(candidate.getUsername());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_ButtonMyAppliesActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void ButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonBackActionPerformed
         CandidateUI candidateUI = new CandidateUI();
         candidateUI.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_ButtonBackActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        JobMoreInfo jobMoreInfo = new JobMoreInfo();
-        jobMoreInfo.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void ButtonJobMoreInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonJobMoreInfoActionPerformed
+        CandidateJobMoreInfo candidateJobMoreInfo = new CandidateJobMoreInfo();
+        candidateJobMoreInfo.setVisible(true);
+    }//GEN-LAST:event_ButtonJobMoreInfoActionPerformed
 
     private void TableAppliesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableAppliesMouseClicked
         int row = TableApplies.getSelectedRow();
@@ -208,17 +208,17 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
         setValueRecruiter(TableApplies.getModel().getValueAt(row, 1).toString());
     }//GEN-LAST:event_TableAppliesMouseClicked
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void ButtonDeleteAppliesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonDeleteAppliesActionPerformed
         iCRUDImpl.delApplies(candidate.getUsername(), valueID);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_ButtonDeleteAppliesActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void ButtonApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonApplyActionPerformed
         iCRUDImpl.getApplies(candidate.getUsername(), valueID);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_ButtonApplyActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void ButtonCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCompletedActionPerformed
         getCompletedAppliesNew(candidate.getUsername());
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_ButtonCompletedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,14 +299,14 @@ public class CandidateAppliesNew extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonApply;
+    private javax.swing.JButton ButtonBack;
+    private javax.swing.JButton ButtonCompleted;
+    private javax.swing.JButton ButtonDeleteApplies;
+    private javax.swing.JButton ButtonJobMoreInfo;
+    private javax.swing.JButton ButtonMyApplies;
+    private javax.swing.JButton ButtonOpenForApply;
     private javax.swing.JTable TableApplies;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

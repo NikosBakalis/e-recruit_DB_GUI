@@ -93,7 +93,7 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(login);
         login.setBounds(490, 250, 70, 23);
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Nikolas\\Documents\\NetBeansProjects\\JavaMySQL\\images\\1.jpg")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/javamysql/images/1.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(0, 0, 830, 390);
