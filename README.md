@@ -2,12 +2,24 @@
 MySQL DataBase connected to Java User Interface
 
 ## Goal
-To create a connection between a Database and a User Interface using Java as the main UI and dack-end language
+To create an APP for candidates and recruiters so as to apply for jobs, allow interviews, let the recruiters give candidates a total score and finaly accept or reject their application.
 
 ## Learn
 ```
-Ιn-depth knowledge of JDBC
-Gain MySQL DataBase knowledge
-Basics of Java UI
+1) Ιn-depth knowledge of JDBC
+Connection between UI and Batabase
 Creation of a working log-in system
+Changes and fill the DB via textfields, comboboxes, lists, etc from the UI.
+
+
+2) Gain MySQL DataBase knowledge
+MySQL Stored Procedures
+MySQL Triggers
+
+3) Basics of Java UI
+Frames
+Texts
+Lists
+Comboboxes
+etc.
 ```
