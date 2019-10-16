@@ -9,7 +9,7 @@ To create an APP for candidates and recruiters so as to apply for jobs, allow in
 1) Ιn-depth knowledge of JDBC
 Connection between UI and Batabase
 Creation of a working log-in system
-Changes and fill the DB via textfields, comboboxes, lists, etc from the UI.
+Changes and populate the DB via textfields, comboboxes, lists, etc from the UI.
 
 
 2) Gain MySQL DataBase knowledge
